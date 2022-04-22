@@ -1,30 +1,89 @@
+import schema from './src/schema.js'
+import {
+  element
+} from 'https://cdn.jsdelivr.net/gh/marcodpt/element@1.0.2/index.js'
+
+const submit = data => {window.alert(JSON.stringify(data, undefined, 2))}
+
 export default {
-  title: 'Alert',
-  gh: 'https://github.com/marcodpt/element',
-  element: ({div}, attrs, children) => div({
-    class: [
-      'alert',
-      'alert-'+attrs.type
-    ]
-  }, children),
+  title: 'Json Schema Bootstrap',
+  gh: 'https://github.com/marcodpt/json-schema-bootstrap',
+  element: element(schema),
   samples: {
-    success: {
+    integer: {
       attributes: {
-        type: 'success'
-      },
-      children: "This is a success alert"
+        schema: {
+          title: "An integer",
+          type: "integer",
+          default: 5,
+          minimum: 0,
+          maximum: 10,
+          multipleOf: 1
+        },
+        submit: submit
+      }
     },
-    warning: {
+    number: {
       attributes: {
-        type: 'warning'
-      },
-      children: "This is a warning alert"
+        schema: {
+          title: "A number",
+          type: "number",
+          default: 5,
+          minimum: 0,
+          maximum: 10,
+          multipleOf: 1
+        },
+        submit: submit
+      }
     },
-    danger: {
+    string: {
       attributes: {
-        type: 'danger'
-      },
-      children: "This is a danger alert"
+        schema: {
+          title: "A string",
+          type: "string",
+          minLength: 3,
+          maxLength: 10,
+          pattern: "a",
+          default: ""
+        },
+        submit: submit
+      }
+    },
+    object: {
+      attributes: {
+        schema: {
+          type: "object",
+          title: "My form",
+          description: "A sample form!\nHope you enjoy it!",
+          properties: {
+            integer: {
+              title: "An integer",
+              type: "integer",
+              default: 5,
+              minimum: 0,
+              maximum: 10,
+              multipleOf: 1
+            },
+            number: {
+              title: "A number",
+              type: "number",
+              default: 5,
+              minimum: 0,
+              maximum: 10,
+              multipleOf: 1
+            },
+            string: {
+              title: "A string",
+              type: "string",
+              minLength: 3,
+              maxLength: 10,
+              pattern: "a",
+              default: ""
+            }
+          }
+        },
+        submit: submit
+      }
     }
   }
 }

@@ -1,12 +1,11 @@
 export default ({div, label, input}, {
+  type,
   title,
   description,
   change,
   ...schema
 }) => {
-  const error = change(schema.default)
-
-  const update => (e, value) => {
+  const update = (e, value) => {
     const error = change(value)
 
     const ctrl = e.querySelector('.form-control')
@@ -15,7 +14,7 @@ export default ({div, label, input}, {
     ctrl.classList.add('is-'+(error ? 'in' : '')+'valid')
 
     const feedback = e.querySelector('.invalid-feedback')
-    e.textContent = error
+    feedback.textContent = error
     feedback.classList[error ? 'remove' : 'add']('d-none')
   }
 
@@ -28,13 +27,14 @@ export default ({div, label, input}, {
       label({
         class: 'form-label',
         title: description
-      }, text(title))
+      }, title)
     ]),
     div({
       class: 'col-md-'+(title ? 9 : 12)
     }, [
       input({
         class: 'form-control',
+        type: type == "number" || type == "integer" ? "number" : "text",
         value: schema.default,
         keyup: ev => {
           update(ev.target.closest('div'), ev.target.value)
