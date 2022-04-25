@@ -10,45 +10,6 @@ export default {
   gh: 'https://github.com/marcodpt/json-schema-bootstrap',
   element: element(schema),
   samples: {
-    integer: {
-      attributes: {
-        schema: {
-          title: "An integer",
-          type: "integer",
-          default: 5,
-          minimum: 0,
-          maximum: 10,
-          multipleOf: 1
-        },
-        submit: submit
-      }
-    },
-    number: {
-      attributes: {
-        schema: {
-          title: "A number",
-          type: "number",
-          default: 5,
-          minimum: 0,
-          maximum: 10,
-          multipleOf: 1
-        },
-        submit: submit
-      }
-    },
-    string: {
-      attributes: {
-        schema: {
-          title: "A string",
-          type: "string",
-          minLength: 3,
-          maxLength: 10,
-          pattern: "a",
-          default: ""
-        },
-        submit: submit
-      }
-    },
     object: {
       attributes: {
         schema: {
@@ -56,29 +17,35 @@ export default {
           title: "My form",
           description: "A sample form!\nHope you enjoy it!",
           properties: {
-            integer: {
-              title: "An integer",
+            age: {
+              title: "Age",
               type: "integer",
-              default: 5,
-              minimum: 0,
-              maximum: 10,
+              default: 30,
+              minimum: 18,
+              maximum: 99,
               multipleOf: 1
             },
-            number: {
-              title: "A number",
+            salary: {
+              title: "Salary ($)",
               type: "number",
-              default: 5,
-              minimum: 0,
-              maximum: 10,
-              multipleOf: 1
+              default: 3000,
+              minimum: 1000,
+              maximum: 10000,
+              multipleOf: 0.01
             },
-            string: {
-              title: "A string",
+            name: {
+              title: "Name",
               type: "string",
               minLength: 3,
               maxLength: 10,
               pattern: "a",
               default: ""
+            },
+            accept: {
+              title: "Accept conditions",
+              type: "boolean",
+              default: false,
+              const: true
             }
           }
         },

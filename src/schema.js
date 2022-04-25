@@ -1,7 +1,7 @@
 import v from 'https://cdn.jsdelivr.net/gh/marcodpt/json-schema/index.js'
 import btn from './btn.js'
-import field from './field.js'
-import object from './object.js'
+import format from './format.js'
+import lang from './lang/en.js'
 
 const parser = (type, value) => {
   if (type == "integer" && !isNaN(value)) {
@@ -19,6 +19,11 @@ export default (Tags, {
   const Scope = {}
 
   const add = (schema, path, validate) => {
+    const getError = data => {
+      const k = validate(data)
+      return lang[k] == null ? k : lang[k](schema[k])
+    }
+
     const parent = Object.keys(Scope).reduce(
       (parent, key) => path.substr(0, key.length) == key && (
         parent == null || key.length > parent.length
@@ -58,7 +63,7 @@ export default (Tags, {
     if (!parent) {
       s.schema.change = value => {
         s.data = parser(s.schema.type, value)
-        return validate(s.data)
+        return getError(s.data)
       }
     } else {
       const P = path.substr(parent.length + 1).split('/')
@@ -78,7 +83,7 @@ export default (Tags, {
         s.schema.change = value => {
           p.data[P[1]] = parser(s.schema.type, value)
 
-          return validate(p.data[P[1]])
+          return getError(p.data[P[1]])
         }
 
         if ([
@@ -117,23 +122,17 @@ export default (Tags, {
   v(schema, add)
   console.log(Scope)
 
-  const createDom = ({
-    schema,
-    children
-  }) => children ?
-    object(Tags, schema, children.map(child => createDom(child))) :
-    field(Tags, schema)
-
   const {form} = Tags
 
   return form({
+    novalidate: true,
     submit: ev => {
       ev.preventDefault()
       ev.stopPropagation()
       submit(Scope['#'].data)
     }
   }, [
-    createDom(Scope['#']),
+    format(Scope['#']),
     btn({
       type: 'submit'
     }, 'Submit')

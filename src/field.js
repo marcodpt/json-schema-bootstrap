@@ -1,23 +1,30 @@
-export default ({div, label, input}, {
+import {element} from '../dependencies.js'
+
+const update = change => (e, value) => {
+  const error = change(value)
+
+  const ctrl = e.querySelector('.form-control,.form-check-input')
+
+  ctrl.classList.remove('is-'+(error ? '' : 'in')+'valid')
+  ctrl.classList.add('is-'+(error ? 'in' : '')+'valid')
+
+  const feedback = e.querySelector('.invalid-feedback')
+  feedback.textContent = error
+  feedback.classList[error ? 'remove' : 'add']('d-none')
+}
+
+const getInput = schema => ({
+  ...schema,
+  change: (el, value) => update(schema.change)(el.closest('div'), value)
+})
+
+const field = element(({div, label, input}, {
   type,
   title,
   description,
   change,
   ...schema
-}) => {
-  const update = (e, value) => {
-    const error = change(value)
-
-    const ctrl = e.querySelector('.form-control')
-
-    ctrl.classList.remove('is-'+(error ? '' : 'in')+'valid')
-    ctrl.classList.add('is-'+(error ? 'in' : '')+'valid')
-
-    const feedback = e.querySelector('.invalid-feedback')
-    feedback.textContent = error
-    feedback.classList[error ? 'remove' : 'add']('d-none')
-  }
-
+}, children) => {
   const e = div({
     class: ['row', 'my-3']
   }, [
@@ -32,14 +39,7 @@ export default ({div, label, input}, {
     div({
       class: 'col-md-'+(title ? 9 : 12)
     }, [
-      input({
-        class: 'form-control',
-        type: type == "number" || type == "integer" ? "number" : "text",
-        value: schema.default,
-        keyup: ev => {
-          update(ev.target.closest('div'), ev.target.value)
-        }
-      }),
+      children,
       div({
         class: 'invalid-feedback'
       })
@@ -47,8 +47,10 @@ export default ({div, label, input}, {
   ])
 
   if (schema.default != null) {
-    update(e, schema.default)
+    update(change)(e, schema.default)
   }
 
   return e
-}
+})
+
+export default el => schema => field(schema, element(el)(getInput(schema)))

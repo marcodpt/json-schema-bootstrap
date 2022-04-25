@@ -1,15 +1,13 @@
-import {element} from '../../dependencies.js'
+import field from '../field.js'
 
-export default element(({input}, {
+export default field(({input}, {
+  title,
+  description,
   change,
   ...schema
-}) => {
-  const e = input({
-    class: 'form-check-input',
-    type: 'checkbox',
-    checked: schema.default ? true : false,
-    change: ev => {
-      ev.target.checked ? change(true) : change(false)
-    }
-  })
-})
+}) => input({
+  class: 'form-check-input',
+  type: 'checkbox',
+  checked: schema.default ? true : false,
+  change: ev => {change(ev.target, ev.target.checked ? true : false)}
+}))
