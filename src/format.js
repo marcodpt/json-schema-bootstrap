@@ -2,26 +2,28 @@ import object from './object.js'
 import string from './input/string.js'
 import number from './input/number.js'
 import checkbox from './input/checkbox.js'
-
-/*import switch from './input/switch.js'
 import range from './input/range.js'
+import text from './input/text.js'
 import date from './input/date.js'
-import typeahead from './input/typeahead.js',
 import file from './input/file.js'
+
+/*
+import typeahead from './input/typeahead.js'
+import array from './input/array.js'
+*/
 
 const Formats = {
   boolean: {
-    _: checkbox,
-    switch: switch
+    _: checkbox
   },
   integer: {
     _: number,
     range: range,
-    date: date,
-    typeahead: typeahead
+    date: date
   },
   number: {
-    _: number
+    _: number,
+    range: range
   },
   string: {
     _: string,
@@ -29,28 +31,11 @@ const Formats = {
     date: date
   },
   object: {
-    _: file
+    _: object,
+    file: file
   },
   array: {
-    _: file
-  }
-}*/
-
-const Formats = {
-  boolean: {
-    _: checkbox
-  },
-  integer: {
-    _: number
-  },
-  number: {
-    _: number
-  },
-  string: {
-    _: string
-  },
-  object: {
-    _: object
+    file: file
   }
 }
 
@@ -64,7 +49,7 @@ const format = ({
 
   const F = Formats[schema.type]
   if (F) {
-    const G = F[schema.format || '_']
+    const G = F[schema.format] || F['_']
     if (G) {
       return G(schema, children)
     }

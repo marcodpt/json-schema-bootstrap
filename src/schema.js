@@ -1,6 +1,7 @@
 import v from 'https://cdn.jsdelivr.net/gh/marcodpt/json-schema/index.js'
 import btn from './btn.js'
 import format from './format.js'
+import formatters from './formatters.js'
 import lang from './lang/en.js'
 
 const parser = (type, value) => {
@@ -19,9 +20,10 @@ export default (Tags, {
   const Scope = {}
 
   const add = (schema, path, validate) => {
+    const F = formatters[schema.format] || (value => value)
     const getError = data => {
       const k = validate(data)
-      return lang[k] == null ? k : lang[k](schema[k])
+      return lang[k] == null ? k : lang[k](F(schema[k]))
     }
 
     const parent = Object.keys(Scope).reduce(

@@ -6,9 +6,9 @@ export default field(({input}, {
   change,
   ...schema
 }) => input({
-  class: 'form-control',
+  class: 'form-control validate',
   type: 'text',
   placeholder: !title ? description : null,
   value: schema.default,
-  keyup: ev => {change(ev.target, ev.target.value)}
+  keyup: ev => change(ev.target.parentNode, ev.target.value) 
 }))

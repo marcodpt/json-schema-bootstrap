@@ -1,4 +1,4 @@
-import {element} from '../../dependencies.js'
+import field from '../field.js'
 
 const reader = file => new Promise((resolve, reject) => {
   var reader = new FileReader()
@@ -34,23 +34,18 @@ const reader = file => new Promise((resolve, reject) => {
   }
 })
 
-export default element(({input}, {
+export default field(({input}, {
+  title,
+  description,
   change,
+  type,
   ...schema
-}) => {
-  const m = schema.type == "array"
-  const e = input({
-    class: 'form-control',
-    type: 'file',
-    multiple: m,
-    change: ev => {
-      change(m ? [] : null)
-
-      if (ev.target.checked) {
-
-      }
-
-      ev.target.checked ? change(true) : change(false)
-    }
-  })
-})
+}) => input({
+  class: 'form-control validate',
+  type: 'file',
+  placeholder: !title ? description : null,
+  multiple: type == "array",
+  change: ev => {
+    console.log(ev.target.files)
+  } 
+}))
