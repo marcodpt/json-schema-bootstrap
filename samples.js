@@ -81,6 +81,13 @@ export default {
               maximum: "2022-05-01",
               default: "2022-04-01"
             },
+            favorite: {
+              title: "Favorite Color",
+              type: "string",
+              format: "color",
+              default: "#ffffff",
+              pattern: "^#[a-f].{5}$"
+            },
             accept: {
               title: "Accept conditions",
               type: "boolean",

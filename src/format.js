@@ -6,6 +6,7 @@ import range from './input/range.js'
 import text from './input/text.js'
 import date from './input/date.js'
 import file from './input/file.js'
+import color from './input/color.js'
 
 /*
 import typeahead from './input/typeahead.js'
@@ -28,7 +29,8 @@ const Formats = {
   string: {
     _: string,
     text: text,
-    date: date
+    date: date,
+    color: color
   },
   object: {
     _: object,

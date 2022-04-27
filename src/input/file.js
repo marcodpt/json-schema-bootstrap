@@ -7,15 +7,9 @@ const reader = file => new Promise((resolve, reject) => {
     if (reader.error) {
       reject(reader.error)
     } else {
-      var data = reader.result
-      if (type.substr(-1) == '*') {
-        const m = 'base64,'
-        var D = data.split(m)
-        D.splice(0, 1)
-        data = D.join(m)
-      }
+      const data = reader.result
       resolve({
-        data: data,
+        data: type.substr(-1) == '*' ? btoa(data) : data,
         mime: type,
         name: file.name
       })
@@ -28,7 +22,7 @@ const reader = file => new Promise((resolve, reject) => {
     'image'
   ]).indexOf(M[0]) != -1) {
     type += '*'
-    reader.readAsFileURL(file)
+    reader.readAsBinaryString(file)
   } else {
     reader.readAsText(file, 'UTF-8')
   }
@@ -46,6 +40,16 @@ export default field(({input}, {
   placeholder: !title ? description : null,
   multiple: type == "array",
   change: ev => {
-    console.log(ev.target.files)
+    const F = ev.target.files
+    const P = []
+    for (var i = 0; i < F.length; i++) {
+      P.push(reader(F[i]))
+    }
+    Promise.all(P).then(files => {
+      change(ev.target.parentNode, type == "array" ? files : files[0])
+    }).catch(err => {
+      console.log(err)
+      change(ev.target.parentNode, null)
+    })
   } 
 }))
