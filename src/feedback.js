@@ -1,5 +1,6 @@
-export default change => (e, value) => {
-  const error = change(value)
+export default change => (e, value, validation) => {
+  var error = change(value)
+  error = validation ? validation(value, error) : error
 
   e.querySelectorAll('.validate').forEach(ctrl => {
     ctrl.classList.remove('is-'+(error ? '' : 'in')+'valid')

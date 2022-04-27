@@ -88,11 +88,24 @@ export default {
               default: "#ffffff",
               pattern: "^#[a-f].{5}$"
             },
+            codigo: {
+              title: "CNPJ/CPF",
+              type: "string",
+              format: "cnpjcpf",
+              default: "",
+              pattern: "^(|[0-9]{11}|[0-9]{14})$"
+            },
+            endereco: {
+              title: "CEP",
+              type: ["object", "null"],
+              format: "cep"
+            },
             accept: {
               title: "Accept conditions",
               type: "boolean",
               default: false,
-              const: true
+              const: true,
+              error: "You must accept conditions."
             },
             subscribe: {
               title: "Subscribe newsletter",
@@ -108,7 +121,9 @@ export default {
             friends: {
               title: "Friends",
               type: "array",
-              format: "file"
+              format: "file",
+              minItems: 2,
+              maxItems: 3
             }
           }
         },

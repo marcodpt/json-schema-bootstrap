@@ -7,6 +7,8 @@ import text from './input/text.js'
 import date from './input/date.js'
 import file from './input/file.js'
 import color from './input/color.js'
+import cnpjcpf from './input/cnpjcpf.js'
+import cep from './input/cep.js'
 
 /*
 import typeahead from './input/typeahead.js'
@@ -30,11 +32,13 @@ const Formats = {
     _: string,
     text: text,
     date: date,
-    color: color
+    color: color,
+    cnpjcpf: cnpjcpf
   },
   object: {
     _: object,
-    file: file
+    file: file,
+    cep: cep
   },
   array: {
     file: file
@@ -49,7 +53,9 @@ const format = ({
     children = children.map(child => format(child))
   }
 
-  const F = Formats[schema.type]
+  const t = schema.type instanceof Array ? schema.type[0] : schema.type
+
+  const F = Formats[t]
   if (F) {
     const G = F[schema.format] || F['_']
     if (G) {

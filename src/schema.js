@@ -23,7 +23,8 @@ export default (Tags, {
     const F = formatters[schema.format] || (value => value)
     const getError = data => {
       const k = validate(data)
-      return lang[k] == null ? k : lang[k](F(schema[k]))
+      const error = lang[k] == null ? k : lang[k](F(schema[k]))
+      return error && schema.error ? schema.error : error
     }
 
     const parent = Object.keys(Scope).reduce(
