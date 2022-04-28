@@ -9,9 +9,9 @@ import file from './input/file.js'
 import color from './input/color.js'
 import cnpjcpf from './input/cnpjcpf.js'
 import cep from './input/cep.js'
+import typeahead from './input/typeahead.js'
 
 /*
-import typeahead from './input/typeahead.js'
 import array from './input/array.js'
 */
 
@@ -22,7 +22,8 @@ const Formats = {
   integer: {
     _: number,
     range: range,
-    date: date
+    date: date,
+    typeahead: typeahead
   },
   number: {
     _: number,
@@ -33,7 +34,8 @@ const Formats = {
     text: text,
     date: date,
     color: color,
-    cnpjcpf: cnpjcpf
+    cnpjcpf: cnpjcpf,
+    typeahead: typeahead
   },
   object: {
     _: object,

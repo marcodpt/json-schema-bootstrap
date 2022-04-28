@@ -4,6 +4,13 @@ import format from './format.js'
 import formatters from './formatters.js'
 import lang from './lang/en.js'
 
+const interpolate = (str, X) => {
+  return str.replace(/{([^{}]*)}/g, (a, b) => {
+    var r = X[b]
+    return typeof r === 'string' || typeof r === 'number' ? r : a
+  })
+}
+
 const parser = (type, value) => {
   if (type == "integer" && !isNaN(value)) {
     return parseInt(value)
@@ -15,6 +22,7 @@ const parser = (type, value) => {
 
 export default (Tags, {
   schema,
+  resolver,
   submit
 }) => {
   const Scope = {}
@@ -47,6 +55,10 @@ export default (Tags, {
       schema.additionalProperties != null
     ) {
       s.data = {}
+      if (resolver) {
+        s.resolved = {}
+        s.watch = {}
+      }
     } else if (
       t == "array" ||
       schema.prefixItems != null ||
@@ -83,8 +95,39 @@ export default (Tags, {
         "additionalProperties",
         "items"
       ].indexOf(P[0]) !== -1 && P.length == 2) {
+        if (p.watch) {
+          s.schema.watch = (href, callback) => {
+            if (p.watch[href] == null) {
+              p.watch[href] = []
+            }
+            p.watch[href].push(callback)
+          }
+        }
+
         s.schema.change = value => {
           p.data[P[1]] = parser(s.schema.type, value)
+
+          Object.keys(p.watch).forEach(href => {
+            const R = p.resolved
+            const url = interpolate(href, p.data)
+
+            p.watch[href].forEach(F => F(R[url]))
+            if (
+              R[url] === undefined &&
+              url.indexOf('{') == -1 && 
+              url.indexOf('}') == -1
+            ) {
+              R[url] = null
+              new Promise(resolve => resolve(resolver(url)))
+                .then(data => {
+                  R[url] = data
+                  p.watch[href].forEach(F => F(data))
+                }).catch(err => {
+                  console.log(err)
+                  p.watch[href].forEach(F => F(R[url]))
+                })
+            }
+          })
 
           return getError(p.data[P[1]])
         }

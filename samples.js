@@ -2,6 +2,7 @@ import schema from './src/schema.js'
 import {
   element
 } from 'https://cdn.jsdelivr.net/gh/marcodpt/element@1.0.2/index.js'
+import resolver from './resolver.js'
 
 const submit = data => {window.alert(JSON.stringify(data, undefined, 2))}
 
@@ -124,10 +125,52 @@ export default {
               format: "file",
               minItems: 2,
               maxItems: 3
-            }
+            }/*,
+            country: {
+              type: "string",
+              format: "typeahead",
+              title: "Country",
+              default: "cn",
+              href: "countries"
+            },
+            city: {
+              type: "integer",
+              format: "typeahead",
+              title: "City",
+              href: "cities_{country}",
+              default: 1
+            }*/,
+            company: {
+              type: "integer",
+              format: "typeahead",
+              title: "Company",
+              href: "companies",
+              default: 3,
+              label: "Some company"
+            }/*,
+            role: {
+              type: "string",
+              format: "typeahead",
+              title: "Role",
+              href: "roles",
+              description: "List of roles..."
+            },
+            pet: {
+              type: "string",
+              format: "typeahead",
+              title: "Pet",
+              enum: ["cat", "dog", "horse"]
+            },
+            sport: {
+              type: "string",
+              format: "typeahead",
+              title: "Sport",
+              default: "soccer"
+            }*/
           }
         },
-        submit: submit
+        submit: submit,
+        resolver: resolver
       }
     }
   }
