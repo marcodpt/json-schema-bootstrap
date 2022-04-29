@@ -125,7 +125,7 @@ export default {
               format: "file",
               minItems: 2,
               maxItems: 3
-            }/*,
+            },
             country: {
               type: "string",
               format: "typeahead",
@@ -139,7 +139,7 @@ export default {
               title: "City",
               href: "cities_{country}",
               default: 1
-            }*/,
+            },
             company: {
               type: "integer",
               format: "typeahead",
@@ -147,7 +147,7 @@ export default {
               href: "companies",
               default: 3,
               label: "Some company"
-            }/*,
+            },
             role: {
               type: "string",
               format: "typeahead",
@@ -166,7 +166,7 @@ export default {
               format: "typeahead",
               title: "Sport",
               default: "soccer"
-            }*/
+            }
           }
         },
         submit: submit,

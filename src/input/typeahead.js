@@ -4,11 +4,19 @@ import spinner from '../spinner.js'
 const toStr = x => typeof x != "string" ?
   (x == null ? '' : JSON.stringify(x, undefined, 2)) : x
 
+const validate = e => (value, error) => {
+  if (error) {
+    return error
+  }
+  const x = e.querySelector('option[value="'+toStr(value)+'"]')
+  return x == null || x.disabled ? 'Escolha uma das opções possíveis!' : ''
+}
+
 const getOptions = ({option, i}, options, value) => {
   if (!(options instanceof Array)) {
     return [
       option({
-        value: "",
+        value: toStr(value),
         disabled: true
       }, '\u231B')
     ]
@@ -29,7 +37,9 @@ const getOptions = ({option, i}, options, value) => {
         if (toStr(value) == toStr(o)) {
           choose = true
         }
-        return option(toStr(o))
+        return option({
+          value: toStr(o)
+        }, toStr(o))
       }
     })
 
@@ -51,7 +61,7 @@ const setOptions = (Tags, e, options, value, change) => {
   e.disabled = l <= 1
   e.value = toStr(value)
   if (e.parentNode) {
-    change(e.parentNode, toStr(value))
+    change(e.parentNode, toStr(value), validate(e))
   }
 }
 
@@ -68,8 +78,11 @@ export default field((Tags, schema) => {
   var options = null
   var oldData = null
   const e = select({
-    class: 'form-select',
-    change: ev => change(ev.target.parentNode, ev.target.value)
+    class: 'form-select validate',
+    change: ev => {
+      const e = ev.target
+      change(e.parentNode, e.value, validate(e))
+    }
   })
 
   if (href != null) {
@@ -78,9 +91,9 @@ export default field((Tags, schema) => {
       if (oldData !== data) {
         oldData = data
         var o = getOptions(
-          Tags, data, data == null ? null : schema.default
+          Tags, data, schema.default
         )
-        setOptions(Tags, e, o, o == null ? null : schema.default, change)
+        setOptions(Tags, e, o, schema.default, change)
       }
     })
   } else if (schema.enum != null) {
@@ -94,6 +107,9 @@ export default field((Tags, schema) => {
     ], schema.default)
   }
 
-  setOptions(Tags, e, options, options == null ? null : schema.default, change)
+  setOptions(Tags, e, options, schema.default, change)
+  setTimeout(() => {
+    setOptions(Tags, e, options, schema.default, change)
+  }, 300)
   return e
 })
