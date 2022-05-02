@@ -11,10 +11,11 @@ export default element(({button, a}, {
     'btn',
     'btn-'+(outline ? 'outline-' : '')+bg,
     size ? 'btn-'+size : '',
-    !props.click &&
-    !props.onclick &&
-    !props.href &&
-    props.type != "reset" &&
-    props.type != "submit" ? 'disabled' : ''
-  ]
+      !props.click &&
+      !props.onclick &&
+      !props.href &&
+      props.type != "reset" &&
+      props.type != "submit" ?
+    'disabled' : ''
+  ].concat(props.class)
 }, children))

@@ -1,5 +1,5 @@
-import {element} from '../dependencies.js'
-import alert from './alert.js'
+import {element} from '../../dependencies.js'
+import alert from '../alert.js'
 
 export default element(({fieldset, legend}, {
   title,

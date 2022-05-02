@@ -18,7 +18,7 @@ export default {
           title: "My form",
           description: "A sample form!\nHope you enjoy it!",
           properties: {
-            age: {
+            /*age: {
               title: "Age",
               type: "integer",
               default: 30,
@@ -166,7 +166,37 @@ export default {
               format: "typeahead",
               title: "Sport",
               default: "soccer"
-            }
+            },*/
+            primes: {
+              title: "Primes",
+              description: "Prime number selection",
+              type: "array",
+              items: {
+                type: "integer",
+                format: "typeahead",
+                enum: [2, 3, 5, 7, 11, 13, 17, 19]
+              },
+              minItems: 2,
+              maxItems: 5,
+              uniqueItems: true
+            }/*,
+            contacts: {
+              title: "Contacts",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  name: {
+                    title: "Name",
+                    type: "string"
+                  },
+                  number: {
+                    title: "Number",
+                    type: "string"
+                  }
+                }
+              }
+            }*/
           }
         },
         submit: submit,

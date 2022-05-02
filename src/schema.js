@@ -12,9 +12,9 @@ const interpolate = (str, X) => {
 }
 
 const parser = (type, value) => {
-  if (type == "integer" && !isNaN(value)) {
+  if (type == "integer" && !isNaN(value) && value !== "") {
     return parseInt(value)
-  } else if (type == "number" && !isNaN(value)) {
+  } else if (type == "number" && !isNaN(value) && value !== "") {
     return parseFloat(value)
   }
   return value
@@ -27,7 +27,7 @@ export default (Tags, {
 }) => {
   const Scope = {}
 
-  const add = (schema, path, validate) => {
+  v(schema, (schema, path, validate) => {
     const F = formatters[schema.format] || (value => value)
     const getError = data => {
       const k = validate(data)
@@ -89,12 +89,7 @@ export default (Tags, {
       }
       p.children.push(s)
 
-      if ([
-        "properties",
-        "prefixItems",
-        "additionalProperties",
-        "items"
-      ].indexOf(P[0]) !== -1 && P.length == 2) {
+      if (P[0] == "properties" && P.length == 2) {
         if (p.watch) {
           s.schema.watch = (href, callback) => {
             if (p.watch[href] == null) {
@@ -131,41 +126,14 @@ export default (Tags, {
 
           return getError(p.data[P[1]])
         }
-
-        if ([
-          "additionalProperties",
-          "items"
-        ].indexOf(P[0]) != -1) {
-          s.schema.remove = () => {
-            if (P[0] == "items" && p.data.length - 1 != P[1]) {
-              return null
-            } else {
-              return () => {
-
-              }
-            }
-          }
+      } else if (P[0] == "items" && P.length == 1) {
+        s.schema.change = item => {
+          p.data.push(item)
+          p.schema.change(p.data)
         }
-      } else if (P[0] == "additionalProperties" || P[0] == "items") {
-        p.schema.add = key => {
-          if (P[0] == "items") {
-            key = p.data.length
-          }
-          const newPath = path+'/'+key
-          if (Scope[newPath] == null) {
-            add(schema, newPath, validate)
-          }
-        }
-        //if (p.schema.minItems) {
-          //while (p.data.length < p.schema.minItems) {
-            //p.schema.add()
-          //}
-        //}
       }
     }
-  }
-
-  v(schema, add)
+  })
   console.log(Scope)
 
   const {form} = Tags

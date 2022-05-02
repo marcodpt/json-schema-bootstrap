@@ -81,6 +81,7 @@ export default field((Tags, schema) => {
     class: 'form-select validate',
     change: ev => {
       const e = ev.target
+      console.log('here')
       change(e.parentNode, e.value, validate(e))
     }
   })

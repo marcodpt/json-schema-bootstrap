@@ -1,4 +1,5 @@
-import object from './object.js'
+import form from './input/form.js'
+import items from './input/items.js'
 import string from './input/string.js'
 import number from './input/number.js'
 import checkbox from './input/checkbox.js'
@@ -10,10 +11,6 @@ import color from './input/color.js'
 import cnpjcpf from './input/cnpjcpf.js'
 import cep from './input/cep.js'
 import typeahead from './input/typeahead.js'
-
-/*
-import array from './input/array.js'
-*/
 
 const Formats = {
   boolean: {
@@ -38,11 +35,12 @@ const Formats = {
     typeahead: typeahead
   },
   object: {
-    _: object,
+    _: form,
     file: file,
     cep: cep
   },
   array: {
+    _: items,
     file: file
   }
 }
