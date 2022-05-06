@@ -1,5 +1,4 @@
 import field from '../field.js'
-import spinner from '../spinner.js'
 
 const toStr = x => typeof x != "string" ?
   (x == null ? '' : JSON.stringify(x, undefined, 2)) : x
@@ -60,9 +59,7 @@ const setOptions = (Tags, e, options, value, change) => {
   e.innerHTML = select(options).innerHTML
   e.disabled = l <= 1
   e.value = toStr(value)
-  if (e.parentNode) {
-    change(e.parentNode, toStr(value), validate(e))
-  }
+  change(e.parentNode, toStr(value), validate(e))
 }
 
 export default field((Tags, schema) => {
@@ -71,6 +68,7 @@ export default field((Tags, schema) => {
     description,
     label,
     href,
+    type,
     change,
     watch
   } = schema
@@ -79,11 +77,7 @@ export default field((Tags, schema) => {
   var oldData = null
   const e = select({
     class: 'form-select validate',
-    change: ev => {
-      const e = ev.target
-      console.log('here')
-      change(e.parentNode, e.value, validate(e))
-    }
+    change: ev => change(ev.target.parentNode, ev.target.value)
   })
 
   if (href != null) {

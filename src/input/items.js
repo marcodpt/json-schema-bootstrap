@@ -1,22 +1,10 @@
 import {element} from '../../dependencies.js'
 import btn from '../btn.js'
 
-const addItem = ({div, span}, {
-  title,
-  description
-}, children) => div({
-  class: 'card my-3'
-}, [
-  div({
-    class: 'card-body'
-  }, children)
-]).cloneNode(true)
-
-export default element((Tags, schema, children) => {
+export default element((Tags, schema) => {
   const {fieldset, legend, span, i} = Tags
-  const {minItems, maxItems, title, description} = schema
-  const items = []
-  const newItem = () => addItem(Tags, schema, children)
+  const {minItems, maxItems, title, description, builder} = schema
+  const {children, add, remove} = builder()
   const limitMin = n => minItems >= n || n == 0
   const limitMax = n => maxItems != null && maxItems <= n
   const setLimits = (f, n) => {
@@ -43,10 +31,6 @@ export default element((Tags, schema, children) => {
     }
   }
 
-  for (var item = 0; minItems && item < minItems; item++) {
-    items.push(newItem())
-  }
-
   return fieldset([
     legend([
       span({
@@ -56,7 +40,7 @@ export default element((Tags, schema, children) => {
         bg: 'secondary',
         class: [
           'ms-2',
-          limitMin(items.length) ? 'disabled' : ''
+          limitMin(children.length) ? 'disabled' : ''
         ],
         type: 'button',
         click: ev => {
@@ -65,6 +49,7 @@ export default element((Tags, schema, children) => {
 
           if (!limitMin(n)) {
             f.removeChild(f.children[n])
+            remove()
             n = n - 1
           }
           setLimits(f, n)
@@ -77,14 +62,14 @@ export default element((Tags, schema, children) => {
         type: 'button',
         class: [
           'ms-2',
-          limitMax(items.length) ? 'disabled' : ''
+          limitMax(children.length) ? 'disabled' : ''
         ],
         click: ev => {
           const f = ev.target.closest('fieldset')
           var n = f.children.length - 1 
 
           if (!limitMax(n)) {
-            f.appendChild(newItem())
+            f.appendChild(add())
             n = n + 1
           }
           setLimits(f, n)
@@ -93,6 +78,6 @@ export default element((Tags, schema, children) => {
         class: 'fas fa-plus'
       }))
     ]),
-    items
+    children 
   ])
 })

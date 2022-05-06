@@ -3,6 +3,7 @@ import field from '../field.js'
 export default field(({input, div}, {
   title,
   description,
+  type,
   change,
   minimum,
   maximum,
@@ -17,9 +18,9 @@ export default field(({input, div}, {
     step: multipleOf,
     value: schema.default,
     change: ev => {
-      const p = ev.target.parentNode
-      change(p, ev.target.value)
-      p.querySelector('.form-text').textContent = ev.target.value
+      const e = ev.target
+      change(e.parentNode, e.value)
+      e.parentNode.querySelector('.form-text').textContent = e.value
     }
   }),
   div({

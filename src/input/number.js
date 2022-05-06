@@ -3,6 +3,7 @@ import field from '../field.js'
 export default field(({input}, {
   title,
   description,
+  type,
   change,
   minimum,
   maximum,
