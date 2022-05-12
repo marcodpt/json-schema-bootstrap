@@ -1,6 +1,7 @@
+import {html} from '../../dependencies.js'
 import field from '../field.js'
 
-export default field(({input}, {
+export default field(({
   title,
   description,
   change,
@@ -8,7 +9,7 @@ export default field(({input}, {
   minimum,
   maximum,
   ...schema
-}) => {
+}) => html(({input}) => {
   const loader = value => isNaN(value) ? value :
     !parseInt(value) ? '' :
       new Date(value * 1000).toISOString().substr(0, 10)
@@ -33,4 +34,4 @@ export default field(({input}, {
       type == "string" ? ev.target.value : parser(ev.target.value)
     ) 
   })
-})
+}))

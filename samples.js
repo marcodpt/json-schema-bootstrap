@@ -1,7 +1,4 @@
 import schema from './src/schema.js'
-import {
-  element
-} from 'https://cdn.jsdelivr.net/gh/marcodpt/element@1.0.2/index.js'
 import resolver from './resolver.js'
 
 const submit = data => {window.alert(JSON.stringify(data, undefined, 2))}
@@ -9,7 +6,7 @@ const submit = data => {window.alert(JSON.stringify(data, undefined, 2))}
 export default {
   title: 'Json Schema Bootstrap',
   gh: 'https://github.com/marcodpt/json-schema-bootstrap',
-  element: element(schema),
+  element: schema,
   samples: {
     object: {
       attributes: {
@@ -201,7 +198,8 @@ export default {
           }
         },
         submit: submit,
-        resolver: resolver
+        resolver: resolver,
+        class: 'my-5'
       }
     }
   }

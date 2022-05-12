@@ -1,9 +1,11 @@
-import {element} from '../../dependencies.js'
+import {html} from '../../dependencies.js'
 import btn from '../btn.js'
 
-export default element((Tags, schema) => {
-  const {fieldset, legend, span, i} = Tags
-  const {minItems, maxItems, title, description, builder} = schema
+export default ({
+  minItems, maxItems, title, description, builder
+}) => html(({
+  fieldset, legend, span, i
+}) => {
   const {children, add, remove} = builder()
   const limitMin = n => minItems >= n || n == 0
   const limitMax = n => maxItems != null && maxItems <= n

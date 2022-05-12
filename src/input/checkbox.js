@@ -1,13 +1,13 @@
-import {element} from '../../dependencies.js'
+import {html} from '../../dependencies.js'
 import feedback from '../feedback.js'
 
-export default element(({div, input, label}, {
+export default ({
   title,
   description,
   format,
   change,
   ...schema
-}) => {
+}) => html(({div, input, label}) => {
   const f = feedback(change)
   const e = div({
     class: [

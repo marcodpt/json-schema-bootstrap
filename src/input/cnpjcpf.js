@@ -1,3 +1,4 @@
+import {html} from '../../dependencies.js'
 import field from '../field.js'
 
 const validaCNPJ = cnpj => {
@@ -81,13 +82,13 @@ const validaCPF = cpf => {
   return Resto == parseInt(cpf.substring(10, 11))
 }
 
-export default field(({input}, {
+export default field(({
   title,
   description,
   format,
   change,
   ...schema
-}) => input({
+}) => html(({input}) => input({
   class: 'form-control validate',
   type: 'text',
   placeholder: !title ? description : null,
@@ -106,4 +107,4 @@ export default field(({input}, {
       }
     })
   } 
-}))
+})))

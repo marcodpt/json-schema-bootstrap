@@ -1,3 +1,4 @@
+import {html} from '../../dependencies.js'
 import field from '../field.js'
 
 const reader = file => new Promise((resolve, reject) => {
@@ -28,13 +29,13 @@ const reader = file => new Promise((resolve, reject) => {
   }
 })
 
-export default field(({input}, {
+export default field(({
   title,
   description,
   change,
   type,
   ...schema
-}) => input({
+}) => html(({input}) => input({
   class: 'form-control validate',
   type: 'file',
   placeholder: !title ? description : null,
@@ -52,4 +53,4 @@ export default field(({input}, {
       change(ev.target.parentNode, null)
     })
   } 
-}))
+})))

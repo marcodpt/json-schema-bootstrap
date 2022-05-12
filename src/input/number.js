@@ -1,6 +1,7 @@
+import {html} from '../../dependencies.js'
 import field from '../field.js'
 
-export default field(({input}, {
+export default field(({
   title,
   description,
   type,
@@ -9,7 +10,7 @@ export default field(({input}, {
   maximum,
   multipleOf,
   ...schema
-}) => input({
+}) => html(({input}) => input({
   class: 'form-control validate',
   type: 'number',
   placeholder: !title ? description : null,
@@ -19,4 +20,4 @@ export default field(({input}, {
   value: schema.default,
   change: ev => change(ev.target.parentNode, ev.target.value),
   keyup: ev => change(ev.target.parentNode, ev.target.value)
-}))
+})))

@@ -1,12 +1,12 @@
-import {element} from '../../dependencies.js'
 import alert from '../alert.js'
+import {html} from '../../dependencies.js'
 
-export default element(({fieldset, legend}, {
+export default ({
   title,
   description,
   builder,
   ...schema
-}) => {
+}) => html(({fieldset, legend}) => {
   const {children} = builder()
 
   return fieldset([

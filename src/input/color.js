@@ -1,11 +1,12 @@
+import {html} from '../../dependencies.js'
 import field from '../field.js'
 
-export default field(({input, div}, {
+export default field(({
   title,
   description,
   change,
   ...schema
-}) => [
+}) => html(({input, div}) => [
   input({
     class: 'form-control form-control-color',
     type: 'color',
@@ -24,4 +25,4 @@ export default field(({input, div}, {
   div({
     class: 'form-text'
   }, schema.default)
-])
+]))

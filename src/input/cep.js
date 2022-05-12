@@ -1,4 +1,5 @@
 import field from '../field.js'
+import {html} from '../../dependencies.js'
 
 const jsonp = uri => {
   return new Promise((resolve, reject) => {
@@ -21,12 +22,12 @@ const jsonp = uri => {
   })
 }
 
-export default field(({input, div}, {
+export default field(({
   title,
   description,
   change,
   ...schema
-}) => [
+}) => html(({input, div}) => [
   input({
     class: 'form-control validate',
     type: 'text',
@@ -81,4 +82,4 @@ export default field(({input, div}, {
   div({
     class: 'valid-feedback'
   })
-])
+]))

@@ -1,15 +1,15 @@
-import {element} from '../dependencies.js'
+import {html} from '../dependencies.js'
 import feedback from './feedback.js'
 
-export default el => schema => {
+export default children => schema => {
   var f = feedback(schema.change)
-  const field = element(({div, label, input}, {
+  const field = ({
     type,
     title,
     description,
     change,
     ...schema
-  }, children) => {
+  }, children) => html(({div, label, input}) => {
     const e = div({
       class: ['row', 'my-3']
     }, [
@@ -40,7 +40,7 @@ export default el => schema => {
     return e
   })
 
-  return field(schema, element(el)({
+  return field(schema, children({
     ...schema,
     change: f
   }))

@@ -1,6 +1,8 @@
-import {element} from '../dependencies.js'
+import {html} from '../dependencies.js'
 
-export default element(({div}, {type, description}) => !description ? null : div({
+export default ({type, description}) => !description ? null : html(({
+  div
+}) => div({
   class: [
     'alert',
     'alert-'+(type == "null" ? "danger" : (

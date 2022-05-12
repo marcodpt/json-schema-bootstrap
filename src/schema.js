@@ -2,17 +2,20 @@ import btn from './btn.js'
 import iterator from './iterator.js'
 import validator from './validator.js'
 import {parser} from './lib.js'
+import {html} from '../dependencies.js'
 
-export default (Tags, {
+export default ({
   schema,
   resolver,
   submit,
-  lang
+  lang,
+  ...extra
 }) => {
   var data = null
-  const {form} = Tags
+  const validate = validator(lang)
 
-  return form({
+  return html(({form}) => form({
+    ...extra,
     novalidate: true,
     submit: ev => {
       ev.preventDefault()
@@ -24,13 +27,13 @@ export default (Tags, {
       ...schema,
       change: value => {
         data = parser(schema.type, value)
-        return validator(schema, data)
+        return validate(schema, data)
       },
-      validate: validator(lang),
+      validate: validate,
       resolver: resolver
     }),
     btn({
       type: 'submit'
     }, 'Submit')
-  ])
+  ]))
 }

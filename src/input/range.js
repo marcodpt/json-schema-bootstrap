@@ -1,6 +1,7 @@
+import {html} from '../../dependencies.js'
 import field from '../field.js'
 
-export default field(({input, div}, {
+export default field(({
   title,
   description,
   type,
@@ -9,7 +10,7 @@ export default field(({input, div}, {
   maximum,
   multipleOf,
   ...schema
-}) => [
+}) => html(({input, div}) => [
   input({
     class: 'form-range validate',
     type: 'range',
@@ -26,4 +27,4 @@ export default field(({input, div}, {
   div({
     class: 'form-text'
   }, schema.default)
-])
+]))

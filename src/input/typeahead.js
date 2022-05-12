@@ -1,3 +1,4 @@
+import {html} from '../../dependencies.js'
 import field from '../field.js'
 
 const toStr = x => typeof x != "string" ?
@@ -62,16 +63,16 @@ const setOptions = (Tags, e, options, value, change) => {
   change(e.parentNode, toStr(value), validate(e))
 }
 
-export default field((Tags, schema) => {
-  const {
-    title,
-    description,
-    label,
-    href,
-    type,
-    change,
-    watch
-  } = schema
+export default field(({
+  title,
+  description,
+  label,
+  href,
+  type,
+  change,
+  watch,
+  ...schema
+}) => html(Tags => {
   const {select} = Tags
   var options = null
   var oldData = null
@@ -107,4 +108,4 @@ export default field((Tags, schema) => {
     setOptions(Tags, e, options, schema.default, change)
   }, 300)
   return e
-})
+}))
