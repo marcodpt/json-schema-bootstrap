@@ -8,6 +8,7 @@ export default children => schema => {
     title,
     description,
     change,
+    readOnly,
     ...schema
   }, children) => html(({div, label, input}) => {
     const e = div({
@@ -27,7 +28,7 @@ export default children => schema => {
         ]
       }, [
         children,
-        div({
+        readOnly ? null : div({
           class: 'invalid-feedback'
         })
       ])
@@ -40,7 +41,7 @@ export default children => schema => {
     return e
   })
 
-  return field(schema, children({
+  return field(schema, children(schema.readOnly ? schema : {
     ...schema,
     change: f
   }))

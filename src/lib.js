@@ -1,6 +1,11 @@
 const copy = X => X !== undefined ? JSON.parse(JSON.stringify(X)) : X
 
+const getType = type => type == null ? 'null' :
+  type instanceof Array ? type[0] : type
+
 const parser = (type, value) => {
+  type = getType(type)
+
   if (type == "number" || type == "integer") {
     value = type == "number" ? parseFloat(value) : parseInt(value)
     if (isNaN(value)) {
@@ -25,4 +30,4 @@ const interpolate = (str, X) => {
   })
 }
 
-export {copy, parser, interpolate}
+export {copy, getType, parser, interpolate}

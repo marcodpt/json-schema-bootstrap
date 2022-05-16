@@ -8,3 +8,7 @@ My json-schema bootstrap5 user interface
  - string `lang`: One of the available languages (default: 'en')
  - function `submit`(`data`): Function called after validation
  - function `resolver`(`url`): Function called when `href` property is present
+
+## TODO
+ - handle null type 
+ - table example

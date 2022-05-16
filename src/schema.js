@@ -13,6 +13,7 @@ export default ({
 }) => {
   var data = null
   const validate = validator(lang)
+  const readOnly = typeof submit != "function"
 
   return html(({form}) => form({
     ...extra,
@@ -20,11 +21,14 @@ export default ({
     submit: ev => {
       ev.preventDefault()
       ev.stopPropagation()
-      submit(data)
+      if (!readOnly) {
+        submit(data)
+      }
     }
   }, [
     iterator({
       ...schema,
+      readOnly: schema.readOnly == null ? readOnly : schema.readOnly,
       change: value => {
         data = parser(schema.type, value)
         return validate(schema, data)
@@ -32,7 +36,7 @@ export default ({
       validate: validate,
       resolver: resolver
     }),
-    btn({
+    readOnly ? null : btn({
       type: 'submit'
     }, 'Submit')
   ]))
