@@ -4,15 +4,20 @@ export default ({
   title,
   description,
   href,
-  icon,
-  btn
+  btn,
+  fas,
+  sm
 }) => html(({a, i}) => a({
-  class: btn ? 'btn btn-'+btn : null,
+  class: [
+    btn ? 'btn btn-'+btn : '',
+    btn && sm ? 'btn-sm' : '',
+    !href && btn ? 'disabled' : ''
+  ],
   href: href,
   title: description
 }, [
-  !icon ? null : i({class: icon}),
-  icon && title ? ' ' : '',
+  !fas ? null : i({class: 'fas fa-'+fas}),
+  fas && title ? ' ' : '',
   title,
-  !icon && !title && href ? '_' : ''
+  !fas && !title && href ? '_' : ''
 ]))

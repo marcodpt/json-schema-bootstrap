@@ -12,3 +12,7 @@ My json-schema bootstrap5 user interface
 ## TODO
  - handle null type 
  - table example
+ - form validation
+ - date br
+ - use form constructor with modal in hrefSchema
+ - use output in table

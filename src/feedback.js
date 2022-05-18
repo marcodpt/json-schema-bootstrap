@@ -1,4 +1,4 @@
-export default (change) => (e, value, validation) => {
+export default change => (e, value, validation) => {
   var error = change(value)
   error = validation ? validation(value, error) : error
 

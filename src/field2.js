@@ -1,16 +1,16 @@
 import {html} from '../dependencies.js'
-import feedback from './feedback.js'
 
-export default children => schema => {
-  var f = feedback(schema.change)
-  const field = ({
-    type,
+export default ({
+  schema,
+  change
+}) => children => {
+  const {
     title,
     description,
-    change,
-    readOnly,
-    ...schema
-  }, children) => html(({div, label}) => {
+    ...extra
+  } = schema
+
+  return html(({div, label}) => {
     const e = div({
       class: ['row', 'my-3']
     }, [
@@ -40,9 +40,4 @@ export default children => schema => {
 
     return e
   })
-
-  return field(schema, children(schema.readOnly ? schema : {
-    ...schema,
-    change: f
-  }))
 }

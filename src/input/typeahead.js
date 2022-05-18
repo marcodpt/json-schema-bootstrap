@@ -1,5 +1,5 @@
 import {html} from '../../dependencies.js'
-import field from '../field.js'
+import wrapper from '../field.js'
 
 const toStr = x => typeof x != "string" ?
   (x == null ? '' : JSON.stringify(x, undefined, 2)) : x
@@ -63,10 +63,11 @@ const setOptions = (Tags, e, options, value, change) => {
   change(e.parentNode, toStr(value), validate(e))
 }
 
-export default field(({
+const input = ({
   title,
   description,
   label,
+  labels,
   href,
   type,
   change,
@@ -93,7 +94,15 @@ export default field(({
       }
     })
   } else if (schema.enum != null) {
-    options = getOptions(Tags, schema.enum, schema.default)
+    var E = schema.enum
+    if (labels instanceof Array) {
+      E = E.map((value, i) => ({
+        value: value,
+        label: labels[i] || value
+      }))
+    }
+
+    options = getOptions(Tags, E, schema.default)
   } else {
     options = getOptions(Tags, [
       {
@@ -108,4 +117,8 @@ export default field(({
     setOptions(Tags, e, options, schema.default, change)
   }, 300)
   return e
-}))
+})
+
+const field = wrapper(input)
+
+export {field, input}
