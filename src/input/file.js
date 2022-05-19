@@ -1,5 +1,6 @@
 import {html} from '../../dependencies.js'
-import field from '../field.js'
+import control from '../control.js'
+import wrap from '../wrap.js'
 
 const reader = file => new Promise((resolve, reject) => {
   var reader = new FileReader()
@@ -29,16 +30,17 @@ const reader = file => new Promise((resolve, reject) => {
   }
 })
 
-export default field(({
+export default wrap(control(({
   title,
   description,
   change,
   type,
   ...schema
 }) => html(({input}) => input({
-  class: 'form-control validate',
+  class: 'form-control',
   type: 'file',
-  placeholder: !title ? description : null,
+  name: title,
+  placeholder: description,
   multiple: type == "array",
   change: ev => {
     const F = ev.target.files
@@ -47,10 +49,10 @@ export default field(({
       P.push(reader(F[i]))
     }
     Promise.all(P).then(files => {
-      change(ev.target.parentNode, type == "array" ? files : files[0])
+      change(type == "array" ? files : files[0])
     }).catch(err => {
       console.log(err)
-      change(ev.target.parentNode, null)
+      change(null)
     })
   } 
-})))
+}))))

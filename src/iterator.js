@@ -17,7 +17,7 @@ const iterator = schema => {
   const t = getType(type)
 
   if (t == "object" && properties != null) {
-    schema.builder = () => {
+    schema.builder = wrapper => {
       const data = parser(t, copy(schema.default))
       const children = []
       const resolved = {}
@@ -63,6 +63,7 @@ const iterator = schema => {
             }
             watch[href].push(callback)
           },
+          wrapper: wrapper,
           ...base
         }))
       })
@@ -72,7 +73,7 @@ const iterator = schema => {
       }
     }
   } else if (t == "array" && items != null) {
-    schema.builder = () => {
+    schema.builder = wrapper => {
       const data = parser(t, copy(schema.default))
       const children = []
       for (var n = 0; n < minItems; n++) {
@@ -87,6 +88,7 @@ const iterator = schema => {
             data[m] = parser(items.type, value)
             return validate(items, data[m])
           },
+          wrapper: wrapper,
           ...base
         }))
       }

@@ -1,7 +1,8 @@
 import {html} from '../../dependencies.js'
-import field from '../field.js'
+import control from '../control.js'
+import wrap from '../wrap.js'
 
-export default field(({
+export default wrap(control(({
   title,
   description,
   type,
@@ -11,13 +12,14 @@ export default field(({
   multipleOf,
   ...schema
 }) => html(({input}) => input({
-  class: 'form-control validate',
+  class: 'form-control',
   type: 'number',
-  placeholder: !title ? description : null,
+  name: title,
+  placeholder: description,
   min: minimum,
   max: maximum,
   step: multipleOf,
   value: schema.default,
-  change: ev => change(ev.target.parentNode, ev.target.value),
-  keyup: ev => change(ev.target.parentNode, ev.target.value)
-})))
+  change: ev => change(ev.target.value),
+  keyup: ev => change(ev.target.value)
+}))))

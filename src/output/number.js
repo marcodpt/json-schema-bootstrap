@@ -1,7 +1,7 @@
-import field from '../field.js'
+import wrap from '../wrap.js'
 import link from '../link.js'
 
-export default field(({
+export default wrap(({
   href,
   ...schema
 }) => link({

@@ -1,14 +1,16 @@
 import {html} from '../../dependencies.js'
-import field from '../field.js'
+import control from '../control.js'
+import wrap from '../wrap.js'
 
-export default field(({
+export default wrap(control(({
   title,
   description,
   change,
   ...schema
 }) => html(({textarea}) => textarea({
-  class: 'form-control validate',
+  class: 'form-control',
   rows: 6,
-  placeholder: !title ? description : null,
-  keyup: ev => change(ev.target.parentNode, ev.target.value) 
-}, schema.default)))
+  name: title,
+  placeholder: description,
+  keyup: ev => change(ev.target.value) 
+}, schema.default))))

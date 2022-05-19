@@ -1,5 +1,6 @@
 import {html} from '../../dependencies.js'
-import field from '../field.js'
+import control from '../control.js'
+import wrap from '../wrap.js'
 
 const validaCNPJ = cnpj => {
   if (
@@ -82,20 +83,20 @@ const validaCPF = cpf => {
   return Resto == parseInt(cpf.substring(10, 11))
 }
 
-export default field(({
+export default wrap(control(({
   title,
   description,
-  format,
   change,
   ...schema
 }) => html(({input}) => input({
-  class: 'form-control validate',
+  class: 'form-control',
   type: 'text',
-  placeholder: !title ? description : null,
+  name: title,
+  placeholder: description,
   value: schema.default,
   keyup: ev => {
     var v = ev.target.value.replace(/[^\d]+/g,'')
-    change(ev.target.parentNode, v, (v, error) => {
+    change(v, (v, error) => {
       if (error) {
         return error
       } else if (v.length == 11) {
@@ -107,4 +108,4 @@ export default field(({
       }
     })
   } 
-})))
+}))))

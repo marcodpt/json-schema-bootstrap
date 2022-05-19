@@ -1,30 +1,21 @@
 import {html} from '../../dependencies.js'
-import field from '../field.js'
+import control from '../control.js'
+import wrap from '../wrap.js'
 
-export default field(({
+export default wrap(control(({
   title,
-  description,
-  type,
-  change,
   minimum,
   maximum,
   multipleOf,
+  change,
   ...schema
-}) => html(({input, div}) => [
-  input({
-    class: 'form-range validate',
-    type: 'range',
-    min: minimum,
-    max: maximum,
-    step: multipleOf,
-    value: schema.default,
-    change: ev => {
-      const e = ev.target
-      change(e.parentNode, e.value)
-      e.parentNode.querySelector('.form-text').textContent = e.value
-    }
-  }),
-  div({
-    class: 'form-text'
-  }, schema.default)
-]))
+}) => html(({input}) => input({
+  name: title,
+  class: 'form-range',
+  type: 'range',
+  min: minimum,
+  max: maximum,
+  step: multipleOf,
+  value: schema.default,
+  change: ev => change(ev.target.value)
+})), {text: true}))

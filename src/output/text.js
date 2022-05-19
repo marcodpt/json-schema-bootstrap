@@ -1,7 +1,7 @@
 import {html} from '../../dependencies.js'
-import field from '../field.js'
+import wrap from '../wrap.js'
 
-export default field(schema => html(({div}) => div({
+export default wrap(schema => html(({div}) => div({
   style: {
     whiteSpace: 'pre-wrap'
   }

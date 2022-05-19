@@ -1,4 +1,5 @@
 import alert from '../alert.js'
+import wrapper from '../wrapper.js'
 import {html} from '../../dependencies.js'
 
 export default ({
@@ -7,7 +8,7 @@ export default ({
   builder,
   ...schema
 }) => html(({fieldset, legend}) => {
-  const {children} = builder()
+  const {children} = builder(wrapper)
 
   return fieldset([
     !title ? null : legend(title),
