@@ -9,6 +9,7 @@ export default ({
   resolver,
   submit,
   lang,
+  valid,
   ...extra
 }) => {
   var data = null
@@ -34,7 +35,8 @@ export default ({
         return validate(schema, data)
       },
       validate: validate,
-      resolver: resolver
+      resolver: resolver,
+      valid: valid
     }),
     readOnly ? null : btn({
       type: 'submit'

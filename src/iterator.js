@@ -6,6 +6,7 @@ const iterator = schema => {
   const {
     type,
     change,
+    valid,
     validate,
     resolver,
     properties,
@@ -13,7 +14,7 @@ const iterator = schema => {
     minItems,
     readOnly
   } = schema
-  const base = {validate, resolver}
+  const base = {validate, resolver, valid}
   const t = getType(type)
 
   if (t == "object" && properties != null) {

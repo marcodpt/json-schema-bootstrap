@@ -20,5 +20,3 @@ My json-schema bootstrap5 user interface
  - unify formats (no table for input/output)
  - create a way to extend formats
  - add description to typeahead
- - remove optionally validation
- - remove feedback function

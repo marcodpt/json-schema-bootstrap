@@ -16,7 +16,8 @@ export default {
       attributes: {
         schema: form,
         submit: submit,
-        resolver: resolver
+        resolver: resolver,
+        valid: true
       }
     },
     item: {

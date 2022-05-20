@@ -2,6 +2,7 @@ import {html} from '../dependencies.js'
 
 export default (el, {text} = {}) => ({
   change,
+  valid,
   ...schema
 }) => {
   const t = !text ? null : html(({div}) => div({
@@ -18,8 +19,15 @@ export default (el, {text} = {}) => ({
     if (e) {
       const x = e instanceof Array ? e[0] : e
       if (x) {
-        x.classList.remove(`is-${err ? '' : 'in'}valid`)
-        x.classList.add(`is-${err ? 'in' : ''}valid`)
+        if (err) {
+          x.classList.remove(`is-valid`)
+          x.classList.add(`is-invalid`)
+        } else {
+          x.classList.remove(`is-invalid`)
+          if (valid) {
+            x.classList.add(`is-valid`)
+          }
+        }
       }
     }
     if (t) {
