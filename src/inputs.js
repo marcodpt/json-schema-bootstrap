@@ -10,7 +10,7 @@ import file from './input/file.js'
 import color from './input/color.js'
 import cnpjcpf from './input/cnpjcpf.js'
 import cep from './input/cep.js'
-import {field as typeahead} from './input/typeahead.js'
+import typeahead from './input/typeahead.js'
 
 export default {
   boolean: {

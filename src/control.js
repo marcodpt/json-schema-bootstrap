@@ -16,8 +16,11 @@ export default (el, {text} = {}) => ({
     err = validation ? validation(value, err) : err
 
     if (e) {
-      e.classList.remove(`is-${err ? '' : 'in'}valid`)
-      e.classList.add(`is-${err ? 'in' : ''}valid`)
+      const x = e instanceof Array ? e[0] : e
+      if (x) {
+        x.classList.remove(`is-${err ? '' : 'in'}valid`)
+        x.classList.add(`is-${err ? 'in' : ''}valid`)
+      }
     }
     if (t) {
       t.textContent = value

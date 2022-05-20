@@ -16,3 +16,9 @@ My json-schema bootstrap5 user interface
  - date br
  - use form constructor with modal in hrefSchema
  - use output in table
+ - use null for not set objects, like cep/image in input form
+ - unify formats (no table for input/output)
+ - create a way to extend formats
+ - add description to typeahead
+ - remove optionally validation
+ - remove feedback function

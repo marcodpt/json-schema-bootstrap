@@ -1,7 +1,7 @@
 import {html} from '../../dependencies.js'
 import link from '../link.js'
 import {interpolate} from '../lib.js'
-import {input as typeahead} from '../input/typeahead.js'
+import typeahead from '../input/typeahead.js'
 
 export default ({
   title,

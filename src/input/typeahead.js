@@ -1,5 +1,6 @@
 import {html} from '../../dependencies.js'
-import wrapper from '../field.js'
+import control from '../control.js'
+import wrap from '../wrap.js'
 
 const toStr = x => typeof x != "string" ?
   (x == null ? '' : JSON.stringify(x, undefined, 2)) : x
@@ -60,10 +61,10 @@ const setOptions = (Tags, e, options, value, change) => {
   e.innerHTML = select(options).innerHTML
   e.disabled = l <= 1
   e.value = toStr(value)
-  change(e.parentNode, toStr(value), validate(e))
+  change(toStr(value), validate(e))
 }
 
-const input = ({
+export default wrap(control(({
   title,
   description,
   label,
@@ -79,7 +80,8 @@ const input = ({
   var oldData = null
   const e = select({
     class: 'form-select validate',
-    change: ev => change(ev.target.parentNode, ev.target.value)
+    name: title,
+    change: ev => change(ev.target.value)
   })
 
   if (href != null) {
@@ -113,12 +115,5 @@ const input = ({
   }
 
   setOptions(Tags, e, options, schema.default, change)
-  setTimeout(() => {
-    setOptions(Tags, e, options, schema.default, change)
-  }, 300)
   return e
-})
-
-const field = wrapper(input)
-
-export {field, input}
+})))
