@@ -2,6 +2,7 @@ import {html} from '../../dependencies.js'
 import link from '../link.js'
 import {interpolate} from '../lib.js'
 import typeahead from '../input/typeahead.js'
+import iterator from '../iterator.js'
 
 export default ({
   title,
@@ -72,7 +73,7 @@ export default ({
           return X
         }, Prel.map(() => null))
         .filter(l => l != null)
-        .map(p => p instanceof Array ? typeahead(p.reduce((S, l) => {
+        .map(p => p instanceof Array ? iterator(p.reduce((S, l) => {
           S.enum.push(l.href)
           S.labels.push(l.title)
           return S
@@ -84,7 +85,9 @@ export default ({
               location.href = value
             }
           },
-          default: ''
+          default: '',
+          format: 'typeahead',
+          type: 'string'
         })) : link(p))
       ),
       inline(L.filter(l => Arel.indexOf(l.rel) != -1).map(m => link(m))),
@@ -156,7 +159,11 @@ export default ({
         ])),
         Object.keys(items.properties || {}).map(key => td({
           class: 'text-center align-middle'
-        }, row[key]))
+        }, iterator({
+          ...items.properties[key],
+          default: row[key],
+          readOnly: true
+        })))
       ]))
     ])
   ])
