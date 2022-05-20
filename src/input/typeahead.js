@@ -79,7 +79,7 @@ export default wrap(control(({
   var options = null
   var oldData = null
   const e = select({
-    class: 'form-select validate',
+    class: 'form-select',
     name: title,
     change: ev => change(ev.target.value)
   })

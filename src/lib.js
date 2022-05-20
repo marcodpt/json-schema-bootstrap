@@ -38,25 +38,23 @@ const interpolate = (str, X) => {
   }
 }
 
-const jsonp = uri => {
-  return new Promise((resolve, reject) => {
-    var id = '_' + Math.round(10000 * Math.random())
-    var callbackName = 'jsonp_callback_' + id
-    window[callbackName] = data => {
-      delete window[callbackName]
-      var ele = document.getElementById(id)
-      ele.parentNode.removeChild(ele)
-      resolve(data)
-    }
+const jsonp = uri => new Promise((resolve, reject) => {
+  var id = '_' + Math.round(10000 * Math.random())
+  var callbackName = 'jsonp_callback_' + id
+  window[callbackName] = data => {
+    delete window[callbackName]
+    var ele = document.getElementById(id)
+    ele.parentNode.removeChild(ele)
+    resolve(data)
+  }
 
-    var src = uri+(uri.indexOf('?') !== -1 ? '&' : '?')+
-        'callback='+callbackName
-    var script = document.createElement('script')
-    script.src = src
-    script.id = id
-    script.addEventListener('error', reject)
-    document.body.appendChild(script)
-  })
-}
+  var src = uri+(uri.indexOf('?') !== -1 ? '&' : '?')+
+      'callback='+callbackName
+  var script = document.createElement('script')
+  script.src = src
+  script.id = id
+  script.addEventListener('error', reject)
+  document.body.appendChild(script)
+})
 
 export {copy, getType, parser, interpolate, jsonp}

@@ -1,37 +1,29 @@
 import {html} from '../../dependencies.js'
-import feedback from '../feedback.js'
+import control from '../control.js'
 
 export default ({
+  format,
+  ...schema
+}) => html(({div}) => div({
+  class: [
+    'my-3',
+    'form-check',
+    format == 'toggle' ? 'form-switch' : ''
+  ]
+}, control(({
   title,
   description,
-  format,
   change,
   ...schema
-}) => html(({div, input, label}) => {
-  const f = feedback(change)
-  const e = div({
-    class: [
-      'my-3',
-      'form-check',
-      format == 'toggle' ? 'form-switch' : ''
-    ]
-  }, [
-    input({
-      class: 'form-check-input validate',
-      type: 'checkbox',
-      checked: schema.default ? true : false,
-      click: ev => f(ev.target.parentNode, ev.target.checked ? true : false)
-    }),
-    label({
-      class: 'form-check-label',
-      title: description
-    }, title),
-    div({
-      class: 'invalid-feedback'
-    })
-  ])
-  if (schema.default != null) {
-    f(e, schema.default)
-  }
-  return e
-})
+}) => html(({input, label}) => [
+  input({
+    class: 'form-check-input',
+    type: 'checkbox',
+    checked: schema.default ? true : false,
+    click: ev => change(ev.target.checked ? true : false)
+  }),
+  label({
+    class: 'form-check-label',
+    title: description
+  }, title)
+]))(schema)))
