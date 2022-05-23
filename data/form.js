@@ -152,6 +152,14 @@ export default {
       title: "Sport",
       default: "soccer"
     },
+    alert: {
+      title: 'Alert',
+      description: 'Some random info'
+    },
+    warning: {
+      description: 'Be cautious',
+      format: 'warning'
+    },
     primes: {
       title: "Primes",
       description: "Prime number selection",

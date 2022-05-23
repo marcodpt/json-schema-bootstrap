@@ -1,4 +1,5 @@
 import wrapper from '../wrapper.js'
+import alert from '../alert.js'
 import {html} from '../../dependencies.js'
 
 export default ({
@@ -12,15 +13,6 @@ export default ({
   return fieldset([
     !title ? null : legend(title),
     children,
-    !description ? null : div({
-      class: [
-        'alert',
-        'alert-info'
-      ],
-      style: {
-        whiteSpace: 'pre-wrap'
-      },
-      role: 'alert'
-    }, description)
+    !description ? null : alert({}, description)
   ])
 })

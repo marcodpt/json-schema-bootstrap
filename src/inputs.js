@@ -11,6 +11,7 @@ import color from './input/color.js'
 import cnpjcpf from './input/cnpjcpf.js'
 import cep from './input/cep.js'
 import typeahead from './input/typeahead.js'
+import feedback from './input/feedback.js'
 
 export default {
   boolean: {
@@ -42,5 +43,8 @@ export default {
   array: {
     _: items,
     file: file
+  },
+  null: {
+    _: feedback
   }
 }
