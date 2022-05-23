@@ -1,12 +1,15 @@
 import {html} from '../../dependencies.js'
-import btn from '../btn.js'
 
 export default ({
   minItems, maxItems, title, description, builder
 }) => html(({
-  fieldset, legend, span, i, div
+  fieldset, legend, span, i, div, button
 }) => {
-  const {children, add, remove} = builder()
+  const {children, add, remove} = builder(children => schema => html(({
+    div
+  }) => div({
+    class: 'my-3'
+  }, children(schema))))
   const limitMin = n => minItems >= n || n == 0
   const limitMax = n => maxItems != null && maxItems <= n
   const setLimits = (f, n) => {
@@ -38,10 +41,11 @@ export default ({
       span({
         title: description
       }, title),
-      btn({
-        bg: 'secondary',
+      button({
         class: [
           'ms-2',
+          'btn',
+          'btn-secondary',
           limitMin(children.length) ? 'disabled' : ''
         ],
         type: 'button',
@@ -59,11 +63,12 @@ export default ({
       }, i({
         class: 'fas fa-minus'
       })),
-      btn({
-        bg: 'secondary',
+      button({
         type: 'button',
         class: [
           'ms-2',
+          'btn',
+          'btn-secondary',
           limitMax(children.length) ? 'disabled' : ''
         ],
         click: ev => {
@@ -80,10 +85,6 @@ export default ({
         class: 'fas fa-plus'
       }))
     ]),
-    children.map(child => div({
-      class: 'my-3'
-    }, [
-      child
-    ])) 
+    children 
   ])
 })

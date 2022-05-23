@@ -108,6 +108,7 @@ const iterator = schema => {
               data[n] = parser(items.type, value)
               return validate(items, data[n])
             },
+            wrapper: wrapper,
             ...base
           })
         },

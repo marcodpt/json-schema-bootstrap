@@ -1,4 +1,3 @@
-import btn from './btn.js'
 import iterator from './iterator.js'
 import validator from './validator.js'
 import {parser} from './lib.js'

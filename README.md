@@ -11,15 +11,15 @@ My json-schema bootstrap5 user interface
 
 ## TODO
  - handle null type 
- - table example
- - form validation
  - date br
- - use form constructor with modal in hrefSchema
  - use null for not set objects, like cep/image in input form
- - unify formats (no table for input/output)
- - create a way to extend formats
  - add description to typeahead
- - separate extra properties from schema iterator
- - use link as hyperschema and make it recursive
  - error feedback on objects and arrays
  - form pending
+ - unify formats (no table for input/output)
+ 
+ - use link as hyperschema and make it recursive
+ - separate extra properties from schema iterator
+ - use form constructor with modal in hrefSchema
+ - create a way to extend formats
+ - table example
