@@ -4,7 +4,7 @@ import btn from '../btn.js'
 export default ({
   minItems, maxItems, title, description, builder
 }) => html(({
-  fieldset, legend, span, i
+  fieldset, legend, span, i, div
 }) => {
   const {children, add, remove} = builder()
   const limitMin = n => minItems >= n || n == 0
@@ -80,6 +80,10 @@ export default ({
         class: 'fas fa-plus'
       }))
     ]),
-    children 
+    children.map(child => div({
+      class: 'my-3'
+    }, [
+      child
+    ])) 
   ])
 })

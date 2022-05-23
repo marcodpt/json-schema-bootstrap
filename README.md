@@ -22,5 +22,4 @@ My json-schema bootstrap5 user interface
  - separate extra properties from schema iterator
  - use link as hyperschema and make it recursive
  - error feedback on objects and arrays
- - problem in my-3 in inputs without wrapper for example arrays
  - form pending
