@@ -1,4 +1,3 @@
-import alert from '../alert.js'
 import wrapper from '../wrapper.js'
 import {html} from '../../dependencies.js'
 
