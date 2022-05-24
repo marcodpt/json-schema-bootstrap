@@ -1,10 +1,4 @@
 import wrap from '../wrap.js'
-import link from '../link.js'
+import href from '../href.js'
 
-export default wrap(({
-  href,
-  ...schema
-}) => link({
-  href,
-  title: schema.default.toLocaleString()
-}))
+export default wrap(schema => href(schema, schema => schema.default.toLocaleString()))

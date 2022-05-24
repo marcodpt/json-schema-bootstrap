@@ -10,16 +10,17 @@ My json-schema bootstrap5 user interface
  - function `resolver`(`url`): Function called when `href` property is present
 
 ## TODO
- - handle null type 
+ - unify formats (no table for input/output)
+ - separate extra properties from schema iterator
+ - use link as hyperschema and make it recursive
+
  - date br
  - use null for not set objects, like cep/image in input form
  - add description to typeahead
  - error feedback on objects and arrays
  - form pending
- - unify formats (no table for input/output)
+ - href rendering on table and items
  
- - use link as hyperschema and make it recursive
- - separate extra properties from schema iterator
  - use form constructor with modal in hrefSchema
  - create a way to extend formats
  - table example

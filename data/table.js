@@ -44,12 +44,13 @@ export default {
       title: 'Page 3 of 3',
       rel: 'index'
     }, {
-      href: '#/items/{}',
-      title: '{} items per page',
+      href: '#/items/5',
+      title: '5 items per page',
       rel: 'alternate',
       hrefSchema: {
         type: 'integer',
         format: 'typeahead',
+        label: '{} items per page',
         enum: [5, 10, 20],
         default: 20
       }
