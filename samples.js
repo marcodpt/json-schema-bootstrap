@@ -1,4 +1,4 @@
-import schema from './src/schema.js'
+//import schema from './src/schema.js'
 import resolver from './resolver.js'
 import data from './data/rows.js'
 import table from './data/table.js'
@@ -263,6 +263,156 @@ export default {
         ui: 'color',
         default: '#ffffff',
         pattern: '^#[a-f].{5}$'
+      }
+    },
+    range0: {
+      attributes: {
+        default: 3.1415,
+        ui: 'range'
+      }
+    },
+    range1: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        title: "debt",
+        type: "number",
+        ui: "range",
+        default: 10,
+        minimum: 1000,
+        maximum: 10000,
+        multipleOf: 0.01
+      }
+    },
+    range2: {
+      attributes: {
+        config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        title: "debt",
+        description: 'Something to pay for',
+        type: "number",
+        ui: "range",
+        minimum: 1000,
+        maximum: 10000,
+        multipleOf: 0.01
+      }
+    },
+    range3: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'range',
+        title: "Children",
+        type: "integer",
+        default: 0,
+        minimum: 0,
+        maximum: 20,
+        multipleOf: 1
+      }
+    },
+    integer0: {
+      attributes: {
+        default: 7,
+        ui: 'integer'
+      }
+    },
+    integer1: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: "integer",
+        title: "Age",
+        type: "integer",
+        default: 9,
+        minimum: 18,
+        maximum: 99,
+        multipleOf: 1
+      }
+    },
+    integer2: {
+      attributes: {
+        config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        ui: "integer",
+        title: "Age",
+        type: "integer",
+        minimum: 18,
+        maximum: 99,
+        multipleOf: 1
+      }
+    },
+    integer3: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'integer',
+        title: "Age",
+        default: 30,
+        minimum: 18,
+        maximum: 99,
+        multipleOf: 1
+      }
+    },
+    number0: {
+    pi: {
+      title: "Pi",
+      type: "number",
+      default: 3.1415926535,
+      href: "https://www.google.com/search?q=pi+digits"
+    },
+      attributes: {
+        default: 3.1415,
+        ui: 'number'
+      }
+    },
+    number1: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: "number",
+        default: 500,
+        minimum: 1000,
+        maximum: 10000,
+        multipleOf: 0.01
+      }
+    },
+    number2: {
+      attributes: {
+        config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        ui: "number",
+        title: "salary",
+        description: 'Enter your salary...',
+        type: "number",
+        minimum: 1000,
+        maximum: 10000,
+        multipleOf: 0.01
+      }
+    },
+    number3: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'number',
+        default: 3000,
+        minimum: 1000,
+        maximum: 10000,
+        multipleOf: 0.01
       }
     },
     /*inline: {

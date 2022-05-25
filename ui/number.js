@@ -1,12 +1,12 @@
-import {html} from '../../dependencies.js'
-import control from '../control.js'
-import wrap from '../wrap.js'
+import {html} from '../dependencies.js'
+import {control} from '../index.js'
+import {toNumber} from '../lib.js'
 
-export default wrap(control(({
+export default control(({
   title,
   description,
   type,
-  change,
+  submit,
   minimum,
   maximum,
   multipleOf,
@@ -20,6 +20,6 @@ export default wrap(control(({
   max: maximum,
   step: multipleOf,
   value: schema.default,
-  change: ev => change(ev.target.value),
-  keyup: ev => change(ev.target.value)
-}))))
+  change: ev => submit(toNumber(ev.target.value)),
+  keyup: ev => submit(toNumber(ev.target.value))
+})))

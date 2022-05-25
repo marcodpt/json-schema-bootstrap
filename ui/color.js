@@ -27,7 +27,7 @@ export default control(({
     backgroundColor: schema.default
   },
   class: 'w-100 h-100'
-}, '\n')), {
+}, '\u200b')), {
   input: 'input',
   value: 'span'
 })

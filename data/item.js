@@ -62,18 +62,6 @@ export default {
       title: "Score",
       type: "integer"
     },
-    pi: {
-      title: "Pi",
-      type: "number",
-      default: 3.1415926535,
-      href: "https://www.google.com/search?q=pi+digits"
-    },
-    color: {
-      title: "Color",
-      type: "string",
-      default: "#aaaaaa",
-      format: "color"
-    },
     bio: {
       title: "Bio",
       default: "Hello,\nMy name is John!",

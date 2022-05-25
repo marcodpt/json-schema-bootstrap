@@ -4,6 +4,8 @@ import data from './ui/data.js'
 import string from './ui/string.js'
 import text from './ui/text.js'
 import color from './ui/color.js'
+import range from './ui/range.js'
+import number from './ui/number.js'
 
 export default {
   card: card,
@@ -18,5 +20,8 @@ export default {
   data: data,
   string: string,
   text: text,
-  color: color
+  color: color,
+  range: range,
+  integer: number,
+  number: number
 }

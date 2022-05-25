@@ -3,40 +3,6 @@ export default {
   title: "My form",
   description: "A sample form!\nHope you enjoy it!",
   properties: {
-    age: {
-      title: "Age",
-      type: "integer",
-      default: 30,
-      minimum: 18,
-      maximum: 99,
-      multipleOf: 1
-    },
-    children: {
-      title: "Children",
-      type: "integer",
-      default: 0,
-      minimum: 0,
-      maximum: 20,
-      multipleOf: 1,
-      format: "range"
-    },
-    salary: {
-      title: "Salary ($)",
-      type: "number",
-      default: 3000,
-      minimum: 1000,
-      maximum: 10000,
-      multipleOf: 0.01
-    },
-    debt: {
-      title: "Debt ($)",
-      type: "number",
-      format: "range",
-      default: 10,
-      minimum: 1000,
-      maximum: 10000,
-      multipleOf: 0.01
-    },
     name: {
       title: "Name",
       type: "string",
@@ -66,13 +32,6 @@ export default {
       minimum: "2022-03-01",
       maximum: "2022-05-01",
       default: "2022-04-01"
-    },
-    favorite: {
-      title: "Favorite Color",
-      type: "string",
-      format: "color",
-      default: "#ffffff",
-      pattern: "^#[a-f].{5}$"
     },
     codigo: {
       title: "CNPJ/CPF",
