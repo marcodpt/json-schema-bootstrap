@@ -14,6 +14,7 @@ My json-schema bootstrap5 user interface
  - separate extra properties from schema iterator
  - use link as hyperschema and make it recursive
 
+ - images, video, audio outputs
  - date br
  - use null for not set objects, like cep/image in input form
  - add description to typeahead

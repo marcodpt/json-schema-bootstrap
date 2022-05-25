@@ -6,6 +6,11 @@ import text from './ui/text.js'
 import color from './ui/color.js'
 import range from './ui/range.js'
 import number from './ui/number.js'
+import checkbox from './ui/checkbox.js'
+import cnpjcpf from './ui/cnpjcpf.js'
+import cep from './ui/cep.js'
+import file from './ui/file.js'
+import date from './ui/date.js'
 
 export default {
   card: card,
@@ -23,5 +28,12 @@ export default {
   color: color,
   range: range,
   integer: number,
-  number: number
+  number: number,
+  checkbox: checkbox,
+  switch: checkbox,
+  boolean: checkbox,
+  cnpjcpf: cnpjcpf,
+  cep: cep,
+  file: file,
+  date: date
 }

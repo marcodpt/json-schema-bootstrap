@@ -23,7 +23,10 @@ const control = (input, output, config) => schema => html(({div}) => {
     })
 
     const genFeedback = (e, value) => {
-      const msg = schema.submit(value)
+      var msg = schema.submit(value)
+      if (config.validator) {
+        msg = config.validator(value, msg)
+      }
 
       if (config.value) {
         const v = e.querySelector(config.value)
@@ -62,7 +65,7 @@ const control = (input, output, config) => schema => html(({div}) => {
     if (config.input) {
       const x = el.querySelector(config.input)
       if (x) {
-        x.after(feedback)
+        x.parentNode.appendChild(feedback)
       }
       return el
     } else {

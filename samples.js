@@ -364,12 +364,6 @@ export default {
       }
     },
     number0: {
-    pi: {
-      title: "Pi",
-      type: "number",
-      default: 3.1415926535,
-      href: "https://www.google.com/search?q=pi+digits"
-    },
       attributes: {
         default: 3.1415,
         ui: 'number'
@@ -413,6 +407,234 @@ export default {
         minimum: 1000,
         maximum: 10000,
         multipleOf: 0.01
+      }
+    },
+    bool00: {
+      attributes: {
+        default: false,
+        ui: 'boolean'
+      }
+    },
+    bool01: {
+      attributes: {
+        default: true,
+        ui: 'switch'
+      }
+    },
+    bool02: {
+      attributes: {
+        default: true,
+        ui: 'checkbox'
+      }
+    },
+    bool03: {
+      attributes: {
+        default: null,
+        ui: 'boolean'
+      }
+    },
+    bool04: {
+      attributes: {
+        ui: 'checkbox'
+      }
+    },
+    bool1: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: "boolean",
+        title: "Accept conditions",
+        default: false,
+        const: true,
+        error: "You must accept conditions."
+      }
+    },
+    bool2: {
+      attributes: {
+        config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        ui: "checkbox",
+        title: "Accept conditions",
+        const: true,
+        error: "You must accept conditions."
+      }
+    },
+    bool3: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'switch',
+        title: 'Subscribe newsletter',
+        type: 'boolean',
+        default: false
+      }
+    },
+    cnpjcpf0: {
+      attributes: {
+        default: '171.395.530-09',
+        ui: 'cnpjcpf'
+      }
+    },
+    cnpjcpf1: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'cnpjcpf',
+        default: '79418083000194',
+        pattern: '^(|[0-9]{11}|[0-9]{14})$'
+      }
+    },
+    cnpjcpf2: {
+      attributes: {
+        config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        ui: "cnpjcpf",
+        title: "cnpjcpf",
+        description: 'Enter your CPF...',
+        pattern: '^(|[0-9]{11}|[0-9]{14})$'
+      }
+    },
+    cnpjcpf3: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'cnpjcpf',
+        default: '79418083000193',
+        pattern: '^(|[0-9]{11}|[0-9]{14})$'
+      }
+    },
+    cep0: {
+      attributes: {
+        default: '01001-001',
+        ui: 'cep'
+      }
+    },
+    cep1: {
+      attributes: {
+        config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        ui: "cep",
+        title: "cep",
+        description: 'Enter your CEP...',
+        type: ['object', 'null'],
+        default: null
+      }
+    },
+    cep2: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'cep',
+        type: ['object', 'null'],
+        default: null
+      }
+    },
+    file0: {
+      attributes: {
+        default: {
+          data: 'Hello world!',
+          name: 'sample.txt',
+          mime: 'text/plain'
+        },
+        ui: 'file'
+      }
+    },
+    file1: {
+      attributes: {
+        config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        ui: "file",
+        title: "image",
+        description: 'some image...',
+        type: ['object', 'null'],
+        default: null
+      }
+    },
+    file2: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'file',
+        type: 'array',
+        default: [],
+        minItems: 1,
+        maxItems: 3
+      }
+    },
+    file3: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'file',
+        type: ['array', 'object', 'null'],
+        minItems: 1,
+        maxItems: 3
+      }
+    },
+    date0: {
+      attributes: {
+        default: {
+          data: 'Hello world!',
+          name: 'sample.txt',
+          mime: 'text/plain'
+        },
+        ui: 'date'
+      }
+    },
+    date1: {
+      attributes: {
+        config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        ui: "date",
+        title: "image",
+        description: 'some image...',
+        type: ['object', 'null'],
+        default: null
+      }
+    },
+    date2: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'date',
+        type: 'array',
+        default: [],
+        minItems: 1,
+        maxItems: 3
+      }
+    },
+    date3: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'date',
+        type: ['array', 'object', 'null'],
+        minItems: 1,
+        maxItems: 3
       }
     },
     /*inline: {

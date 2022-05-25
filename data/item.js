@@ -3,19 +3,6 @@ export default {
   title: "Some item",
   description: "Static item example!\nHope you enjoy it!",
   properties: {
-    active: {
-      title: "Active",
-      type: "boolean",
-      default: false
-    },
-    passing: {
-      title: "Passing",
-      type: "boolean"
-    },
-    fixed: {
-      title: "Fixed",
-      type: "boolean"
-    },
     name: {
       title: "Name",
       type: "string"

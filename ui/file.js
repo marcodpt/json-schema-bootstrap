@@ -1,6 +1,6 @@
-import {html} from '../../dependencies.js'
-import control from '../control.js'
-import wrap from '../wrap.js'
+import {html} from '../dependencies.js'
+import {control} from '../index.js'
+import {hasType} from '../lib.js'
 
 const reader = file => new Promise((resolve, reject) => {
   var reader = new FileReader()
@@ -30,10 +30,10 @@ const reader = file => new Promise((resolve, reject) => {
   }
 })
 
-export default wrap(control(({
+export default control(({
   title,
   description,
-  change,
+  submit,
   type,
   ...schema
 }) => html(({input}) => input({
@@ -41,7 +41,7 @@ export default wrap(control(({
   type: 'file',
   name: title,
   placeholder: description,
-  multiple: type == "array",
+  multiple: hasType(type, "array"),
   change: ev => {
     const F = ev.target.files
     const P = []
@@ -49,10 +49,13 @@ export default wrap(control(({
       P.push(reader(F[i]))
     }
     Promise.all(P).then(files => {
-      change(type == "array" ? files : files[0])
+      submit(
+        hasType(type, "object") && files.length == 1 ? files[0] :
+        !hasType(type, "array") ? null : files
+      )
     }).catch(err => {
       console.log(err)
-      change(null)
+      submit(hasType(type, "array") && !hasType(type, "null") ? [] : null)
     })
   } 
-}))))
+})))

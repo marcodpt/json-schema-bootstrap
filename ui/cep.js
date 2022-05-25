@@ -1,14 +1,13 @@
-import {html} from '../../dependencies.js'
+import {html} from '../dependencies.js'
 import {jsonp} from '../lib.js'
-import control from '../control.js'
-import wrap from '../wrap.js'
+import {control} from '../index.js'
 
-export default wrap(control(({
+export default control(({
   title,
   description,
-  change,
+  submit,
   ...schema
-}) => html(({input, div}) => [
+}) => html(({input, div}) => div([
   input({
     class: 'form-control',
     type: 'text',
@@ -23,22 +22,24 @@ export default wrap(control(({
 
       var v = e.value.replace(/[^\d]+/g,'')
 
-      if (v.length != 8) {
-        change(null, () => 'Digite um CEP válido')
+      if (v === '') {
+        submit(null)
+      } else if (v.length != 8) {
+        submit(v)
         t.textContent = ''
-        f.textContent = ''
+        t.classList.add('d-none')
       } else {
-        change(null, () => '')
+        submit(true)
         t.textContent = 'Carregando...'
-        f.textContent = ''
+        t.classList.remove('d-none')
         e.disabled = true
         jsonp(`https://viacep.com.br/ws/${v}/json/`).then(data => {
           if (data.erro) {
             throw "Erro viacep: "+data.erro
           }
-          change(data)
-          t.textContent = ''
-          f.textContent = `
+          submit(data)
+          t.classList.remove('d-none')
+          t.textContent = `
             ${data.localidade} - ${data.uf},
             ${data.bairro},
             ${data.logradouro} ${data.complemento}
@@ -47,21 +48,31 @@ export default wrap(control(({
         }).catch(err => {
           console.log(err)
           e.disabled = false
-          change(null, () => `
-            Erro ao buscar o CEP.
-            Verifique se foi digitado corretamente
-            e sua conexão com a internet está ativa! 
-          `)
+          submit(false)
           t.textContent = ''
-          f.textContent = ''
+          t.classList.add('d-none')
         })
       }
     } 
   }),
   div({
-    class: 'form-text'
-  }),
-  div({
-    class: 'valid-feedback'
+    class: 'form-text d-none'
   })
-])))
+])), null, {
+  validator: (value, msg) => {
+    if (value === true) {
+      return null
+    } else if (value === undefined) {
+      return `
+        Erro ao buscar o CEP.
+        Verifique se foi digitado corretamente
+        e sua conexão com a internet está ativa! 
+      `
+    } else if (typeof value === "string") {
+      return 'Digite um CEP válido'
+    } else {
+      return msg
+    }
+  },
+  input: 'input'
+})

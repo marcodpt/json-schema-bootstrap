@@ -1,6 +1,5 @@
-import {html} from '../../dependencies.js'
-import control from '../control.js'
-import wrap from '../wrap.js'
+import {html} from '../dependencies.js'
+import {control} from '../index.js'
 
 const validaCNPJ = cnpj => {
   if (
@@ -83,10 +82,10 @@ const validaCPF = cpf => {
   return Resto == parseInt(cpf.substring(10, 11))
 }
 
-export default wrap(control(({
+export default control(({
   title,
   description,
-  change,
+  submit,
   ...schema
 }) => html(({input}) => input({
   class: 'form-control',
@@ -94,18 +93,17 @@ export default wrap(control(({
   name: title,
   placeholder: description,
   value: schema.default,
-  keyup: ev => {
-    var v = ev.target.value.replace(/[^\d]+/g,'')
-    change(v, (v, error) => {
-      if (error) {
-        return error
-      } else if (v.length == 11) {
-        return validaCPF(v) ? '' : 'CPF inválido.'
-      } else if (v.length == 14) {
-        return validaCNPJ(v) ? '' : 'CNPJ inválido.'
-      } else {
-        return ''
-      }
-    })
-  } 
-}))))
+  keyup: ev => submit(ev.target.value.replace(/[^\d]+/g,''))
+})), null, {
+  validator: (value, msg) => {
+    if (msg) {
+      return msg
+    } else if (value.length == 11) {
+      return validaCPF(value) ? msg : 'CPF inválido.'
+    } else if (value.length == 14) {
+      return validaCNPJ(value) ? msg : 'CNPJ inválido.'
+    } else {
+      return msg
+    }
+  }
+})

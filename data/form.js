@@ -33,43 +33,6 @@ export default {
       maximum: "2022-05-01",
       default: "2022-04-01"
     },
-    codigo: {
-      title: "CNPJ/CPF",
-      type: "string",
-      format: "cnpjcpf",
-      default: "",
-      pattern: "^(|[0-9]{11}|[0-9]{14})$"
-    },
-    endereco: {
-      title: "CEP",
-      type: ["object", "null"],
-      format: "cep"
-    },
-    accept: {
-      title: "Accept conditions",
-      type: "boolean",
-      default: false,
-      const: true,
-      error: "You must accept conditions."
-    },
-    subscribe: {
-      title: "Subscribe newsletter",
-      type: "boolean",
-      default: false,
-      format: "toggle"
-    },
-    image: {
-      title: "Image",
-      type: "object",
-      format: "file"
-    },
-    friends: {
-      title: "Friends",
-      type: "array",
-      format: "file",
-      minItems: 2,
-      maxItems: 3
-    },
     country: {
       type: "string",
       format: "typeahead",
