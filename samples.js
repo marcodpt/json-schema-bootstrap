@@ -590,14 +590,58 @@ export default {
         maxItems: 3
       }
     },
-    date0: {
+    dateA: {
       attributes: {
-        default: {
-          data: 'Hello world!',
-          name: 'sample.txt',
-          mime: 'text/plain'
+        ui: 'date',
+        default: "2020-01-02"
+      }
+    },
+    dateB: {
+      attributes: {
+        ui: 'date',
+        default: ""
+      }
+    },
+    dateC: {
+      attributes: {
+        ui: 'date',
+        default: 0
+      }
+    },
+    dateD: {
+      attributes: {
+        ui: 'date',
+        default: 1648771200
+      }
+    },
+    dateD: {
+      attributes: {
+        language: 'pt',
+        ui: 'date',
+        default: "2020-01-02"
+      }
+    },
+    dateE: {
+      attributes: {
+        language: 'pt',
+        ui: 'date',
+        default: ""
+      }
+    },
+    dateF: {
+      attributes: {
+        language: 'pt',
+        ui: 'date',
+        default: 0
+      }
+    },
+    dateG: {
+      attributes: {
+        config: {
+          language: 'pt'
         },
-        ui: 'date'
+        ui: 'date',
+        default: 1648771200
       }
     },
     date1: {
@@ -607,11 +651,13 @@ export default {
           showValid: true,
           language: 'pt'
         },
-        ui: "date",
-        title: "image",
-        description: 'some image...',
-        type: ['object', 'null'],
-        default: null
+        ui: 'date',
+        title: 'date',
+        description: 'some date',
+        type: 'integer',
+        minimum: 1648771200,
+        maximum: 1651276800,
+        default: 1638771200
       }
     },
     date2: {
@@ -620,21 +666,64 @@ export default {
           callback: callback
         },
         ui: 'date',
-        type: 'array',
-        default: [],
-        minItems: 1,
-        maxItems: 3
+        title: 'date',
+        description: 'some date',
+        type: 'integer',
+        minimum: 1648771200,
+        maximum: 1651276800
       }
     },
     date3: {
       attributes: {
         config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        ui: 'date',
+        maximum: 1651276800,
+        default: 1649771200
+      }
+    },
+    date4: {
+      attributes: {
+        config: {
           callback: callback
         },
         ui: 'date',
-        type: ['array', 'object', 'null'],
-        minItems: 1,
-        maxItems: 3
+        type: 'string',
+        minimum: "2022-03-01",
+        maximum: "2022-05-01",
+        default: "2022-02-01"
+      }
+    },
+    date5: {
+      attributes: {
+        config: {
+          callback: callback,
+          showValid: true,
+          language: 'pt'
+        },
+        ui: 'date',
+        title: 'date',
+        description: 'some date',
+        type: 'string',
+        minimum: "2022-03-01",
+        maximum: "2022-05-01"
+      }
+    },
+    date6: {
+      attributes: {
+        config: {
+          callback: callback
+        },
+        ui: 'date',
+        title: 'date',
+        description: 'some date',
+        type: 'string',
+        minimum: "2022-03-01",
+        maximum: "2022-05-01",
+        default: "2022-04-01"
       }
     },
     /*inline: {

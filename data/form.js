@@ -18,21 +18,6 @@ export default {
       minLength: 1,
       default: ""
     },
-    born: {
-      title: "Born",
-      type: "integer",
-      format: "date",
-      minimum: 1648771200,
-      maximum: 1651276800
-    },
-    since: {
-      title: "Since",
-      type: "string",
-      format: "date",
-      minimum: "2022-03-01",
-      maximum: "2022-05-01",
-      default: "2022-04-01"
-    },
     country: {
       type: "string",
       format: "typeahead",

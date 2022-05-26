@@ -13,37 +13,11 @@ export default {
       default: "github",
       href: "https://www.github.com"
     },
-    admitted: {
-      title: "Admitted",
-      type: "string",
-      format: "date",
-      default: "2020-01-02"
-    },
-    termination: {
-      title: "Termination",
-      type: "string",
-      format: "date",
-      default: ""
-    },
-    aborted: {
-      title: "Aborted",
-      type: "string",
-      format: "date",
-      default: "",
-      href: "https://www.google.com/search?q=aborted"
-    },
     age: {
       title: "Age",
       type: "integer",
       default: 34,
       href: "https://www.google.com/search?q=age"
-    },
-    since: {
-      title: "Since",
-      type: "integer",
-      default: 1648771200,
-      format: "date",
-      href: "https://www.google.com/search?q=date+format"
     },
     score: {
       title: "Score",

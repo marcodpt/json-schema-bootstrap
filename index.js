@@ -7,8 +7,7 @@ const control = (input, output, config) => schema => html(({div}) => {
     description,
     submit,
     readOnly,
-    it,
-    ...extra
+    it
   } = schema
   config = config || {}
 
@@ -88,7 +87,8 @@ const builder = ({
   }) => config ? it({
     ...schema,
     it: it,
-    submit: (({
+    language: config.language,
+    submit: typeof config.callback != 'function' ? null : (({
       language,
       showValid,
       callback
@@ -96,7 +96,23 @@ const builder = ({
       const l = lang[language] || lang.en
       var error = showValid ? '' : null
       validator(schema, data, key => {
-        error = l[key](schema[key])
+        var x = schema[key]
+        if ([
+          'const',
+          'maximum',
+          'exclusiveMaximum',
+          'minimum',
+          'exclusiveMinimum'
+        ].indexOf(key) !== -1) {
+          x = it({
+            ...schema,
+            it: it,
+            language: config.language,
+            default: schema[key]
+          }).textContent
+        }
+
+        error = l[key](x)
       })
 
       if (!error && callback) {

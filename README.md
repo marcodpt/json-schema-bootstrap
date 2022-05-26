@@ -15,7 +15,6 @@ My json-schema bootstrap5 user interface
  - use link as hyperschema and make it recursive
 
  - images, video, audio outputs
- - date br
  - use null for not set objects, like cep/image in input form
  - add description to typeahead
  - error feedback on objects and arrays
