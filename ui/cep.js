@@ -1,13 +1,11 @@
 import {html} from '../dependencies.js'
-import {jsonp} from '../lib.js'
-import {control} from '../index.js'
+import {jsonp, control} from '../lib.js'
 
 export default control(({
   title,
   description,
-  submit,
   ...schema
-}) => html(({input, div}) => div([
+}, submit) => html(({input, div}) => div([
   input({
     class: 'form-control',
     type: 'text',

@@ -1,12 +1,11 @@
 import {html} from '../dependencies.js'
-import {control} from '../index.js'
+import {control} from '../lib.js'
 
 export default control(({
   title,
   description,
-  submit,
   ...schema
-}) => html(({input}) => input({
+}, submit) => html(({input}) => input({
   class: 'form-control',
   type: 'text',
   name: title,

@@ -10,10 +10,10 @@ My json-schema bootstrap5 user interface
  - function `resolver`(`url`): Function called when `href` property is present
 
 ## TODO
- - unify formats (no table for input/output)
- - separate extra properties from schema iterator
  - use link as hyperschema and make it recursive
 
+ - move all functions to lib
+ - sane magic defaults
  - images, video, audio outputs
  - use null for not set objects, like cep/image in input form
  - add description to typeahead

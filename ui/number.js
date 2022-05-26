@@ -1,17 +1,15 @@
 import {html} from '../dependencies.js'
-import {control} from '../index.js'
-import {toNumber} from '../lib.js'
+import {toNumber, control} from '../lib.js'
 
 export default control(({
   title,
   description,
   type,
-  submit,
   minimum,
   maximum,
   multipleOf,
   ...schema
-}) => html(({input}) => input({
+}, submit) => html(({input}) => input({
   class: 'form-control',
   type: 'number',
   name: title,

@@ -1,13 +1,12 @@
 import {html} from '../dependencies.js'
-import {control} from '../index.js'
+import {control} from '../lib.js'
 
 export default control(({
   title,
   description,
-  submit,
   ui,
   ...schema
-}) => html(({div, label, input}) => div({
+}, submit) => html(({div, label, input}) => div({
   class: [
     'form-check',
     ui == 'switch' ? 'form-switch' : ''

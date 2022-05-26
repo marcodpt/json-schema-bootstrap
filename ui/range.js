@@ -1,15 +1,13 @@
 import {html} from '../dependencies.js'
-import {control} from '../index.js'
-import {toNumber} from '../lib.js'
+import {toNumber, control} from '../lib.js'
 
 export default control(({
   title,
   minimum,
   maximum,
   multipleOf,
-  submit,
   ...schema
-}) => html(({div, span, input}) => div([
+}, submit) => html(({div, span, input}) => div([
   div({
     class: 'form-text'
   }),

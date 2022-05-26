@@ -1,12 +1,11 @@
 import {html} from '../dependencies.js'
-import {control} from '../index.js'
+import {control} from '../lib.js'
 
 export default control(({
   title,
   description,
-  submit,
   ...schema
-}) => html(({textarea}) => textarea({
+}, submit) => html(({textarea}) => textarea({
   class: 'form-control',
   rows: 6,
   name: title,

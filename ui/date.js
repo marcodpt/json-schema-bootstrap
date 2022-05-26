@@ -1,5 +1,5 @@
 import {html} from '../dependencies.js'
-import {control} from '../index.js'
+import {control} from '../lib.js'
 
 const loader = value => isNaN(value) ? value :
   !parseInt(value) ? '' :
@@ -12,13 +12,11 @@ const parser = value => value ? parseInt(
 export default control(({
   title,
   description,
-  submit,
   type,
   minimum,
   maximum,
-  language,
   ...schema
-}) => html(({input}) => {
+}, submit, {language}) => html(({input}) => {
   if (type != "string") {
     minimum = loader(minimum)
     maximum = loader(maximum)
@@ -36,10 +34,7 @@ export default control(({
       type == "string" ? ev.target.value || '' : parser(ev.target.value)
     ) 
   })
-}), ({
-  language,
-  ...schema
-}) => html(({span}) => {
+}), (schema, {language}) => html(({span}) => {
   var text = ''
   if (language) {
     var text = loader(schema.default)

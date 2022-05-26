@@ -1,6 +1,5 @@
 import {html} from '../dependencies.js'
-import {control} from '../index.js'
-import {hasType} from '../lib.js'
+import {hasType, control} from '../lib.js'
 
 const reader = file => new Promise((resolve, reject) => {
   var reader = new FileReader()
@@ -33,10 +32,9 @@ const reader = file => new Promise((resolve, reject) => {
 export default control(({
   title,
   description,
-  submit,
   type,
   ...schema
-}) => html(({input}) => input({
+}, submit) => html(({input}) => input({
   class: 'form-control',
   type: 'file',
   name: title,

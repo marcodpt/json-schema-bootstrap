@@ -1,12 +1,11 @@
 import {html} from '../dependencies.js'
-import {control} from '../index.js'
+import {control} from '../lib.js'
 
 export default control(({
   title,
   description,
-  submit,
   ...schema
-}) => html(({input, span, div}) => div([
+}, submit) => html(({input, span, div}) => div([
   div({
     class: 'input-group'
   }, [
