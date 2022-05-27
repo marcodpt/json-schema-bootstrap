@@ -3,28 +3,6 @@ export default {
   title: "My form",
   description: "A sample form!\nHope you enjoy it!",
   properties: {
-    name: {
-      title: "Name",
-      type: "string",
-      minLength: 3,
-      maxLength: 10,
-      pattern: "a",
-      default: ""
-    },
-    bio: {
-      type: "string",
-      format: "text",
-      description: "Talk a little about yourself...",
-      minLength: 1,
-      default: ""
-    },
-    country: {
-      type: "string",
-      format: "typeahead",
-      title: "Country",
-      default: "cn",
-      href: "countries"
-    },
     city: {
       type: "integer",
       format: "typeahead",
@@ -39,33 +17,6 @@ export default {
       href: "companies",
       default: 3,
       label: "Some company"
-    },
-    role: {
-      type: "string",
-      format: "typeahead",
-      title: "Role",
-      href: "roles",
-      description: "List of roles..."
-    },
-    pet: {
-      type: "string",
-      format: "typeahead",
-      title: "Pet",
-      enum: ["cat", "dog", "horse"]
-    },
-    sport: {
-      type: "string",
-      format: "typeahead",
-      title: "Sport",
-      default: "soccer"
-    },
-    alert: {
-      title: 'Alert',
-      description: 'Some random info'
-    },
-    warning: {
-      description: 'Be cautious',
-      format: 'warning'
     },
     primes: {
       title: "Primes",

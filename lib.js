@@ -1,5 +1,7 @@
 import {html} from './dependencies.js'
 
+const copy = X => X !== undefined ? JSON.parse(JSON.stringify(X)) : X
+
 const toNumber = x => {
   if (typeof x == 'string') {
     if (x.indexOf('.') == -1) {
@@ -33,6 +35,21 @@ const jsonp = uri => new Promise((resolve, reject) => {
 
 const hasType = (types, type) => types instanceof Array ?
   types.indexOf(type) >= 0 : types === type
+
+const interpolate = (str, X) => {
+  if (X && typeof X == 'object' && !(X instanceof Array)) {
+    return str.replace(/{([^{}]*)}/g, (a, b) => {
+      var r = X[b]
+      return typeof r === 'string' || typeof r === 'number' ? r : a
+    })
+  } else {
+    return str.replace(/{}/g, () =>
+      X instanceof Array ? X.join(',') :
+      X == null ? '' :
+      X
+    )
+  }
+}
 
 const control = (input, output, config) => (schema, submit, options) =>
   html(({div}) => {
@@ -102,4 +119,4 @@ const control = (input, output, config) => (schema, submit, options) =>
     }
   })
 
-export {toNumber, jsonp, hasType, control}
+export {copy, toNumber, jsonp, hasType, interpolate, control}

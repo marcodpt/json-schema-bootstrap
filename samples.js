@@ -1,10 +1,13 @@
-//import schema from './src/schema.js'
-import resolver from './resolver.js'
 import data from './data/rows.js'
 import table from './data/table.js'
 import form from './data/form.js'
 import item from './data/item.js'
 import element from './index.js'
+import countries from './data/countries.js'
+import cities_us from './data/cities_us.js'
+import cities_cn from './data/cities_cn.js'
+import cities_br from './data/cities_br.js'
+import roles from './data/roles.js'
 
 const resolve = data => console.log(JSON.stringify(data, undefined, 2))
 
@@ -887,6 +890,362 @@ export default {
           minimum: "2022-03-01",
           maximum: "2022-05-01",
           default: "2022-04-01"
+        }
+      }
+    },
+    typeaheadStatic: {
+      attributes: {
+        schema: {
+          default: "Test",
+          ui: 'typeahead'
+        }
+      }
+    },
+    typeaheadEmpty: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "typeahead",
+          title: "primes",
+          enum: []
+        }
+      }
+    },
+    typeaheadEmptyDefault: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "typeahead",
+          title: "primes",
+          enum: [],
+          default: 7
+        }
+      }
+    },
+    typeaheadSport: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: "typeahead",
+          title: "Sport",
+          default: "soccer"
+        }
+      }
+    },
+    typeaheadConstLabel: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "typeahead",
+          title: "primes",
+          label: 'x = 7',
+          default: 7
+        }
+      }
+    },
+    typeaheadPrimesEmpty: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "typeahead",
+          title: "primes",
+          enum: [2, 3, 5, 7, 11, 13, 17, 19]
+        }
+      }
+    },
+    typeaheadPrimesWrong: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "typeahead",
+          title: "primes",
+          enum: [2, 3, 5, 7, 11, 13, 17, 19],
+          default: 4
+        }
+      }
+    },
+    typeaheadPrimesWrongLabel: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "typeahead",
+          title: "primes",
+          enum: [2, 3, 5, 7, 11, 13, 17, 19],
+          label: 'x: {}',
+          default: 4
+        }
+      }
+    },
+    typeaheadPrimes: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "typeahead",
+          title: "primes",
+          enum: [2, 3, 5, 7, 11, 13, 17, 19],
+          default: 7
+        }
+      }
+    },
+    typeaheadPrimesLabel: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "typeahead",
+          title: "primes",
+          enum: [2, 3, 5, 7, 11, 13, 17, 19],
+          default: 7,
+          label: 'x: {}'
+        }
+      }
+    },
+    typeaheadPets: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: "typeahead",
+          title: "pets",
+          description: "Choose your favorite pet...",
+          enum: ["dog", "cat", "horse"]
+        }
+      }
+    },
+    typeaheadPetsWrong: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: "typeahead",
+          title: "pets",
+          description: "Choose your favorite pet...",
+          enum: ["dog", "cat", "horse"],
+          default: "bird"
+        }
+      }
+    },
+    typeaheadPetsDefault: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: "typeahead",
+          title: "pets",
+          description: "Choose your favorite pet...",
+          enum: ["dog", "cat", "horse"],
+          default: "cat"
+        }
+      }
+    },
+    typeaheadPetsWrongLabels: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: "typeahead",
+          title: "pets",
+          description: "Choose your favorite pet...",
+          enum: ["dog", "cat", "horse"],
+          labels: ["Dog", "Cat"],
+          default: "bird"
+        }
+      }
+    },
+    typeaheadPetsDefaultLabels: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: "typeahead",
+          title: "pets",
+          description: "Choose your favorite pet...",
+          enum: ["dog", "cat", "horse"],
+          labels: ["Dog", "Cat"],
+          default: "cat"
+        }
+      }
+    },
+    typeaheadRole: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          update: callback => callback(roles)
+        },
+        schema: {
+          ui: "typeahead",
+          title: "Role",
+          description: "List of roles..."
+        }
+      }
+    },
+    typeaheadRoleWrong: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          update: callback => callback(roles)
+        },
+        schema: {
+          ui: "typeahead",
+          title: "Role",
+          description: "List of roles...",
+          default: "teacher"
+        }
+      }
+    },
+    typeaheadRoleDefault: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          update: callback => callback(roles)
+        },
+        schema: {
+          ui: "typeahead",
+          title: "Role",
+          description: "List of roles...",
+          default: "sysadmin"
+        }
+      }
+    },
+    typeaheadCountry: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          update: callback => {
+            callback(null)
+            setTimeout(() => callback(countries), 2000)
+          }
+        },
+        schema: {
+          ui: "typeahead",
+          title: "Country",
+          description: "Choose a country..."
+        }
+      }
+    },
+    typeaheadCountryWrong: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          update: callback => {
+            callback(null)
+            setTimeout(() => callback(countries), 2000)
+          }
+        },
+        schema: {
+          ui: "typeahead",
+          title: "Country",
+          default: "fr",
+          enum: ['cn', 'br', 'us'],
+          description: "Choose a country..."
+        }
+      }
+    },
+    typeaheadCountryDefault: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          update: callback => {
+            callback(null)
+            setTimeout(() => callback(countries), 2000)
+          }
+        },
+        schema: {
+          ui: "typeahead",
+          title: "Country",
+          default: "cn",
+          description: "Choose a country..."
+        }
+      }
+    },
+    typeaheadCity: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          update: callback => {
+            callback(null)
+            setTimeout(() => callback(cities_cn), 2000)
+            setTimeout(() => callback(cities_br), 7000)
+            setTimeout(() => callback(cities_us), 12000)
+          }
+        },
+        schema: {
+          ui: "typeahead",
+          title: "City"
+        }
+      }
+    },
+    typeaheadCityWrong: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          update: callback => {
+            callback(null)
+            setTimeout(() => callback(cities_br), 2000)
+            setTimeout(() => callback(cities_us), 7000)
+            setTimeout(() => callback(cities_cn), 12000)
+          }
+        },
+        schema: {
+          ui: "typeahead",
+          title: "City",
+          default: 8
+        }
+      }
+    },
+    typeaheadCityDefault: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          update: callback => {
+            callback(null)
+            setTimeout(() => callback(cities_us), 2000)
+            setTimeout(() => callback(cities_cn), 7000)
+            setTimeout(() => callback(cities_br), 12000)
+          }
+        },
+        schema: {
+          ui: "typeahead",
+          title: "City",
+          default: 1
         }
       }
     },

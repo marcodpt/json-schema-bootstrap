@@ -1,6 +1,7 @@
 import {validator} from './dependencies.js'
 import lang from './src/lang/index.js'
 import ui from './interfaces.js'
+import {copy} from './lib.js'
 
 const it = oldOptions => (schema, newOptions) => {
   const options = ({
@@ -43,7 +44,7 @@ const it = oldOptions => (schema, newOptions) => {
     })
 
     if (typeof validate == 'function') {
-      error = validate(data, error)
+      error = validate(data, error, copy(options))
     }
 
     if (!error && resolve) {

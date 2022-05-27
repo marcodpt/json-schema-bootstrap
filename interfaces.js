@@ -11,6 +11,7 @@ import cnpjcpf from './ui/cnpjcpf.js'
 import cep from './ui/cep.js'
 import file from './ui/file.js'
 import date from './ui/date.js'
+import typeahead from './ui/typeahead.js'
 
 export default {
   card: card,
@@ -35,5 +36,6 @@ export default {
   cnpjcpf: cnpjcpf,
   cep: cep,
   file: file,
-  date: date
+  date: date,
+  typeahead: typeahead
 }
