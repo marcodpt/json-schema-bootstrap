@@ -2,38 +2,21 @@ export default {
   type: "object",
   title: "Some item",
   description: "Static item example!\nHope you enjoy it!",
+  ui: "form",
   properties: {
     name: {
       title: "Name",
-      type: "string"
-    },
-    company: {
-      title: "Company",
+      description: "My name",
       type: "string",
-      default: "github",
-      href: "https://www.github.com"
-    },
-    age: {
-      title: "Age",
-      type: "integer",
-      default: 34,
-      href: "https://www.google.com/search?q=age"
-    },
-    score: {
-      title: "Score",
-      type: "integer"
+      ui: "string"
     },
     bio: {
-      title: "Bio",
       default: "Hello,\nMy name is John!",
       type: "string",
-      format: "text"
+      ui: "text"
     }
   },
   default: {
-    active: true,
-    passing: true,
-    name: "John",
-    score: 123456789
+    name: "John"
   }
 }

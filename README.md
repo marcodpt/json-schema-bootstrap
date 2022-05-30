@@ -15,10 +15,7 @@ My json-schema bootstrap5 user interface
  - move all functions to lib
  - sane magic defaults
  - images, video, audio outputs
- - use null for not set objects, like cep/image in input form
- - add description to typeahead
- - error feedback on objects and arrays
- - form pending
+ - error feedback on arrays
  - href rendering on table and items
  
  - use form constructor with modal in hrefSchema

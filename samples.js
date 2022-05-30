@@ -16,6 +16,24 @@ export default {
   gh: 'https://github.com/marcodpt/json-schema-bootstrap',
   element: element,
   samples: {
+    form: {
+      attributes: {
+        schema: form,
+        options: {
+          resolve: data => new Promise(resolve => {
+            setTimeout(() => {
+              window.alert(JSON.stringify(data, undefined, 2))
+              resolve()
+            }, 2000)
+          })
+        }
+      }
+    },
+    item: {
+      attributes: {
+        schema: item
+      }
+    },
     nothing: {
       attributes: {}
     },
@@ -1274,11 +1292,6 @@ export default {
         },
         resolver: resolver,
         valid: true
-      }
-    },
-    item: {
-      attributes: {
-        schema: item
       }
     },
     table: {

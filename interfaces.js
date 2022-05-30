@@ -12,6 +12,7 @@ import cep from './ui/cep.js'
 import file from './ui/file.js'
 import date from './ui/date.js'
 import typeahead from './ui/typeahead.js'
+import form from './ui/form.js'
 
 export default {
   card: card,
@@ -37,5 +38,6 @@ export default {
   cep: cep,
   file: file,
   date: date,
-  typeahead: typeahead
+  typeahead: typeahead,
+  form: form
 }
