@@ -23,11 +23,11 @@ export default control(({
       if (v === '') {
         submit(null)
       } else if (v.length != 8) {
-        submit(v)
+        submit(v, () => 'Digite um CEP válido')
         t.textContent = ''
         t.classList.add('d-none')
       } else {
-        submit(true)
+        submit(null)
         t.textContent = 'Carregando...'
         t.classList.remove('d-none')
         e.disabled = true
@@ -46,7 +46,11 @@ export default control(({
         }).catch(err => {
           console.log(err)
           e.disabled = false
-          submit(false)
+          submit(null, () => `
+            Erro ao buscar o CEP.
+            Verifique se foi digitado corretamente
+            e sua conexão com a internet está ativa! 
+          `)
           t.textContent = ''
           t.classList.add('d-none')
         })
@@ -57,20 +61,5 @@ export default control(({
     class: 'form-text d-none'
   })
 ])), null, {
-  validator: (value, msg) => {
-    if (value === true) {
-      return null
-    } else if (value === undefined) {
-      return `
-        Erro ao buscar o CEP.
-        Verifique se foi digitado corretamente
-        e sua conexão com a internet está ativa! 
-      `
-    } else if (typeof value === "string") {
-      return 'Digite um CEP válido'
-    } else {
-      return msg
-    }
-  },
   input: 'input'
 })

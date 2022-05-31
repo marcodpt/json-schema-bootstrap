@@ -1,20 +1,34 @@
 import {html} from '../dependencies.js'
 import {control, interpolate} from '../lib.js'
 
-var Data = []
-var pending = false
-
-const indexValue = value => Data.reduce((i, item, j) =>
-  i == -1 && item.value == value ? j : i
-, -1)
-
 export default control(({
   title,
   description,
   label,
   labels,
   ...schema
-}, submit, {update}) => html(({select, option}) => {
+}, submitter, {update}) => html(({select, option}) => {
+  var Data = []
+  var pending = false
+
+  const indexValue = value => Data.reduce((i, item, j) =>
+    i == -1 && item.value == value ? j : i
+  , -1)
+
+  const submit = data => submitter(data, (value, msg, {language}) => {
+    if (msg) {
+      return msg
+    } else if (!pending && indexValue(value) == -1) {
+      if (language == 'pt') {
+        return 'Escolha uma das opções possíveis!'
+      } else {
+        return 'Choose one of the possible options!'
+      }
+    } else {
+      return msg
+    }
+  })
+
   const e = select({
     class: 'form-select',
     name: title,
@@ -83,18 +97,4 @@ export default control(({
   }
 
   return e
-}), null, {
-  validator: (value, msg, {language}) => {
-    if (msg) {
-      return msg
-    } else if (!pending && indexValue(value) == -1) {
-      if (language == 'pt') {
-        return 'Escolha uma das opções possíveis!'
-      } else {
-        return 'Choose one of the possible options!'
-      }
-    } else {
-      return msg
-    }
-  }
-})
+}))

@@ -10,14 +10,21 @@ export default {
       type: "string",
       ui: "string",
       minLength: 1
-    }/*,
+    },
+    country: {
+      ui: "typeahead",
+      title: "Country",
+      default: "fr",
+      href: "countries",
+      description: "Choose a country..."
+    },
     city: {
       type: "integer",
       ui: "typeahead",
       title: "City",
       href: "cities_{country}",
       default: 1
-    }*/,
+    },
     cpf: {
       type: "string",
       ui: "cnpjcpf",

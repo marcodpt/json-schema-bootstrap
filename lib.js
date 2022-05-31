@@ -36,6 +36,10 @@ const jsonp = uri => new Promise((resolve, reject) => {
 const hasType = (types, type) => types instanceof Array ?
   types.indexOf(type) >= 0 : types === type
 
+const dependencies = str => [...str.matchAll(/{([^{}]*)}/g)]
+  .map(M => M[0].substr(1, M[0].length - 2))
+  .reduce((Deps, key) => Deps.concat(Deps.indexOf(key) < 0 ? [key] : []), [])
+
 const interpolate = (str, X) => {
   if (X && typeof X == 'object' && !(X instanceof Array)) {
     return str.replace(/{([^{}]*)}/g, (a, b) => {
@@ -70,8 +74,8 @@ const control = (input, output, config) => (schema, submit, options) =>
         class: 'invalid-feedback'
       })
 
-      const genFeedback = (e, value) => {
-        var msg = submit(value, config.validator)
+      const genFeedback = (e, value, validator) => {
+        var msg = submit(value, validator)
 
         if (config.value) {
           const v = e.querySelector(config.value)
@@ -98,7 +102,9 @@ const control = (input, output, config) => (schema, submit, options) =>
 
       var el = null
 
-      el = input(schema, value => genFeedback(el, value), options)
+      el = input(schema,
+        (value, validator) => genFeedback(el, value, validator)
+      , options)
 
       if (schema.default !== undefined) {
         genFeedback(el, schema.default)
@@ -119,4 +125,4 @@ const control = (input, output, config) => (schema, submit, options) =>
     }
   })
 
-export {copy, toNumber, jsonp, hasType, interpolate, control}
+export {copy, toNumber, jsonp, hasType, dependencies, interpolate, control}

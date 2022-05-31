@@ -1,5 +1,5 @@
 import {html} from '../dependencies.js'
-import {copy} from '../lib.js'
+import {copy, interpolate, dependencies} from '../lib.js'
 
 const wrapper = (it, {
   title,
@@ -36,32 +36,86 @@ export default ({
   ...schema
 }, submit, {
   it,
-  ...options
+  loader
 }) => {
   const P = properties || {}
   const O = {}
   const Err = []
   const Data = copy(schema.default || {})
+  const Watch = {}
+  const Deps = {}
+  const Cache = {}
+  const Callbacks = {}
+  const getter = key => {
+    const cb = Callbacks[key]
+    const href = P[key].href
+
+    if (!cb || !href) {
+      return
+    } else if ((Deps[key] || []).reduce((err, dep) =>
+      err || Data[dep] === undefined || Err.indexOf(dep) >= 0
+    , false)) {
+      cb(null)
+    } else {
+      cb(null)
+      const start = interpolate(href, Data)
+      if (Cache[start] !== undefined) {
+        cb(Cache[start])
+      } else {
+        Cache[start] = null
+        Promise
+          .resolve(loader(start))
+          .then(data => {
+            Cache[start] = data
+            const end = interpolate(href, Data)
+            if (start == end) {
+              cb(data)
+            }
+          })
+      }
+    }
+  }
 
   if (submit) {
     Object.keys(P).forEach(key => {
       if (P[key].default !== undefined) {
         Data[key] = copy(P[key].default)
       }
+      if (P[key].href) {
+        Deps[key] = dependencies(P[key].href)
+        Deps[key].forEach(dep => {
+          if (Watch[dep] == null) {
+            Watch[dep] = []
+          }
+          if (Watch[dep].indexOf(key) == -1) {
+            Watch[dep].push(key)
+          }
+        })
+      }
+      O[key] = {}
+      if (P[key].href) {
+        O[key].update = callback => {
+          Callbacks[key] = callback
+          getter(key)
+        }
+      }
+      O[key].reject = () => {
+        const i = Err.indexOf(key)
+        if (i < 0) {
+          Err.push(key)
+        }
+      }
+    })
 
-      O[key] = {
-        resolve: data => {
-          const i = Err.indexOf(key)
-          if (i >= 0) {
-            Err.splice(i, 1)
-          }
-          Data[key] = data
-        },
-        reject: () => {
-          const i = Err.indexOf(key)
-          if (i < 0) {
-            Err.push(key)
-          }
+    Object.keys(P).forEach(key => {
+      O[key].resolve = data => {
+        const i = Err.indexOf(key)
+        if (i >= 0) {
+          Err.splice(i, 1)
+        }
+        Data[key] = data
+        if (Watch[key]) {
+          Watch[key].forEach(k => getter(k))
         }
       }
     })
@@ -133,12 +187,9 @@ export default ({
         console.log(Data)
 
         if (!Err.length) {
-          new Promise(resolve => {
-            pending = true
-            setButton(ev, false)
-            resolve()
-          })
-            .then(() => submit(Data))
+          pending = true
+          setButton(ev, false)
+          Promise.resolve(submit(Data))
             .then(msg => {
               pending = false
               setButton(ev, msg ? true : false)

@@ -9,7 +9,19 @@ import cities_cn from './data/cities_cn.js'
 import cities_br from './data/cities_br.js'
 import roles from './data/roles.js'
 
+const DB = {
+  countries,
+  cities_cn,
+  cities_us,
+  cities_br,
+  roles
+}
+
 const resolve = data => console.log(JSON.stringify(data, undefined, 2))
+const update = (data, time) => callback => {
+  callback(null)
+  setTimeout(() => callback(data), time)
+}
 
 export default {
   title: 'Json Schema Bootstrap',
@@ -24,6 +36,15 @@ export default {
             setTimeout(() => {
               window.alert(JSON.stringify(data, undefined, 2))
               resolve()
+            }, 2000)
+          }),
+          loader: url => new Promise((resolve, reject) => {
+            setTimeout(() => {
+              if (DB[url] == null) {
+                reject('url not found: '+url)
+              } else {
+                resolve(DB[url])
+              }
             }, 2000)
           })
         }
@@ -1126,7 +1147,7 @@ export default {
       attributes: {
         options: {
           resolve: resolve,
-          update: callback => callback(roles)
+          update: update(roles, 0)
         },
         schema: {
           ui: "typeahead",
@@ -1139,7 +1160,7 @@ export default {
       attributes: {
         options: {
           resolve: resolve,
-          update: callback => callback(roles)
+          update: update(roles, 0)
         },
         schema: {
           ui: "typeahead",
@@ -1153,7 +1174,7 @@ export default {
       attributes: {
         options: {
           resolve: resolve,
-          update: callback => callback(roles)
+          update: update(roles, 0)
         },
         schema: {
           ui: "typeahead",
@@ -1167,10 +1188,7 @@ export default {
       attributes: {
         options: {
           resolve: resolve,
-          update: callback => {
-            callback(null)
-            setTimeout(() => callback(countries), 2000)
-          }
+          update: update(countries, 2000)
         },
         schema: {
           ui: "typeahead",
@@ -1183,10 +1201,7 @@ export default {
       attributes: {
         options: {
           resolve: resolve,
-          update: callback => {
-            callback(null)
-            setTimeout(() => callback(countries), 2000)
-          }
+          update: update(countries, 2000)
         },
         schema: {
           ui: "typeahead",
@@ -1201,10 +1216,7 @@ export default {
       attributes: {
         options: {
           resolve: resolve,
-          update: callback => {
-            callback(null)
-            setTimeout(() => callback(countries), 2000)
-          }
+          update: update(countries, 2000)
         },
         schema: {
           ui: "typeahead",

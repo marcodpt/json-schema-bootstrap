@@ -28,57 +28,5 @@ export default ({
     valid: valid
   })
 
-  return readOnly ? it : html(({form, button, i}) => form({
-    ...extra,
-    novalidate: true,
-    submit: ev => {
-      ev.preventDefault()
-      ev.stopPropagation()
-      if (!readOnly) {
-        console.log(data)
-        if (isValid(schema, data)) {
-          submit(data)
-        } else {
-          const b = ev.target.closest('form')
-            .querySelector('button[type=submit]')
-          if (b) {
-            b.classList.remove('btn-primary')
-            b.classList.add('disabled')
-            b.classList.add('btn-danger')
-
-            const icon = b.querySelector('i.fas')
-            if (icon) {
-              icon.classList.remove('fa-check')
-              icon.classList.add('fa-exclamation')
-            }
-          }
-        }
-      }
-    }
-  }, [
-    it,
-    button({
-      type: 'submit',
-      class: 'btn btn-primary',
-      blur: ev => {
-        const b = ev.target.closest('button')
-        if (b) {
-          b.classList.remove('btn-danger')
-          b.classList.add('btn-primary')
-          b.classList.remove('disabled')
-
-          const icon = b.querySelector('i.fas')
-          if (icon) {
-            icon.classList.remove('fa-exclamation')
-            icon.classList.add('fa-check')
-          }
-        }
-      }
-    }, [
-      i({
-        class: 'fas fa-check'
-      }),
-      ' Submit'
-    ])
-  ]))
+  return it
 }

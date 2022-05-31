@@ -92,9 +92,7 @@ export default control(({
   name: title,
   placeholder: description,
   value: schema.default,
-  keyup: ev => submit(ev.target.value.replace(/[^\d]+/g,''))
-})), null, {
-  validator: (value, msg) => {
+  keyup: ev => submit(ev.target.value.replace(/[^\d]+/g,''), (value, msg) => {
     if (msg) {
       return msg
     } else if (value.length == 11) {
@@ -104,5 +102,5 @@ export default control(({
     } else {
       return msg
     }
-  }
-})
+  })
+})))
