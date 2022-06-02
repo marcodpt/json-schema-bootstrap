@@ -84,7 +84,8 @@ export default {
             title: 'Valor',
             type: 'string',
             ui: 'string',
-            default: ''
+            default: '',
+            minLength: 1
           }
         },
         default: {
@@ -96,6 +97,21 @@ export default {
           href: '#',
           icon: 'fas fa-times',
           title: 'Clear filter'
+        }
+      ]
+    }, {
+      title: 'Picker',
+      icon: 'fas fa-user',
+      ui: 'btn btn-success',
+      links: [
+        {
+          icon: 'fas fa-check',
+          title: 'John',
+          href: '#/user/john'
+        }, {
+          icon: 'fas fa-check',
+          title: 'Arnold',
+          href: '#/user/arnold'
         }
       ]
     }

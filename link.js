@@ -3,10 +3,12 @@ import modal from './modal.js'
 import {hasType, interpolate} from './lib.js'
 
 export default it => {
-  const action = (schema, resolve) => it(schema, {
-    root: false,
-    resolve: resolve
-  })
+  const info = ({title, icon, href}) => html(({i}) => [
+    !icon ? null : i({class: icon}),
+    icon && title ? ' ' : '',
+    title,
+    !icon && !title && href ? '_' : ''
+  ])
 
   const link = ({
     links,
@@ -32,7 +34,7 @@ export default it => {
             !href ? null : 'dropdown-toggle-split'
           ],
           dataBsToggle: 'dropdown'
-        }),
+        }, href ? [] : info({title, icon})),
         ul({
           class: 'dropdown-menu'
         }, links.map(l => link({
@@ -45,8 +47,10 @@ export default it => {
       if (hrefSchema) {
         const {type} = hrefSchema
         if (!hasType(type, "object") && !hasType(type, "array")) {
-          return action(hrefSchema, data => {
-            window.location.href = interpolate(href, data)
+          return it(hrefSchema, {
+            resolve: data => {
+              window.location.href = interpolate(href, data)
+            }
           })
         }
       }
@@ -70,20 +74,20 @@ export default it => {
               if (Data) {
                 window.location.href = interpolate(href, Data)
               } else {
-                throw 'Fill all fields!'
+                throw 'Fill all fields correctly!'
               }
             }
-          }, action(schema, data => {
-            Data = data
+          }, it(schema, {
+            resolve: data => {
+              Data = data
+            },
+            reject: () => {
+              Data = undefined
+            }
           }))
         },
         title: description
-      }, [
-        !icon ? null : i({class: icon}),
-        icon && title ? ' ' : '',
-        title,
-        !icon && !title && href ? '_' : ''
-      ]))
+      }, info({title, icon, href})))
     }
   }
 
