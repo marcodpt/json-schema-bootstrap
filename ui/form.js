@@ -1,5 +1,7 @@
 import {html} from '../dependencies.js'
 import {copy, interpolate, dependencies} from '../lib.js'
+import submitter from '../submitter.js'
+import link from '../link.js'
 
 const wrapper = (it, {
   title,
@@ -31,13 +33,15 @@ const wrapper = (it, {
 export default ({
   title,
   description,
-  readOnly,
   properties,
+  links,
   ...schema
 }, submit, {
   it,
-  loader
+  loader,
+  root
 }) => {
+  const linker = link(it)
   const P = properties || {}
   const O = {}
   const Err = []
@@ -117,106 +121,60 @@ export default ({
         if (Watch[key]) {
           Watch[key].forEach(k => getter(k))
         }
+        if (!root) {
+          submit(Data)
+        }
       }
     })
 
     submit(Data)
   }
 
-  const el = html(({fieldset, legend}) => fieldset([
-    !title || submit ? null : legend({
-      title: description
-    }, title),
-    Object.keys(P).map(key => wrapper(it, {
-      default: (schema.default || {})[key],
-      ...P[key]
-    }, O[key])),
-    description && (!title || submit) ? it({
-      ui: 'info',
-      description: description
-    }) : null
-  ]))
+  const el = button => html(({fieldset, legend, div}) => {
+    const L = (links || [])
+      .map(l => linker(l))
+      .concat(button ? [button] : [])
+      .map(e => div({
+        class: 'col-auto'
+      }, e))
 
-  if (submit && !readOnly) {
-    var pending = false
-    const setButton = (ev, error) => {
-      const b = ev.target.closest('form')
-        .querySelector('button[type=submit]')
-      if (b) {
-        if (error) {
-          b.classList.remove('btn-primary')
-          b.classList.add('btn-danger')
-        } else {
-          b.classList.remove('btn-danger')
-          b.classList.add('btn-primary')
-        }
+    return fieldset([
+      !title ? null : legend({
+        title: submit ? null : description
+      }, title),
+      Object.keys(P).map(key => wrapper(it, {
+        default: (schema.default || {})[key],
+        ...P[key]
+      }, O[key])),
+      description && (!title || submit) ? it({
+        ui: 'info',
+        description: description
+      }) : null,
+      !L.length ? null : div({
+        class: 'row g-3 align-items-center'
+      }, L)
+    ])
+  })
 
-        if (!error && !pending) {
-          b.classList.remove('disabled')
-        } else {
-          b.classList.add('disabled')
-        }
-
-        const icon = b.querySelector('i.fas')
-        if (icon) {
-          if (error) {
-            icon.classList.remove('fa-check')
-            icon.classList.remove('fa-spinner')
-            icon.classList.remove('fa-spin')
-            icon.classList.add('fa-exclamation')
-          } else if (!error && !pending) {
-            icon.classList.remove('fa-exclamation')
-            icon.classList.remove('fa-spinner')
-            icon.classList.remove('fa-spin')
-            icon.classList.add('fa-check')
-          } else {
-            icon.classList.remove('fa-exclamation')
-            icon.classList.remove('fa-check')
-            icon.classList.add('fa-spinner')
-            icon.classList.add('fa-spin')
-          }
-        }
-      }
-    }
-
-    return html(({form, button, i}) => form({
+  if (submit && root) {
+    return html(({form, button, i, div}) => form({
       novalidate: true,
       submit: ev => {
         ev.preventDefault()
         ev.stopPropagation()
-        console.log(Data)
-
-        if (!Err.length) {
-          pending = true
-          setButton(ev, false)
-          Promise.resolve(submit(Data))
-            .then(msg => {
-              pending = false
-              setButton(ev, msg ? true : false)
-            })
-            .catch(err => {
-              pending = false
-              setButton(ev, true)
-              throw err
-            })
-        } else {
-          setButton(ev, true)
-        }
+        return false
       }
     }, [
-      el,
-      button({
-        type: 'submit',
-        class: 'btn btn-primary',
-        blur: ev => setButton(ev, false)
-      }, [
-        i({
-          class: 'fas fa-check'
-        }),
-        ' Submit'
-      ])
+      el(submitter({
+        submit: () => console.log(Data) ||
+          Promise.resolve(submit(Data)).then(msg => {
+            if (msg) {
+              throw msg
+            }
+          })
+      }))
     ]))
   } else {
-    return el
+    return el()
   }
 }

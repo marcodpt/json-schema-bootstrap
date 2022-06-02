@@ -8,7 +8,8 @@ const it = oldOptions => (schema, newOptions) => {
     ...(oldOptions || {}),
     ...{
       resolve: null, 
-      reject: null
+      reject: null,
+      root: (oldOptions || {}).root == null
     },
     ...(newOptions || {})
   })

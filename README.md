@@ -10,14 +10,10 @@ My json-schema bootstrap5 user interface
  - function `resolver`(`url`): Function called when `href` property is present
 
 ## TODO
- - use link as hyperschema and make it recursive
-
  - move all functions to lib
  - sane magic defaults
  - images, video, audio outputs
  - error feedback on arrays
  - href rendering on table and items
- 
- - use form constructor with modal in hrefSchema
  - create a way to extend formats
  - table example

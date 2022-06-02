@@ -14,13 +14,18 @@ const toNumber = x => {
   return isNaN(x) || typeof x != 'number' ? 0 : x
 }
 
+const elRemove = el => {
+  if (el && el.parentNode) {
+    el.parentNode.removeChild(el)
+  }
+}
+
 const jsonp = uri => new Promise((resolve, reject) => {
   var id = '_' + Math.round(10000 * Math.random())
   var callbackName = 'jsonp_callback_' + id
   window[callbackName] = data => {
     delete window[callbackName]
-    var ele = document.getElementById(id)
-    ele.parentNode.removeChild(ele)
+    elRemove(document.getElementById(id))
     resolve(data)
   }
 
@@ -125,4 +130,13 @@ const control = (input, output, config) => (schema, submit, options) =>
     }
   })
 
-export {copy, toNumber, jsonp, hasType, dependencies, interpolate, control}
+export {
+  copy,
+  toNumber,
+  elRemove,
+  jsonp,
+  hasType,
+  dependencies,
+  interpolate,
+  control
+}

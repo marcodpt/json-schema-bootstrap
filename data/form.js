@@ -43,5 +43,61 @@ export default {
   default: {
     name: "John",
     bio: "bio"
-  }
+  },
+  links: [
+    {
+      href: '#hello',
+      icon: 'fas fa-smile',
+      title: 'Say hello!',
+      ui: 'btn btn-warning'
+    }, {
+      href: '#search={}',
+      hrefSchema: {
+        type: 'string',
+        ui: 'string',
+        description: 'Type something'
+      }
+    }, {
+      title: 'Filter',
+      icon: 'fas fa-filter',
+      ui: 'btn btn-info',
+      href: '#filter[]={field} {operator} {value}',
+      hrefSchema: {
+        type: 'object',
+        ui: 'form',
+        title: 'Filter',
+        properties: {
+          field: {
+            title: 'Campo',
+            type: 'string',
+            ui: 'typeahead',
+            enum: ['Id', 'Name', 'Age'],
+            default: ''
+          },
+          operator: {
+            title: 'Operador',
+            type: 'string',
+            ui: 'typeahead',
+            enum: ['Igual', 'Diferente', 'Contêm']
+          },
+          value: {
+            title: 'Valor',
+            type: 'string',
+            ui: 'string',
+            default: ''
+          }
+        },
+        default: {
+          operator: 'Diferente'
+        }
+      },
+      links: [
+        {
+          href: '#',
+          icon: 'fas fa-times',
+          title: 'Clear filter'
+        }
+      ]
+    }
+  ]
 }
