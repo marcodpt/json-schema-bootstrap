@@ -1,10 +1,10 @@
 import {html} from '../dependencies.js'
 import {interpolate} from '../lib.js'
+import linker from '../link.js'
 
 export default ({
   title,
   description,
-  readOnly,
   properties,
   minItems,
   maxItems,
@@ -15,7 +15,9 @@ export default ({
   it,
   loader
 }) => {
-  if (submit && !readOnly) {
+  const link = linker(it)
+
+  if (submit) {
     const Data = schema.default instanceof Array ? schema.default : []
     const limitMin = n => minItems >= n || n == 0
     const limitMax = n => maxItems != null && maxItems <= n
@@ -103,7 +105,7 @@ export default ({
 
     return el
   } else {
-    const el = html(({table, tbody, thead, tr, td, th, span, div}) => {
+    return html(({table, tbody, thead, tr, td, th, span, div}) => {
       const inline = X => !X || !X.length ? null : tr([
         th({
           class: 'text-center',
@@ -117,26 +119,17 @@ export default ({
         ])
       ])
 
-      const Prel = [
-        'first',
-        'prev',
-        'index',
-        'alternate',
-        'next',
-        'last'
-      ]
-      const Arel = [
-        'search'
-      ]
-      const Mrel = Prel.concat(Arel)
-      const L = links || []
+      const toLink = (links, rel) => (links || [])
+        .filter(l => !rel || l.rel == rel)
+        .map(l => link(l))
+
       return table({
         class: [
-          "table",
-          "table-striped",
-          "table-bordered",
-          "table-hover",
-          "table-center"
+          'table',
+          'table-bordered',
+          'table-center',
+          schema.default == null ? '' : 'table-striped',
+          schema.default == null ? '' : 'table-hover'
         ]
       }, [
         thead([
@@ -150,40 +143,9 @@ export default ({
               }, title)
             ])
           ]),
-          inline(L.filter(l => Mrel.indexOf(l.rel) == -1).map(m => link(m))),
-          inline(L
-            .filter(l => Prel.indexOf(l.rel) != -1)
-            .reduce((X, l) => {
-              const i = Prel.indexOf(l.rel)
-              if (l.rel == 'index' || l.rel == 'alternate') {
-                if (X[i] == null) {
-                  X[i] = []
-                }
-                X[i].push(l)
-              } else {
-                X[i] = l
-              }
-              return X
-            }, Prel.map(() => null))
-            .filter(l => l != null)
-            .map(p => p instanceof Array ? iterator(p.reduce((S, l) => {
-              S.enum.push(l.href)
-              S.labels.push(l.title)
-              return S
-            }, {
-              enum: [],
-              labels: [],
-              change: (parent, value) => {
-                if (value) {
-                  location.href = value
-                }
-              },
-              default: '',
-              format: 'typeahead',
-              type: 'string'
-            })) : link(p))
-          ),
-          inline(L.filter(l => Arel.indexOf(l.rel) != -1).map(m => link(m))),
+          inline(toLink(links, 'self')),
+          inline(toLink(links, 'alternate')),
+          inline(toLink(links, 'search')),
           items.default == null ? null : tr([
             (items.links || []).map(() => td()),
             Object.keys(items.properties || {}).map(key =>
@@ -195,27 +157,31 @@ export default ({
           tr([
             (items.links || []).map(l => th({
               class: 'text-center align-middle'
-            }, [
+            }, l.links && l.links.length ? l.links.map(x => link({
+              ...l,
+              links: null,
+              ...x
+            })) : [
               link({
                 ...l,
-                href: l.batch,
-                btn: l.batch ? l.btn : '',
-                title: l.fas ? '' : l.title,
-                sm: true
+                href: ''
               })
             ])),
             Object.keys(items.properties || {}).map(key => {
               const {
                 title,
-                description
+                description,
+                links
               } = items.properties[key]
 
               return th({
                 class: 'text-center align-middle'
               }, [
+                toLink(links, 'alternate'),
                 span({
                   title: description
-                }, title)
+                }, title),
+                toLink(links, 'self')
               ])
             })
           ])
@@ -247,15 +213,14 @@ export default ({
                 ...l,
                 href: interpolate(l.href, row),
                 title: l.fas ? '' : l.title,
-                sm: true
+                links: null
               })
             ])),
             Object.keys(items.properties || {}).map(key => td({
               class: 'text-center align-middle'
             }, it({
               ...items.properties[key],
-              default: row[key],
-              readOnly: true
+              default: row[key]
             })))
           ]))
         ])

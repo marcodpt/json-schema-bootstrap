@@ -144,6 +144,7 @@ export default ({
       }, title),
       Object.keys(P).map(key => wrapper(it, {
         default: (schema.default || {})[key],
+        title: key,
         ...P[key]
       }, O[key])),
       description && (!title || submit) ? it({

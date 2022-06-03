@@ -13,8 +13,22 @@ import file from './ui/file.js'
 import date from './ui/date.js'
 import typeahead from './ui/typeahead.js'
 import form from './ui/form.js'
+import table from './ui/table.js'
 
 export default {
+  /*default interfaces with type*/
+  null: card,
+  boolean: checkbox,
+  integer: number,
+  number: number,
+  string: string,
+  object: form,
+  array: table,
+
+  /*default interface with enum*/
+  select: typeahead,
+
+  /*ui defined interfaces*/
   card: card,
   primary: alert,
   secondary: alert,
@@ -25,19 +39,16 @@ export default {
   light: alert,
   dark: alert,
   data: data,
-  string: string,
   text: text,
   color: color,
   range: range,
-  integer: number,
-  number: number,
   checkbox: checkbox,
   switch: checkbox,
-  boolean: checkbox,
   cnpjcpf: cnpjcpf,
   cep: cep,
   file: file,
   date: date,
   typeahead: typeahead,
-  form: form
+  form: form,
+  table: table
 }

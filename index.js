@@ -57,7 +57,15 @@ const it = oldOptions => (schema, newOptions) => {
     return error && schema.error ? schema.error : error
   }
 
-  return (ui[schema.ui] || (() => null))(schema, submit, options)
+  return (
+    ui[schema.ui] ||
+    ui[schema.format] || (
+      schema.enum != null ? ui.select :
+      schema.type instanceof Array ? ui[schema.type[0]] :
+      schema.type != null ? ui[schema.type] :
+      schema.default !== undefined ? ui['string'] : ui['null']
+    )
+  )(schema, submit, options)
 }
 
 export default ({

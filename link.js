@@ -62,13 +62,9 @@ export default it => {
         ],
         href: hrefSchema ? null : href,
         click: !hrefSchema ? null : () => {
-          const {
-            title,
-            ...schema
-          } = hrefSchema
           var Data = undefined
           modal({
-            title,
+            title: title || hrefSchema.title,
             size: 'lg',
             submit: () => {
               if (Data) {
@@ -77,7 +73,10 @@ export default it => {
                 throw 'Fill all fields correctly!'
               }
             }
-          }, it(schema, {
+          }, it({
+            ...hrefSchema,
+            title: undefined
+          }, {
             resolve: data => {
               Data = data
             },

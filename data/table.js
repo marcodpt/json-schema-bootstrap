@@ -6,95 +6,74 @@ export default {
     {
       title: 'Back',
       href: '#/back',
-      btn: 'secondary',
-      fas: 'arrow-left',
+      ui: 'btn btn-secondary',
+      icon: 'fas fa-arrow-left',
       rel: 'self'
     }, {
       title: 'Post',
       href: '#/post',
-      btn: 'success',
-      fas: 'pencil-alt',
+      ui: 'btn btn-success',
+      icon: 'fas fa-pencil-alt',
       rel: 'self'
     }, {
       href: '#/first',
-      btn: 'secondary',
-      fas: 'fast-backward',
-      rel: 'first'
+      ui: 'btn btn-secondary',
+      icon: 'fas fa-fast-backward',
+      rel: 'alternate'
     }, {
       href: '#/prev',
-      btn: 'secondary',
-      fas: 'step-backward',
-      rel: 'prev'
+      ui: 'btn btn-secondary',
+      icon: 'fas fa-step-backward',
+      rel: 'alternate'
     }, {
       href: '#/page/{}',
-      title: 'Page {} of 3',
-      rel: 'index',
-      hrefSchema: {
-        type: 'integer',
-        format: 'typeahead',
-        enum: [1, 2, 3],
-        default: 3
-      }
-    }, {
-      href: '#/page/2',
-      title: 'Page 2 of 3',
-      rel: 'index'
-    }, {
-      href: '',
-      title: 'Page 3 of 3',
-      rel: 'index'
-    }, {
-      href: '#/items/5',
-      title: '5 items per page',
       rel: 'alternate',
       hrefSchema: {
-        type: 'integer',
-        format: 'typeahead',
+        label: 'Page {} of 3',
+        enum: [1, 2, 3],
+        default: 1
+      }
+    }, {
+      href: '#?per_page={}',
+      rel: 'alternate',
+      hrefSchema: {
         label: '{} items per page',
         enum: [5, 10, 20],
         default: 20
       }
     }, {
-      href: '#/items/10',
-      title: '10 items per page',
+      href: '',
+      ui: 'btn btn-secondary',
+      icon: 'fas fa-step-forward',
       rel: 'alternate'
     }, {
       href: '',
-      title: '20 items per page',
+      ui: 'btn btn-secondary',
+      icon: 'fas fa-fast-forward',
       rel: 'alternate'
-    }, {
-      href: '',
-      btn: 'secondary',
-      fas: 'step-forward',
-      rel: 'next'
-    }, {
-      href: '',
-      btn: 'secondary',
-      fas: 'fast-forward',
-      rel: 'last'
     }, {
       href: '#?search=',
-      fas: 'times',
-      btn: 'secondary',
+      icon: 'fas fa-times',
+      ui: 'btn btn-secondary',
       rel: 'search'
     }, {
       href: '#?search={}',
       title: 'Search',
       rel: 'search',
       hrefSchema: {
-        type: "string"
+        type: "string",
+        description: 'Type something to search...'
       }
     }, {
       href: '#?filter[]={field}{operator}{value}',
-      fas: 'filter',
-      btn: 'info',
+      icon: 'fas fa-filter',
+      ui: 'btn btn-info',
       title: 'Filter',
       rel: 'search',
       hrefSchema: {
         type: 'object',
         properties: {
           field: {
-            type: 'string',
             enum: [
               'id',
               'register',
@@ -115,7 +94,6 @@ export default {
             ]
           },
           operator: {
-            type: 'string',
             enum: [
               '~eq~',
               '~ct~'
@@ -132,15 +110,27 @@ export default {
         required: ['field', 'operator', 'value']
       }
     }, {
-      href: '#?group={fields}',
-      fas: 'th',
-      btn: 'warning',
+      icon: 'fas fa-th',
+      ui: 'btn btn-warning',
       title: 'Group',
-      rel: 'search'
+      rel: 'search',
+      links: [
+        {
+          rel: 'self',
+          href: '#group=id',
+          icon: 'fas fa-times',
+          title: 'Id'
+        }, {
+          rel: 'self',
+          href: '#group=register',
+          icon: 'fas fa-check',
+          title: 'Register'
+        }
+      ]
     }, {
       href: '#/csv',
-      fas: 'file-csv',
-      btn: 'secondary',
+      icon: 'fas fa-file-csv',
+      ui: 'btn btn-secondary',
       title: 'Download',
       rel: 'search'
     }
@@ -150,47 +140,108 @@ export default {
     properties: {
       id: {
         title: "Id",
-        type: "integer"
+        type: "integer",
+        links: [
+          {
+            rel: 'alternate',
+            icon: 'fas fa-times',
+            ui: 'me-1',
+            href: '#?id='
+          }
+        ]
       },
       register: {
         title: "Register",
         type: "string",
-        format: "date"
+        format: "date",
+        links: [
+          {
+            rel: 'self',
+            icon: 'fas fa-sort',
+            ui: 'ms-1',
+            href: '#?sort=register'
+          }
+        ]
       },
       name: {
         title: "Name",
-        type: "string"
+        type: "string",
+        links: [
+          {
+            rel: 'self',
+            icon: 'fas fa-sort-up',
+            ui: 'ms-1',
+            href: '#?sort=name'
+          }
+        ]
       },
       gender: {
         title: "Gender",
-        type: "string"
+        type: "string",
+        links: [
+          {
+            rel: 'self',
+            icon: 'fas fa-sort-down',
+            ui: 'ms-1',
+            href: '#?sort=gender'
+          }
+        ]
       },
       age: {
         title: "Age",
-        type: "integer"
+        type: "integer",
+        links: [
+          {
+            rel: 'self',
+            icon: 'fas fa-sort',
+            ui: 'ms-1',
+            href: '#?sort=age'
+          }
+        ]
       },
       balance: {
         title: "Balance ($)",
-        type: "number"
+        type: "number",
+        links: [
+          {
+            rel: 'self',
+            icon: 'fas fa-sort',
+            ui: 'ms-1',
+            href: '#?sort=balance'
+          }
+        ]
       },
       bio: {
         title: "Bio",
         type: "string",
-        format: "text"
+        format: "text",
+        links: [
+          {
+            rel: 'self',
+            icon: 'fas fa-sort',
+            ui: 'ms-1',
+            href: '#?sort=bio'
+          }
+        ]
       }
     },
     links: [
       {
-        title: 'Delete',
         href: '#/delete/{id}',
-        batch: '#/delete/{ids}',
-        fas: 'trash',
-        btn: 'danger'
+        rel: 'self',
+        icon: 'fas fa-trash',
+        ui: 'btn btn-danger btn-sm',
+        links: [
+          {
+            href: '#/delete/{id}',
+            rel: 'self'
+          }
+        ]
       }, {
-        title: 'Update',
         href: '#/edit/{id}',
-        fas: 'edit',
-        btn: 'warning'
+        rel: 'self',
+        icon: 'fas fa-edit',
+        ui: 'btn btn-warning btn-sm'
       }
     ],
     default: {
