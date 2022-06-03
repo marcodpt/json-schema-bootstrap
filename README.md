@@ -10,7 +10,6 @@ My json-schema bootstrap5 user interface
  - function `resolver`(`url`): Function called when `href` property is present
 
 ## TODO
- - move all functions to lib
  - sane magic defaults
  - images, video, audio outputs
  - href rendering on table and items
@@ -18,7 +17,8 @@ My json-schema bootstrap5 user interface
 
 ## NEXT
  - select multiple
- - checkbox problem
+ - checkbox problem table
  - link wait some time until url change
  - cancel wrapper in form and table (text-center)
  - lang for close/submit buttons
+ - cache goes down the recursive tree

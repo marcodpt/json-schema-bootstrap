@@ -1,33 +1,5 @@
 import {html} from '../dependencies.js'
-import {hasType, control} from '../lib.js'
-
-const reader = file => new Promise((resolve, reject) => {
-  var reader = new FileReader()
-  var type = file.type
-  reader.onloadend = function () {
-    if (reader.error) {
-      reject(reader.error)
-    } else {
-      const data = reader.result
-      resolve({
-        data: type.substr(-1) == '*' ? btoa(data) : data,
-        mime: type,
-        name: file.name
-      })
-    }
-  }
-  var M = file.type.split('/')
-  if (([
-    'audio',
-    'video',
-    'image'
-  ]).indexOf(M[0]) != -1) {
-    type += '*'
-    reader.readAsBinaryString(file)
-  } else {
-    reader.readAsText(file, 'UTF-8')
-  }
-})
+import {hasType, control, reader} from '../lib.js'
 
 export default control(({
   title,
