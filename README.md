@@ -15,8 +15,10 @@ My json-schema bootstrap5 user interface
  - images, video, audio outputs
  - href rendering on table and items
  - create a way to extend formats
- - error feedback on arrays
 
-## Next
+## NEXT
  - select multiple
  - checkbox problem
+ - link wait some time until url change
+ - cancel wrapper in form and table (text-center)
+ - lang for close/submit buttons

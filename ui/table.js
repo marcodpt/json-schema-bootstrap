@@ -27,7 +27,7 @@ export default ({
         .querySelector('i.fa-plus')
         .closest('button')
 
-      if (limitMax(n)) {
+      if (limitMax(n+1)) {
         bp.classList.add('disabled')
       } else {
         bp.classList.remove('disabled')
@@ -38,11 +38,13 @@ export default ({
         .querySelector('i.fa-minus')
         .closest('button')
 
-      if (limitMin(n)) {
+      if (limitMin(n-1)) {
         bm.classList.add('disabled')
       } else {
         bm.classList.remove('disabled')
       }
+
+      submit(Data)
     }
 
     const add = e => {
@@ -55,13 +57,14 @@ export default ({
         }, it(items, {
           resolve: data => {
             Data[n] = data
+            submit(Data)
           }
         }))))
       }
       setLimits(e, n)
     }
     
-    const el = html(({fieldset, legend, span, button}) => fieldset([
+    const el = html(({fieldset, legend, span, button, i}) => fieldset([
       legend([
         span({
           title: description

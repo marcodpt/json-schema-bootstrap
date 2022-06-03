@@ -1,5 +1,5 @@
 import {validator} from './dependencies.js'
-import lang from './src/lang/index.js'
+import lang from './lang/index.js'
 import ui from './interfaces.js'
 import {copy} from './lib.js'
 

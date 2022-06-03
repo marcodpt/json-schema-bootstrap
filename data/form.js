@@ -38,6 +38,38 @@ export default {
       ui: "text",
       minLength: 1,
       default: ""
+    },
+    primes: {
+      type: "array",
+      minItems: 2,
+      maxItems: 5,
+      items: {
+        enum: [2, 3, 5, 7, 11, 13, 17, 19],
+        default: 1
+      }
+    },
+    cities: {
+      type: "array",
+      maxItems: 3,
+      items: {
+        type: "object",
+        properties: {
+          country: {
+            ui: "typeahead",
+            title: "Country",
+            default: "cn",
+            href: "countries",
+            description: "Choose a country..."
+          },
+          city: {
+            type: "integer",
+            ui: "typeahead",
+            title: "City",
+            href: "cities_{country}",
+            default: 1
+          }
+        }
+      }
     }
   },
   default: {
