@@ -166,6 +166,7 @@ export default {
       name: {
         title: "Name",
         type: "string",
+        href: "#?name={name}",
         links: [
           {
             rel: 'self',

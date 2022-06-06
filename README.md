@@ -11,10 +11,8 @@ My json-schema bootstrap5 user interface
 
 ## TODO
  - sane magic defaults
- - href rendering on table and items
  - create a way to extend formats
 
-## NEXT
  - select multiple
  - checkbox problem table
  - link wait some time until url change

@@ -46,7 +46,9 @@ const dependencies = str => [...str.matchAll(/{([^{}]*)}/g)]
   .reduce((Deps, key) => Deps.concat(Deps.indexOf(key) < 0 ? [key] : []), [])
 
 const interpolate = (str, X) => {
-  if (X && typeof X == 'object' && !(X instanceof Array)) {
+  if (typeof str != 'string') {
+    return str
+  } else if (X && typeof X == 'object' && !(X instanceof Array)) {
     return str.replace(/{([^{}]*)}/g, (a, b) => {
       var r = X[b]
       return typeof r === 'string' || typeof r === 'number' ? r : a

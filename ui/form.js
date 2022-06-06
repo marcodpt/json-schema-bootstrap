@@ -80,11 +80,14 @@ export default ({
     }
   }
 
+  Object.keys(P).forEach(key => {
+    if (P[key].default !== undefined) {
+      Data[key] = copy(P[key].default)
+    }
+  })
+
   if (submit) {
     Object.keys(P).forEach(key => {
-      if (P[key].default !== undefined) {
-        Data[key] = copy(P[key].default)
-      }
       if (P[key].href) {
         Deps[key] = dependencies(P[key].href)
         Deps[key].forEach(dep => {
@@ -132,7 +135,10 @@ export default ({
 
   const el = button => html(({fieldset, legend, div}) => {
     const L = (links || [])
-      .map(l => linker(l))
+      .map(l => linker({
+        ...l,
+        href: submit ? l.href : interpolate(l.href, Data)
+      }))
       .concat(button ? [button] : [])
       .map(e => div({
         class: 'col-auto'
@@ -143,9 +149,10 @@ export default ({
         title: submit ? null : description
       }, title),
       Object.keys(P).map(key => wrapper(it, {
-        default: (schema.default || {})[key],
+        default: Data[key],
         title: key,
-        ...P[key]
+        ...P[key],
+        href: submit ? P[key].href : interpolate(P[key].href, Data)
       }, O[key])),
       description && (!title || submit) ? it({
         ui: 'info',

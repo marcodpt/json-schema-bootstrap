@@ -223,6 +223,7 @@ export default ({
               class: 'text-center align-middle'
             }, it({
               ...items.properties[key],
+              href: interpolate(items.properties[key].href, row),
               default: row[key]
             })))
           ]))
