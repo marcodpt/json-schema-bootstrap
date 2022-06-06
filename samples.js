@@ -8,6 +8,9 @@ import cities_us from './data/cities_us.js'
 import cities_cn from './data/cities_cn.js'
 import cities_br from './data/cities_br.js'
 import roles from './data/roles.js'
+import image from './data/base64_image.js'
+import audio from './data/base64_audio.js'
+import video from './data/base64_video.js'
 
 const DB = {
   countries,
@@ -168,11 +171,28 @@ export default {
         }
       }
     },
+    dataNoneLink: {
+      attributes: {
+        schema: {
+          ui: 'data',
+          href: '#dataNone'
+        }
+      }
+    },
     dataNull: {
       attributes: {
         schema: {
           default: null,
           ui: 'data'
+        }
+      }
+    },
+    dataNullLink: {
+      attributes: {
+        schema: {
+          default: null,
+          ui: 'data',
+          href: '#dataNull'
         }
       }
     },
@@ -184,11 +204,29 @@ export default {
         }
       }
     },
+    dataFalseLink: {
+      attributes: {
+        schema: {
+          default: false,
+          ui: 'data',
+          href: '#dataFalse'
+        }
+      }
+    },
     dataTrue: {
       attributes: {
         schema: {
           default: true,
           ui: 'data'
+        }
+      }
+    },
+    dataTrueLink: {
+      attributes: {
+        schema: {
+          default: true,
+          ui: 'data',
+          href: '#dataTrue'
         }
       }
     },
@@ -200,6 +238,15 @@ export default {
         }
       }
     },
+    data7Link: {
+      attributes: {
+        schema: {
+          default: 7,
+          ui: 'data',
+          href: '#data7'
+        }
+      }
+    },
     dataPi: {
       attributes: {
         schema: {
@@ -208,11 +255,38 @@ export default {
         }
       }
     },
+    dataPiLink: {
+      attributes: {
+        schema: {
+          default: 3.14,
+          ui: 'data',
+          href: '#dataPi'
+        }
+      }
+    },
     dataDog: {
       attributes: {
         schema: {
           default: 'dog',
           ui: 'data'
+        }
+      }
+    },
+    dataDogLink: {
+      attributes: {
+        schema: {
+          default: 'dog',
+          ui: 'data',
+          href: '#dataDog'
+        }
+      }
+    },
+    dataBlankLink: {
+      attributes: {
+        schema: {
+          default: '',
+          ui: 'data',
+          href: '#dataBlank'
         }
       }
     },
@@ -227,6 +301,18 @@ export default {
         }
       }
     },
+    dataTextLink: {
+      attributes: {
+        schema: {
+          default: [
+            'This is a multi-line text!',
+            'Hope everything works right :)!'
+          ].join('\n'),
+          ui: 'data',
+          href: '#dataText'
+        }
+      }
+    },
     dataObject: {
       attributes: {
         schema: {
@@ -238,11 +324,32 @@ export default {
         }
       }
     },
+    dataObjectLink: {
+      attributes: {
+        schema: {
+          default: {
+            id: 3,
+            name: 'John'
+          },
+          ui: 'data',
+          href: '#dataObject'
+        }
+      }
+    },
     dataArray: {
       attributes: {
         schema: {
           default: ['cat', 'dog', 'horse'],
           ui: 'data'
+        }
+      }
+    },
+    dataArrayLink: {
+      attributes: {
+        schema: {
+          default: ['cat', 'dog', 'horse'],
+          ui: 'data',
+          href: '#dataArray'
         }
       }
     },
@@ -1289,6 +1396,48 @@ export default {
           ui: "typeahead",
           title: "City",
           default: 1
+        }
+      }
+    },
+    imageLink: {
+      attributes: {
+        schema: image
+      }
+    },
+    imageSrc: {
+      attributes: {
+        schema: {
+          ...image,
+          href: null,
+          data: image.href
+        }
+      }
+    },
+    audio: {
+      attributes: {
+        schema: audio
+      }
+    },
+    audioSrc: {
+      attributes: {
+        schema: {
+          ...audio,
+          href: null,
+          data: audio.href
+        }
+      }
+    },
+    video: {
+      attributes: {
+        schema: video
+      }
+    },
+    videoSrc: {
+      attributes: {
+        schema: {
+          ...video,
+          href: null,
+          data: video.href
         }
       }
     }
