@@ -47,9 +47,15 @@ export default it => {
       if (hrefSchema) {
         const {type} = hrefSchema
         if (!hasType(type, "object") && !hasType(type, "array")) {
+          var oldData = undefined
           return it(hrefSchema, {
             resolve: data => {
-              window.location.href = interpolate(href, data)
+              oldData = data
+              setTimeout(() => {
+                if (data == oldData) {
+                  window.location.href = interpolate(href, data)
+                }
+              }, 500)
             }
           })
         }
