@@ -17,7 +17,6 @@ const it = oldOptions => (schema, newOptions) => {
     ...(newOptions || {})
   })
 
-  options.it = it(options)
 
   const {
     language,
@@ -25,9 +24,11 @@ const it = oldOptions => (schema, newOptions) => {
     resolve,
     reject
   } = options
+  const l = lang[language] || lang.en
+  options.translations = l.translations
+  options.it = it(options)
 
   const submit = !resolve && !reject ? null : (data, validate) => {
-    const l = lang[language] || lang.en
     var error = showValid ? '' : null
     validator(schema, data, key => {
       var x = schema[key]
@@ -44,7 +45,7 @@ const it = oldOptions => (schema, newOptions) => {
         }).textContent
       }
 
-      error = l[key](x)
+      error = l.errors[key](x)
     })
 
     if (typeof validate == 'function') {

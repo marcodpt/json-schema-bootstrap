@@ -49,7 +49,8 @@ export default {
                 resolve(DB[url])
               }
             }, 2000)
-          })
+          }),
+          language: 'pt'
         }
       }
     },
@@ -63,6 +64,9 @@ export default {
         schema: {
           ...table,
           default: data
+        },
+        options: {
+          language: 'pt'
         }
       }
     },

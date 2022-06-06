@@ -40,9 +40,10 @@ export default ({
   it,
   loader,
   root,
-  cache
+  cache,
+  translations
 }) => {
-  const linker = link(it)
+  const linker = link(it, translations)
   const P = properties || {}
   const O = {}
   const Err = []
@@ -174,6 +175,7 @@ export default ({
       }
     }, [
       el(submitter({
+        label: translations.label,
         submit: () => console.log(Data) ||
           Promise.resolve(submit(Data)).then(msg => {
             if (msg) {

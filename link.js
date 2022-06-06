@@ -1,8 +1,9 @@
 import {html} from './dependencies.js'
 import modal from './modal.js'
 import {hasType, interpolate} from './lib.js'
+import lang from './lang/index.js'
 
-export default it => {
+export default (it, {close, label}) => {
   const info = ({title, icon, href}) => html(({i}) => [
     !icon ? null : i({class: icon}),
     icon && title ? ' ' : '',
@@ -70,6 +71,8 @@ export default it => {
         click: !hrefSchema ? null : () => {
           var Data = undefined
           modal({
+            close,
+            label,
             title: title || hrefSchema.title,
             size: 'lg',
             submit: () => {

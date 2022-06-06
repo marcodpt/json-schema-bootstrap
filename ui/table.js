@@ -13,9 +13,10 @@ export default ({
   ...schema
 }, submit, {
   it,
-  loader
+  loader,
+  translations
 }) => {
-  const link = linker(it)
+  const link = linker(it, translations)
 
   if (submit) {
     const Data = schema.default instanceof Array ? schema.default : []
