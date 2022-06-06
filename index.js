@@ -9,6 +9,7 @@ const it = oldOptions => (schema, newOptions) => {
     ...{
       resolve: null, 
       reject: null,
+      parent: (event, value) => {},
       root: (oldOptions || {}).root == null
     },
     ...(newOptions || {})

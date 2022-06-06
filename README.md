@@ -16,7 +16,6 @@ My json-schema bootstrap5 user interface
  - select multiple
  - checkbox problem table
  - link wait some time until url change
- - cancel wrapper in form and table (text-center)
  - lang for close/submit buttons
  - cache goes down the recursive tree
  - finish version 0.0.1

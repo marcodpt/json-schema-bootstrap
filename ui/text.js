@@ -11,4 +11,8 @@ export default control(({
   name: title,
   placeholder: description,
   keyup: ev => submit(ev.target.value) 
-}, schema.default)))
+}, schema.default)), null, {
+  parent: {
+    text: 'left'
+  }
+})

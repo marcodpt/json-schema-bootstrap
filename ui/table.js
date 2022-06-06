@@ -219,13 +219,27 @@ export default ({
                 links: null
               })
             ])),
-            Object.keys(items.properties || {}).map(key => td({
-              class: 'text-center align-middle'
-            }, it({
-              ...items.properties[key],
-              href: interpolate(items.properties[key].href, row),
-              default: row[key]
-            })))
+            Object.keys(items.properties || {}).map(key => {
+              const P = items.properties[key]
+              var text = 'text-center'
+              const parent = (event, value) => {
+                if (event == 'text') {
+                  text = 'text-'+value
+                }
+              }
+              const el = it({
+                ...P,
+                href: interpolate(P.href, row),
+                default: row[key]
+              }, {parent})
+
+              return td({
+                class: [
+                  text,
+                  'align-middle'
+                ]
+              }, el)
+            })
           ]))
         ])
       ])

@@ -71,6 +71,11 @@ const control = (input, output, config) => (schema, submit, options) =>
     } = schema
     config = config || {}
 
+    const P = config.parent || {}
+    Object.keys(P).forEach(key => {
+      options.parent(key, P[key])
+    })
+
     if (readOnly || !submit) {
       return output ? output(schema, options) : options.it({
         ...schema,
