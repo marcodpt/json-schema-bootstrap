@@ -4,13 +4,15 @@ import ui from './interfaces.js'
 import {copy} from './lib.js'
 
 const it = oldOptions => (schema, newOptions) => {
+  const old = oldOptions || {}
   const options = ({
-    ...(oldOptions || {}),
+    ...old,
     ...{
       resolve: null, 
       reject: null,
       parent: (event, value) => {},
-      root: (oldOptions || {}).root == null
+      cache: old.cache == null ? {} : old.cache,
+      root: old.root == null
     },
     ...(newOptions || {})
   })

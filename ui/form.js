@@ -39,7 +39,8 @@ export default ({
 }, submit, {
   it,
   loader,
-  root
+  root,
+  cache
 }) => {
   const linker = link(it)
   const P = properties || {}
@@ -48,7 +49,6 @@ export default ({
   const Data = copy(schema.default || {})
   const Watch = {}
   const Deps = {}
-  const Cache = {}
   const Callbacks = {}
   const getter = key => {
     const cb = Callbacks[key]
@@ -63,14 +63,14 @@ export default ({
     } else {
       cb(null)
       const start = interpolate(href, Data)
-      if (Cache[start] !== undefined) {
-        cb(Cache[start])
+      if (cache[start] !== undefined) {
+        cb(cache[start])
       } else {
-        Cache[start] = null
+        cache[start] = null
         Promise
           .resolve(loader(start))
           .then(data => {
-            Cache[start] = data
+            cache[start] = data
             const end = interpolate(href, Data)
             if (start == end) {
               cb(data)

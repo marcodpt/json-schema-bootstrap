@@ -17,5 +17,4 @@ My json-schema bootstrap5 user interface
  - checkbox problem table
  - link wait some time until url change
  - lang for close/submit buttons
- - cache goes down the recursive tree
  - finish version 0.0.1
