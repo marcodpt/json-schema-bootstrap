@@ -12,6 +12,8 @@ import image from './data/base64_image.js'
 import audio from './data/base64_audio.js'
 import video from './data/base64_video.js'
 import {html} from './dependencies.js'
+import docsTable from './data/docs_table.js'
+import docsForm from './data/docs_form.js'
 
 const DB = {
   countries,
@@ -75,6 +77,12 @@ export default {
       attributes: {
         schema: table
       }
+    },
+    docsForm: {
+      attributes: docsForm
+    },
+    docsTable: {
+      attributes: docsTable
     },
     nothing: {
       attributes: {}
