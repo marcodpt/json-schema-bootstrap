@@ -1,6 +1,6 @@
 import {validator} from './dependencies.js'
 import lang from './lang/index.js'
-import ui from './interfaces.js'
+import interfaces from './interfaces.js'
 import {copy} from './lib.js'
 
 const it = oldOptions => (schema, newOptions) => {
@@ -59,6 +59,11 @@ const it = oldOptions => (schema, newOptions) => {
     }
 
     return error && schema.error ? schema.error : error
+  }
+
+  const ui = {
+    ...interfaces,
+    ...(options.interfaces || {})
   }
 
   return (

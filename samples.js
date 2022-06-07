@@ -11,6 +11,7 @@ import roles from './data/roles.js'
 import image from './data/base64_image.js'
 import audio from './data/base64_audio.js'
 import video from './data/base64_video.js'
+import {html} from './dependencies.js'
 
 const DB = {
   countries,
@@ -31,22 +32,6 @@ export default {
   gh: 'https://github.com/marcodpt/json-schema-bootstrap',
   element: element,
   samples: {
-    table: {
-      attributes: {
-        schema: {
-          ...table,
-          default: data
-        },
-        options: {
-          language: 'pt'
-        }
-      }
-    },
-    loading: {
-      attributes: {
-        schema: table
-      }
-    },
     form: {
       attributes: {
         schema: form,
@@ -73,6 +58,22 @@ export default {
     item: {
       attributes: {
         schema: item
+      }
+    },
+    table: {
+      attributes: {
+        schema: {
+          ...table,
+          default: data
+        },
+        options: {
+          language: 'pt'
+        }
+      }
+    },
+    loading: {
+      attributes: {
+        schema: table
       }
     },
     nothing: {
@@ -1442,6 +1443,86 @@ export default {
           ...video,
           href: null,
           data: video.href
+        }
+      }
+    },
+    extendUiWrong: {
+      attributes: {
+        schema: {
+          title: 'extendUiWrong',
+          description: [
+            'This is a sample with wrong new ui usage!',
+            'This will work with default card!'
+          ].join('\n'),
+          ui: 'newui'
+        }
+      }
+    },
+    extendUi: {
+      attributes: {
+        schema: {
+          title: 'extend UI',
+          description: [
+            'This is a sample with new ui usage!'
+          ].join('\n'),
+          ui: 'newui'
+        },
+        options: {
+          interfaces: {
+            newui: ({title, description}) => html(({div, h1, p}) =>
+              div({
+                class: 'container'
+              }, [
+                h1({
+                  class: 'display-1'
+                }, title),
+                p({
+                  class: 'lead'
+                }, description)
+              ])
+            )
+          } 
+        }
+      }
+    },
+    extendUiRaw: {
+      attributes: {
+        schema: {
+          title: 'extend UI with raw HTML',
+          description: [
+            'This is a sample with new ui usage with raw HTML!'
+          ].join('\n'),
+          ui: 'raw'
+        },
+        options: {
+          interfaces: {
+            raw: ({title, description}) => `
+              <div class="container">
+                <h1 class="display-1">${title}</h1>
+                <p class="lead">${description}</p>
+              </div>
+            `
+          } 
+        }
+      }
+    },
+    overrideUi: {
+      attributes: {
+        schema: {
+          title: 'override UI',
+          description: [
+            'This is a sample that override default null UI!'
+          ].join('\n')
+        },
+        options: {
+          interfaces: {
+            null: ({title, description}) => `
+              <div class="container">
+                <h1 class="display-1">${title}</h1>
+                <p class="lead">${description}</p>
+              </div>
+            `
+          } 
         }
       }
     }
