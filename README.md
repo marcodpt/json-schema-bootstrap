@@ -216,7 +216,7 @@ console.log(jsb({
       interface on user input.
    - string `language` (default: en): One of the available languages
       (`en`: English, `pt`: Portuguese). Please help us extend the supported 
-      languages in the folder `lang`.
+      languages in the folder [lang](https://github.com/marcodpt/json-schema-bootstrap/tree/main/lang).
    - object `interfaces` (default: {}): User defined interfaces, properties:
      - string `keys`: name of the interface, to be used with `format` property.
      - function `values`(`schema`, `submit`(`data`), `options`): A function
