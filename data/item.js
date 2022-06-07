@@ -1,8 +1,6 @@
 export default {
-  type: "object",
   title: "Some item",
   description: "Static item example!\nHope you enjoy it!",
-  ui: "form",
   properties: {
     id: {
       default: 7,
@@ -11,17 +9,13 @@ export default {
     name: {
       title: "Name",
       description: "My name",
-      type: "string",
-      ui: "string",
       href: '#/{name}?age={age}'
     },
     age: {
       default: 35
     },
     bio: {
-      default: "Hello,\nMy name is John!",
-      type: "string",
-      ui: "text"
+      default: "Hello,\nMy name is John!"
     }
   },
   default: {

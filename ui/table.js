@@ -184,7 +184,7 @@ export default ({
                 toLink(links, 'alternate'),
                 span({
                   title: description
-                }, title),
+                }, title == null ? key : title),
                 toLink(links, 'self')
               ])
             })

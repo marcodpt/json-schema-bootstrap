@@ -1,46 +1,36 @@
 export default {
-  type: "object",
   title: "My form",
   description: "A sample form!\nHope you enjoy it!",
-  ui: "form",
   properties: {
     name: {
       title: "Name",
       description: "My name",
-      type: "string",
-      ui: "string",
       minLength: 1
     },
     country: {
-      ui: "typeahead",
       title: "Country",
       default: "fr",
       href: "countries",
       description: "Choose a country..."
     },
     city: {
-      type: "integer",
-      ui: "typeahead",
       title: "City",
       href: "cities_{country}",
       default: 1
     },
     cpf: {
-      type: "string",
-      ui: "cnpjcpf",
+      format: "cnpjcpf",
       title: "CPF",
       minLength: 11,
       maxLength: 11
     },
     bio: {
-      type: "string",
       description: "Say something about yourself...",
-      ui: "text",
+      format: "text",
       minLength: 1,
       default: ""
     },
     primes: {
-      type: "array",
       minItems: 2,
       maxItems: 5,
       items: {
@@ -49,21 +39,16 @@ export default {
       }
     },
     cities: {
-      type: "array",
       maxItems: 3,
       items: {
-        type: "object",
         properties: {
           country: {
-            ui: "typeahead",
             title: "Country",
             default: "cn",
             href: "countries",
             description: "Choose a country..."
           },
           city: {
-            type: "integer",
-            ui: "typeahead",
             title: "City",
             href: "cities_{country}",
             default: 1
@@ -85,8 +70,6 @@ export default {
     }, {
       href: '#search={}',
       hrefSchema: {
-        type: 'string',
-        ui: 'string',
         description: 'Type something'
       }
     }, {
@@ -95,27 +78,19 @@ export default {
       ui: 'btn btn-info',
       href: '#filter[]={field} {operator} {value}',
       hrefSchema: {
-        type: 'object',
-        ui: 'form',
         title: 'Filter',
         properties: {
           field: {
             title: 'Campo',
-            type: 'string',
-            ui: 'typeahead',
             enum: ['Id', 'Name', 'Age'],
             default: ''
           },
           operator: {
             title: 'Operador',
-            type: 'string',
-            ui: 'typeahead',
             enum: ['Igual', 'Diferente', 'Contêm']
           },
           value: {
             title: 'Valor',
-            type: 'string',
-            ui: 'string',
             default: '',
             minLength: 1
           }

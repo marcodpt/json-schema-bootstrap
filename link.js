@@ -47,7 +47,12 @@ export default (it, {close, label}) => {
     } else {
       if (hrefSchema) {
         const {type} = hrefSchema
-        if (!hasType(type, "object") && !hasType(type, "array")) {
+        if (
+          !hasType(type, "object") &&
+          !hasType(type, "array") &&
+          hrefSchema.properties == null &&
+          hrefSchema.items == null
+        ) {
           var oldData = undefined
           return it(hrefSchema, {
             resolve: data => {

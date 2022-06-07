@@ -1,5 +1,4 @@
 export default {
-  type: "array",
   title: "My Table",
   description: "Some sample table!\nJust as showcase.",
   links: [
@@ -61,7 +60,6 @@ export default {
       title: 'Search',
       rel: 'search',
       hrefSchema: {
-        type: "string",
         description: 'Type something to search...'
       }
     }, {
@@ -71,7 +69,6 @@ export default {
       title: 'Filter',
       rel: 'search',
       hrefSchema: {
-        type: 'object',
         properties: {
           field: {
             enum: [
@@ -103,9 +100,7 @@ export default {
               'Contains'
             ]
           },
-          value: {
-            type: 'string'
-          }
+          value: {}
         },
         required: ['field', 'operator', 'value']
       }
@@ -136,11 +131,8 @@ export default {
     }
   ],
   items: {
-    type: "object",
     properties: {
       id: {
-        title: "Id",
-        type: "integer",
         links: [
           {
             rel: 'alternate',
@@ -152,7 +144,6 @@ export default {
       },
       register: {
         title: "Register",
-        type: "string",
         format: "date",
         links: [
           {
@@ -165,7 +156,6 @@ export default {
       },
       name: {
         title: "Name",
-        type: "string",
         href: "#?name={name}",
         links: [
           {
@@ -178,7 +168,6 @@ export default {
       },
       gender: {
         title: "Gender",
-        type: "string",
         links: [
           {
             rel: 'self',
@@ -190,7 +179,6 @@ export default {
       },
       age: {
         title: "Age",
-        type: "integer",
         links: [
           {
             rel: 'self',
@@ -202,7 +190,6 @@ export default {
       },
       balance: {
         title: "Balance ($)",
-        type: "number",
         links: [
           {
             rel: 'self',
@@ -214,7 +201,6 @@ export default {
       },
       bio: {
         title: "Bio",
-        type: "string",
         format: "text",
         links: [
           {

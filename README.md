@@ -10,7 +10,6 @@ My json-schema bootstrap5 user interface
  - function `resolver`(`url`): Function called when `href` property is present
 
 ## TODO
- - sane magic defaults
  - create a way to extend formats
 
  - select multiple

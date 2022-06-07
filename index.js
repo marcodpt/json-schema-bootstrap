@@ -64,10 +64,18 @@ const it = oldOptions => (schema, newOptions) => {
   return (
     ui[schema.ui] ||
     ui[schema.format] || (
-      schema.enum != null ? ui.select :
+      schema.enum != null || schema.href ? ui.select :
       schema.type instanceof Array ? ui[schema.type[0]] :
       schema.type != null ? ui[schema.type] :
-      schema.default !== undefined ? ui['string'] : ui['null']
+      schema.properties != null ? ui['object'] : 
+      schema.items != null ? ui['array'] : 
+      typeof schema.default == "string" ? ui['string'] :
+      typeof schema.default == "boolean" ? ui['boolean'] :
+      typeof schema.default == "number" ? ui['number'] :
+      schema.default instanceof Array ? ui['array'] :
+      schema.default != null && typeof schema.default == "object" ?
+        ui['object'] :
+      submit ? ui['string'] : ui['null']
     )
   )(schema, submit, options)
 }

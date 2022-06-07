@@ -31,6 +31,22 @@ export default {
   gh: 'https://github.com/marcodpt/json-schema-bootstrap',
   element: element,
   samples: {
+    table: {
+      attributes: {
+        schema: {
+          ...table,
+          default: data
+        },
+        options: {
+          language: 'pt'
+        }
+      }
+    },
+    loading: {
+      attributes: {
+        schema: table
+      }
+    },
     form: {
       attributes: {
         schema: form,
@@ -57,22 +73,6 @@ export default {
     item: {
       attributes: {
         schema: item
-      }
-    },
-    table: {
-      attributes: {
-        schema: {
-          ...table,
-          default: data
-        },
-        options: {
-          language: 'pt'
-        }
-      }
-    },
-    loading: {
-      attributes: {
-        schema: table
       }
     },
     nothing: {
