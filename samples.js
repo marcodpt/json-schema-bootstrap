@@ -111,6 +111,87 @@ export default {
         }
       }
     },
+    basicWithLinks: {
+      attributes: {
+        schema: {
+          title: 'Basic schema',
+          description: 'Very simple schema.\nWith title and links!',
+          ui: 'card',
+          links: [
+            {
+              href: '#back',
+              icon: 'fas fa-arrow-left',
+              title: 'Back',
+              ui: 'btn btn-secondary me-1'
+            }, {
+              href: '#submit',
+              icon: 'fas fa-check',
+              title: 'Submit',
+              ui: 'btn btn-primary'
+            }
+          ]
+        }
+      }
+    },
+    confirm: {
+      attributes: {
+        schema: {
+          title: 'Confirm',
+          description: 'Do you confirm the action?',
+          ui: 'card',
+          format: 'info',
+          links: [
+            {
+              href: '#back',
+              icon: 'fas fa-times',
+              title: 'Cancel',
+              ui: 'btn btn-secondary me-1'
+            }, {
+              href: '#submit',
+              icon: 'fas fa-check',
+              title: 'Submit',
+              ui: 'btn btn-primary'
+            }
+          ]
+        }
+      }
+    },
+    error: {
+      attributes: {
+        schema: {
+          title: 'Error',
+          description: 'Some strange error...',
+          ui: 'card',
+          format: 'danger',
+          links: [
+            {
+              href: '#close',
+              icon: 'fas fa-times',
+              title: 'Close',
+              ui: 'btn btn-secondary'
+            }
+          ]
+        }
+      }
+    },
+    pass: {
+      attributes: {
+        schema: {
+          title: 'Success',
+          description: 'Eveything worked fine!',
+          ui: 'card',
+          format: 'success',
+          links: [
+            {
+              href: '#close',
+              icon: 'fas fa-times',
+              title: 'Close',
+              ui: 'btn btn-secondary'
+            }
+          ]
+        }
+      }
+    },
     primary: {
       attributes: {
         schema: {

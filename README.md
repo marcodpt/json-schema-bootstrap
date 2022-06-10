@@ -227,5 +227,4 @@ console.log(jsb({
 ## TODO
  - auto submit problem
  - after submit form, a DOM element should replace itself
- - add optional links in messages (card/alerts) (back button)
- - type password
+ - showValid bug
