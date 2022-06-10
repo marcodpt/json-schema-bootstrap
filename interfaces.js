@@ -2,6 +2,7 @@ import card from './ui/card.js'
 import alert from './ui/alert.js'
 import data from './ui/data.js'
 import string from './ui/string.js'
+import password from './ui/password.js'
 import text from './ui/text.js'
 import color from './ui/color.js'
 import range from './ui/range.js'
@@ -39,6 +40,7 @@ export default {
   light: alert,
   dark: alert,
   data: data,
+  password: password,
   text: text,
   color: color,
   range: range,

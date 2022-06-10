@@ -34,6 +34,12 @@ export default {
   gh: 'https://github.com/marcodpt/json-schema-bootstrap',
   element: element,
   samples: {
+    docsForm: {
+      attributes: docsForm
+    },
+    docsTable: {
+      attributes: docsTable
+    },
     form: {
       attributes: {
         schema: form,
@@ -77,12 +83,6 @@ export default {
       attributes: {
         schema: table
       }
-    },
-    docsForm: {
-      attributes: docsForm
-    },
-    docsTable: {
-      attributes: docsTable
     },
     nothing: {
       attributes: {}
@@ -408,6 +408,53 @@ export default {
         },
         schema: {
           ui: 'string',
+          default: 'mama mia',
+          minLength: 5
+        }
+      }
+    },
+    password0: {
+      attributes: {
+        schema: {
+          default: 'test',
+          ui: 'password'
+        }
+      }
+    },
+    password1: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          default: 'test',
+          ui: 'password',
+          minLength: 5
+        }
+      }
+    },
+    password2: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: 'password',
+          minLength: 5,
+          title: 'pt',
+          description: 'This time showValid: true, pt: true, name: pt'
+        }
+      }
+    },
+    password3: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: 'password',
           default: 'mama mia',
           minLength: 5
         }
