@@ -12,7 +12,9 @@ console.log(jsb({
   schema: {
     title: 'Docs Form',
     properties: {
-      name: {},
+      name: {
+        minLength: 1
+      },
       bio: {
         title: '',
         description: 'Say something about yourself...',
@@ -223,7 +225,3 @@ console.log(jsb({
       that defines a new user interface, where `schema` and `options` is the
       original variables passed, and `submit` is a function to update the
       the input value (in case `submit` is `null` it is a read only output).
-
-## TODO
- - auto submit problem
- - after submit form, a DOM element should replace itself

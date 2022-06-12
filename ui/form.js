@@ -181,7 +181,7 @@ export default ({
         label: translations.label,
         submit: () => Promise.resolve(submit(Data)).then(msg => {
           if (msg) {
-            throw msg
+            throw 'Form do not pass validation!'
           }
         })
       }))
