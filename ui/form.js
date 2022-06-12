@@ -107,11 +107,12 @@ export default ({
           getter(key)
         }
       }
-      O[key].reject = () => {
+      O[key].reject = (err, data) => {
         const i = Err.indexOf(key)
         if (i < 0) {
           Err.push(key)
         }
+        Data[key] = data
       }
     })
 
@@ -131,7 +132,9 @@ export default ({
       }
     })
 
-    submit(Data)
+    if (!root) {
+      submit(Data)
+    }
   }
 
   const el = button => html(({fieldset, legend, div}) => {
@@ -176,12 +179,11 @@ export default ({
     }, [
       el(submitter({
         label: translations.label,
-        submit: () => console.log(Data) ||
-          Promise.resolve(submit(Data)).then(msg => {
-            if (msg) {
-              throw msg
-            }
-          })
+        submit: () => Promise.resolve(submit(Data)).then(msg => {
+          if (msg) {
+            throw msg
+          }
+        })
       }))
     ]))
   } else {

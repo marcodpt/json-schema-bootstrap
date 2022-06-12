@@ -2,7 +2,9 @@ export default {
   schema: {
     title: 'Docs Form',
     properties: {
-      name: {},
+      name: {
+        minLength: 1
+      },
       bio: {
         title: '',
         description: 'Say something about yourself...',
