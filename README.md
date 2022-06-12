@@ -227,4 +227,3 @@ console.log(jsb({
 ## TODO
  - auto submit problem
  - after submit form, a DOM element should replace itself
- - showValid bug

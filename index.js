@@ -53,7 +53,7 @@ const it = oldOptions => (schema, newOptions) => {
     }
 
     if (!error && resolve) {
-      return resolve(data)
+      return resolve(data) || error
     } else if (error && reject) {
       reject(error, data)
     }
