@@ -54,6 +54,7 @@ export default {
           }
         },
         options: {
+          showValid: true,
           resolve: ({user, password}, e) => {
             console.log('user: '+user)
             console.log('password: '+password)

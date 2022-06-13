@@ -12,7 +12,7 @@ export default control(({
     name: title,
     placeholder: description,
     value: schema.default,
-    keyup: ev => {
+    input: ev => {
       const e = ev.target
       const p = e.parentNode
       const t = p.querySelector('.form-text')

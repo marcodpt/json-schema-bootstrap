@@ -227,5 +227,4 @@ console.log(jsb({
       the input value (in case `submit` is `null` it is a read only output).
 
 ## TODO
- - change to on input event to deal with autofill
  - extend card to support data

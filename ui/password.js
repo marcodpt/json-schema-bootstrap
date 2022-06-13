@@ -12,7 +12,7 @@ export default control(({
   name: title,
   placeholder: description,
   value: schema.default,
-  keyup: ev => submit(ev.target.value) 
+  input: ev => submit(ev.target.value) 
 })), schema => data({
   ...schema,
   default: schema.default == null ? schema.default : 

@@ -18,6 +18,5 @@ export default control(({
   max: maximum,
   step: multipleOf,
   value: schema.default,
-  change: ev => submit(toNumber(ev.target.value)),
-  keyup: ev => submit(toNumber(ev.target.value))
+  input: ev => submit(toNumber(ev.target.value))
 })))

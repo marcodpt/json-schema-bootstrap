@@ -10,7 +10,7 @@ export default control(({
   rows: 6,
   name: title,
   placeholder: description,
-  keyup: ev => submit(ev.target.value) 
+  input: ev => submit(ev.target.value) 
 }, schema.default)), null, {
   parent: {
     text: 'left'
