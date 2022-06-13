@@ -1586,6 +1586,15 @@ export default {
         schema: image
       }
     },
+    imageCard: {
+      attributes: {
+        schema: {
+          ...image,
+          description: null,
+          ui: 'card'
+        }
+      }
+    },
     imageSrc: {
       attributes: {
         schema: {
@@ -1600,6 +1609,15 @@ export default {
         schema: audio
       }
     },
+    audioCard: {
+      attributes: {
+        schema: {
+          ...audio,
+          description: null,
+          ui: 'card'
+        }
+      }
+    },
     audioSrc: {
       attributes: {
         schema: {
@@ -1612,6 +1630,15 @@ export default {
     video: {
       attributes: {
         schema: video
+      }
+    },
+    videoCard: {
+      attributes: {
+        schema: {
+          ...video,
+          description: null,
+          ui: 'card'
+        }
       }
     },
     videoSrc: {

@@ -1,5 +1,6 @@
 import {html} from '../dependencies.js'
 import link from '../link.js'
+import data from './data.js'
 
 export default ({
   title,
@@ -20,10 +21,10 @@ export default ({
     }, [
       title
     ]),
-    !description && !links ? null : div({
+    !description && !links && schema.default === undefined ? null : div({
       class: 'card-body'
     }, [
-      format ? it({
+      !description ? null : format ? it({
         ui: format, 
         description: description
       }) : p({
@@ -31,7 +32,8 @@ export default ({
         style: {
           whiteSpace: 'pre-wrap'
         }
-      }, description)
+      }, description),
+      data(schema),
     ].concat((links || []).map(l => linker(l))))
   ]))
 }

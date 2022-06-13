@@ -226,5 +226,3 @@ console.log(jsb({
       original variables passed, and `submit` is a function to update the
       the input value (in case `submit` is `null` it is a read only output).
 
-## TODO
- - extend card to support data
