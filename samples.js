@@ -40,6 +40,46 @@ export default {
     docsTable: {
       attributes: docsTable
     },
+    login: {
+      attributes: {
+        schema: {
+          properties: {
+            user: {
+              minLength: 1
+            },
+            password: {
+              format: 'password',
+              minLength: 3
+            }
+          }
+        },
+        options: {
+          resolve: ({user, password}, e) => {
+            console.log('user: '+user)
+            console.log('password: '+password)
+            if (user == 'John' && password == 'john') {
+              e.replaceWith(element({
+                schema: {
+                  title: 'Access',
+                  description: 'Welcome John!',
+                  ui: 'card',
+                  format: 'success'
+                }
+              }))
+            } else {
+              e.replaceWith(element({
+                schema: {
+                  title: 'Error',
+                  description: 'Access denied for user: '+user,
+                  ui: 'card',
+                  format: 'danger'
+                }
+              }))
+            }
+          }
+        }
+      }
+    },
     form: {
       attributes: {
         schema: form,

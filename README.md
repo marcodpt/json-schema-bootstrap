@@ -225,3 +225,7 @@ console.log(jsb({
       that defines a new user interface, where `schema` and `options` is the
       original variables passed, and `submit` is a function to update the
       the input value (in case `submit` is `null` it is a read only output).
+
+## TODO
+ - change to on input event to deal with autofill
+ - extend card to support data

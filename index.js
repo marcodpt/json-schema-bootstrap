@@ -28,6 +28,7 @@ const it = oldOptions => (schema, newOptions) => {
   options.translations = l.translations
   options.it = it(options)
 
+  var e = null
   const submit = !resolve && !reject ? null : (data, validate) => {
     var error = showValid ? '' : null
     validator(schema, data, key => {
@@ -53,7 +54,7 @@ const it = oldOptions => (schema, newOptions) => {
     }
 
     if (!error && resolve) {
-      return resolve(data) || error
+      return resolve(data, e) || error
     } else if (error && reject) {
       reject(error, data)
     }
@@ -66,7 +67,7 @@ const it = oldOptions => (schema, newOptions) => {
     ...(options.interfaces || {})
   }
 
-  return (
+  e = (
     ui[schema.ui] ||
     ui[schema.format] || (
       schema.enum != null || schema.href ? ui.select :
@@ -83,6 +84,8 @@ const it = oldOptions => (schema, newOptions) => {
       submit ? ui['string'] : ui['null']
     )
   )(schema, submit, options)
+
+  return e
 }
 
 export default ({
