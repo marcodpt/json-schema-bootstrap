@@ -19,9 +19,9 @@ export default {
       default: 1,
       minimum: 0
     },
-    city2: {
-      title: "Again",
-      href: "cities_{country}",
+    land: {
+      title: "Land",
+      href: "countries",
       default: 7,
       label: "Fantasy"
     },
