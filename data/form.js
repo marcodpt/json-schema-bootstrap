@@ -16,7 +16,8 @@ export default {
     city: {
       title: "City",
       href: "cities_{country}",
-      default: 1
+      default: 1,
+      minimum: 0
     },
     cpf: {
       format: "cnpjcpf",

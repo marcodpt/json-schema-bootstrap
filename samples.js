@@ -94,7 +94,7 @@ export default {
           loader: url => new Promise((resolve, reject) => {
             setTimeout(() => {
               if (DB[url] == null) {
-                reject('url not found: '+url)
+                resolve(true)
               } else {
                 resolve(DB[url])
               }
