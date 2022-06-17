@@ -101,7 +101,7 @@ export default ({
         })
       }
       O[key] = {}
-      if (P[key].href) {
+      if (P[key].href && P[key].label == null) {
         O[key].update = callback => {
           Callbacks[key] = callback
           getter(key)

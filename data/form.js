@@ -19,6 +19,12 @@ export default {
       default: 1,
       minimum: 0
     },
+    city2: {
+      title: "Again",
+      href: "cities_{country}",
+      default: 7,
+      label: "Fantasy"
+    },
     cpf: {
       format: "cnpjcpf",
       title: "CPF",
