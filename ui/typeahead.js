@@ -2,7 +2,7 @@ import {html} from '../dependencies.js'
 import {control, interpolate} from '../lib.js'
 
 export default control((schema, submitter, options) =>
-  html(({select, option}) => {
+  html(({div, input}) => {
     const {
       title,
       description,
@@ -33,22 +33,28 @@ export default control((schema, submitter, options) =>
       }
     })
 
-    const change = ev => {
-      const v = ev.target.value
-      const i = indexValue(v)
-      submit(i == -1 ? v : Data[i].value)
-    }
-    const s = select({
-      class: 'form-select',
-      name: title 
-    })
+    const s = div([
+      input({
+        class: 'form-control',
+        type: 'text'
+      })
+    ])
     var e = s.cloneNode()
 
-    const setLabel = value =>
-      label != null ? interpolate(label, value) :
-      value === undefined ? '\u2304' :
-      typeof value == 'string' ? value :
-        JSON.stringify(value)
+    const setLabel = (value, block) => {
+      if (label != null) {
+        return interpolate(label, value)
+      } else if (value === undefined) {
+        return '\u2304'
+      }
+      const i = block ? -1 : indexValue(value)
+      if (i < 0) {
+        return typeof value == 'string' ? value : JSON.stringify(value)
+      } else {
+        return Data[i].label
+      }
+    }
+      
 
     const renderOptions = Result => {
       if (Result === true) {
@@ -65,7 +71,7 @@ export default control((schema, submitter, options) =>
       const x = s.cloneNode(true)
       e.replaceWith(x)
       e = x
-      e.addEventListener('change', change)
+
       Data.length = 0
       pending = Result == null
       if (Result instanceof Array) {
@@ -76,36 +82,29 @@ export default control((schema, submitter, options) =>
           R.label =
             row && row.label != null ? row.label : 
             labels && labels[i] != null ? labels[i] :
-            setLabel(R.value)
+            setLabel(R.value, true)
           Data.push(R) 
         })
       }
 
-      const v = schema.default == null ? '' : schema.default
-      const Options = Data.concat(indexValue(schema.default) != -1 ? [] : [
-        {
-          value: v,
-          label:
-            Result == null ? '\u231B' :
-            description != null && v === '' ? description :
-              setLabel(schema.default),
-          disabled: true
+      const f = e.querySelector('input')
+      f.value = Result == null ? '\u231B' :
+        description != null && schema.default == null ? description :
+          setLabel(schema.default)
+      new Autocomplete(f, {
+        data: Data,
+        maximumItems: 0,
+        threshold: 0,
+        onSelectItem: ({value}) => {
+          const i = indexValue(value)
+          submit(i == -1 ? value : Data[i].value)
         }
-      ])
+      })
 
-      e.disabled = Options.length <= 1
+      f.disabled = Data.length <= 1
       if (schema.default != null) {
         submit(schema.default)
       }
-      e.innerHTML = Options.map(({
-        value,
-        label,
-        disabled
-      }) => option({
-        value: value,
-        disabled: disabled,
-      }, label).outerHTML).join('\n')
-      e.value = v
     }
 
     renderOptions(
