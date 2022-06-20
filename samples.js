@@ -961,7 +961,8 @@ export default {
           format: 'switch',
           default: ['dog', 'cat'],
           items: {
-            enum: ['horse', 'dog', 'fish', 'cat', 'bird']
+            enum: ['horse', 'dog', 'fish', 'cat', 'bird'],
+            labels: ['Horse', 'DOG', 'Fish']
           },
           minItems: 2
         }
