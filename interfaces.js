@@ -15,6 +15,7 @@ import date from './ui/date.js'
 import typeahead from './ui/typeahead.js'
 import form from './ui/form.js'
 import table from './ui/table.js'
+import multiple from './ui/multiple.js'
 
 export default {
   /*default interfaces with type*/
@@ -52,5 +53,6 @@ export default {
   date: date,
   typeahead: typeahead,
   form: form,
-  table: table
+  table: table,
+  multiple: multiple
 }

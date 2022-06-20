@@ -926,6 +926,62 @@ export default {
         }
       }
     },
+    multiple0: {
+      attributes: {
+        schema: {
+          default: ['dog', 'cat'],
+          ui: 'multiple'
+        }
+      }
+    },
+    multiple1: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: 'multiple',
+          default: [],
+          items: {
+            enum: ['horse', 'dog', 'fish', 'cat', 'bird']
+          },
+          minItems: 2
+        }
+      }
+    },
+    multiple2: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: 'multiple',
+          format: 'switch',
+          default: ['dog', 'cat'],
+          items: {
+            enum: ['horse', 'dog', 'fish', 'cat', 'bird']
+          },
+          minItems: 2
+        }
+      }
+    },
+    multiple3: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: 'multiple',
+          default: ['dog', 'cat'],
+          items: {
+            enum: ['horse', 'dog', 'fish', 'cat', 'bird']
+          },
+          minItems: 2
+        }
+      }
+    },
     cnpjcpf0: {
       attributes: {
         schema: {
