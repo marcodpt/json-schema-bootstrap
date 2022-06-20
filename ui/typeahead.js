@@ -13,6 +13,7 @@ export default control((schema, submitter, options) =>
       update, it
     } = options
     var Data = []
+    var current = undefined
     var pending = false
 
     const indexValue = value => Data.reduce((i, item, j) =>
@@ -29,6 +30,7 @@ export default control((schema, submitter, options) =>
           return 'Choose one of the possible options!'
         }
       } else {
+        current = value
         return msg
       }
     })
@@ -36,27 +38,29 @@ export default control((schema, submitter, options) =>
     const s = div([
       input({
         class: 'form-control',
-        type: 'text'
+        type: 'text',
+        placeholder: description
       })
     ])
     var e = s.cloneNode()
 
-    const setLabel = (value, block) => {
-      if (label != null) {
-        return interpolate(label, value)
-      } else if (value === undefined) {
-        return '\u2304'
-      }
-      const i = block ? -1 : indexValue(value)
-      if (i < 0) {
-        return typeof value == 'string' ? value : JSON.stringify(value)
-      } else {
-        return Data[i].label
-      }
-    }
-      
-
     const renderOptions = Result => {
+      const setLabel = (value, block) => {
+        if (Result == null) {
+          return '\u231B'
+        } else if (label != null) {
+          return interpolate(label, value)
+        } else if (value === undefined) {
+          return '\u2304'
+        }
+        const i = block ? -1 : indexValue(value)
+        if (i < 0) {
+          return typeof value == 'string' ? value : JSON.stringify(value)
+        } else {
+          return Data[i].label
+        }
+      }
+
       if (Result === true) {
         const x = it({
           ...schema,
@@ -88,9 +92,13 @@ export default control((schema, submitter, options) =>
       }
 
       const f = e.querySelector('input')
-      f.value = Result == null ? '\u231B' :
-        description != null && schema.default == null ? description :
-          setLabel(schema.default)
+      f.value = setLabel(schema.default)
+      f.addEventListener('focus', () => {
+        f.value = ''
+      })
+      f.addEventListener('blur', () => {
+        f.value = setLabel(current)
+      })
       new Autocomplete(f, {
         data: Data,
         maximumItems: 0,
@@ -100,7 +108,6 @@ export default control((schema, submitter, options) =>
           submit(i == -1 ? value : Data[i].value)
         }
       })
-
       f.disabled = Data.length <= 1
       if (schema.default != null) {
         submit(schema.default)
