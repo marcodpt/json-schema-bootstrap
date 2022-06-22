@@ -56,17 +56,20 @@ export default (it, {close, label}) => {
           var oldData = undefined
           return it(hrefSchema, {
             resolve: data => {
+              if (data == hrefSchema.default) {
+                return
+              }
               oldData = data
               setTimeout(() => {
                 if (data == oldData) {
-                    const target = interpolate(href, data)
-                    const base = 'javascript:'
-                    const l = base.length
-                    if (target.substr(0, l) == base) {
-                      eval(target.substr(l))
-                    } else {
-                      window.location.href = target
-                    }
+                  const target = interpolate(href, data)
+                  const base = 'javascript:'
+                  const l = base.length
+                  if (target.substr(0, l) == base) {
+                    eval(target.substr(l))
+                  } else {
+                    window.location.href = target
+                  }
                 }
               }, 500)
             }
