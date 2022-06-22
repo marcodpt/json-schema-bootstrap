@@ -58,14 +58,16 @@ export default (it, {close, label}) => {
             resolve: data => {
               oldData = data
               if (data == oldData) {
-                const target = interpolate(href, data)
-                const base = 'javascript:'
-                const l = base.length
-                if (target.substr(0, l) == base) {
-                  eval(target.substr(l))
-                } else {
-                  window.location.href = target
-                }
+                setTimeout(() => {
+                  const target = interpolate(href, data)
+                  const base = 'javascript:'
+                  const l = base.length
+                  if (target.substr(0, l) == base) {
+                    eval(target.substr(l))
+                  } else {
+                    window.location.href = target
+                  }
+                }, 500)
               }
             }
           })
