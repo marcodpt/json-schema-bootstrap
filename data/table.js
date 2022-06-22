@@ -25,7 +25,7 @@ export default {
       icon: 'fas fa-step-backward',
       rel: 'alternate'
     }, {
-      href: '#/page/{}',
+      href: 'javascript:location.replace("#/page/{}")',
       rel: 'alternate',
       hrefSchema: {
         label: 'Page {} of 3',
