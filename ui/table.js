@@ -130,17 +130,38 @@ export default ({
         .filter(l => !rel || l.rel == rel)
         .map(l => link(l))
 
-      const totals = watch == null ? null : td({
-        class: 'text-center align-middle'
-      })
-      const getChecked = () => {
-        if (!totals) {
+      const totals = watch == null ? null : tr([
+        td({
+          class: 'text-center align-middle data-checked'
+        }),
+        (items.links || []).map(() => td()),
+        Object.keys(items.properties || {}).map(key =>
+          td({
+            class: 'text-center align-middle data-'+key
+          })
+        )
+      ])
+      var prevent = false
+
+      const resolveTotals = () => {
+        if (!totals || !watch || prevent) {
           return
         }
-        totals.textContent = (schema.default || [])
-          .reduce((N, row) => N + (row.checked ? 1 : 0), 0)
+        totals.querySelectorAll('td').forEach(e => {
+          e.textContent = '\u200b'
+        })
+        Promise.resolve(watch()).then(data => {
+          if (data && typeof data == 'object') {
+            Object.keys(data).forEach(key => {
+              totals.querySelectorAll('td.data-'+key).forEach(x => {
+                x.textContent = data[key]
+              })
+            })
+          }
+        })
       }
-      getChecked()
+
+      resolveTotals()
 
       return table({
         class: [
@@ -165,21 +186,14 @@ export default ({
           inline(toLink(links, 'self')),
           inline(toLink(links, 'alternate')),
           inline(toLink(links, 'search')),
-          items.default == null ? null : tr([
-            watch == null ? null : totals,
-            (items.links || []).map(() => td()),
-            Object.keys(items.properties || {}).map(key =>
-              td({
-                class: 'text-center align-middle'
-              }, items.default[key])
-            )
-          ]),
+          totals,
           tr([
             watch == null ? null : th({
               class: 'text-center align-middle'
             }, button({
               class: 'btn btn-success btn-sm',
               click: ev => {
+                prevent = true
                 ev.target
                   .closest('table')
                   .querySelector('tbody')
@@ -187,7 +201,8 @@ export default ({
                   .forEach(cb => {
                     cb.click()
                   })
-                getChecked()
+                prevent = false
+                resolveTotals()
               }
             }, [
               i({
@@ -254,7 +269,7 @@ export default ({
                 click: ev => {
                   row.checked = ev.target.checked
                   watch(row)
-                  getChecked()
+                  resolveTotals()
                 },
                 checked: row.checked
               })

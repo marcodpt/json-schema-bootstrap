@@ -230,9 +230,6 @@ export default {
         icon: 'fas fa-edit',
         ui: 'btn btn-warning btn-sm'
       }
-    ],
-    default: {
-      id: 16
-    }
+    ]
   }
 }

@@ -28,15 +28,34 @@ const update = (data, time) => callback => {
   callback(null)
   setTimeout(() => callback(data), time)
 }
+const Totals = {
+  checked: 0,
+  id: data.length,
+  balance: 0
+}
 const W = []
 const watch = (row) => {
-  const i = W.indexOf(row.id)
-  if (i < 0) {
-    W.push(row.id)
+  if (!row) {
+    console.log('resolveTotals...')
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(Totals)
+        console.log('resolved')
+      }, 2000)
+    })
   } else {
-    W.splice(i, 1)
+    const i = W.indexOf(row.id)
+    if (i < 0) {
+      W.push(row.id)
+      Totals.balance += row.balance
+    } else {
+      W.splice(i, 1)
+      Totals.balance -= row.balance
+    }
+    Totals.checked = W.length
+    Totals.balance = Math.round(100 * Totals.balance) / 100
+    console.log(W)
   }
-  console.log(W)
 }
 
 export default {
