@@ -28,6 +28,16 @@ const update = (data, time) => callback => {
   callback(null)
   setTimeout(() => callback(data), time)
 }
+const W = []
+const watch = (row) => {
+  const i = W.indexOf(row.id)
+  if (i < 0) {
+    W.push(row.id)
+  } else {
+    W.splice(i, 1)
+  }
+  console.log(W)
+}
 
 export default {
   title: 'Json Schema Bootstrap',
@@ -116,7 +126,8 @@ export default {
           default: data
         },
         options: {
-          language: 'pt'
+          language: 'pt',
+          watch: watch
         }
       }
     },

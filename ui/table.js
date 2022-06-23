@@ -14,7 +14,8 @@ export default ({
 }, submit, {
   it,
   loader,
-  translations
+  translations,
+  watch
 }) => {
   const link = linker(it, translations)
 
@@ -109,7 +110,9 @@ export default ({
 
     return el
   } else {
-    return html(({table, tbody, thead, tr, td, th, span, div}) => {
+    return html(({
+      table, tbody, thead, tr, td, th, span, div, button, i, input
+    }) => {
       const inline = X => !X || !X.length ? null : tr([
         th({
           class: 'text-center',
@@ -126,6 +129,18 @@ export default ({
       const toLink = (links, rel) => (links || [])
         .filter(l => !rel || l.rel == rel)
         .map(l => link(l))
+
+      const totals = watch == null ? null : td({
+        class: 'text-center align-middle'
+      })
+      const getChecked = () => {
+        if (!totals) {
+          return
+        }
+        totals.textContent = (schema.default || [])
+          .reduce((N, row) => N + (row.checked ? 1 : 0), 0)
+      }
+      getChecked()
 
       return table({
         class: [
@@ -151,6 +166,7 @@ export default ({
           inline(toLink(links, 'alternate')),
           inline(toLink(links, 'search')),
           items.default == null ? null : tr([
+            watch == null ? null : totals,
             (items.links || []).map(() => td()),
             Object.keys(items.properties || {}).map(key =>
               td({
@@ -159,6 +175,25 @@ export default ({
             )
           ]),
           tr([
+            watch == null ? null : th({
+              class: 'text-center align-middle'
+            }, button({
+              class: 'btn btn-success btn-sm',
+              click: ev => {
+                ev.target
+                  .closest('table')
+                  .querySelector('tbody')
+                  .querySelectorAll('input[type=checkbox]')
+                  .forEach(cb => {
+                    cb.click()
+                  })
+                getChecked()
+              }
+            }, [
+              i({
+                class: 'fas fa-check'
+              })
+            ])),
             (items.links || []).map(l => th({
               class: 'text-center align-middle'
             }, l.links && l.links.length ? l.links.map(x => link({
@@ -210,6 +245,20 @@ export default ({
             ])
           ]),
           (schema.default || []).map(row => tr([
+            watch == null ? null : td({
+              class: 'text-center align-middle'
+            }, [
+              input({
+                class: 'form-check-input',
+                type: 'checkbox',
+                click: ev => {
+                  row.checked = ev.target.checked
+                  watch(row)
+                  getChecked()
+                },
+                checked: row.checked
+              })
+            ]),
             (items.links || []).map(l => td({
               class: 'text-center align-middle'
             }, [

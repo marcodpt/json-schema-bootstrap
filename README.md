@@ -214,6 +214,8 @@ console.log(jsb({
       pass validation.
    - function `loader`(`url`): A function that returns a promise with the
       result of fetch `url`.
+   - function `watch`(`data`): A function that resolve changes in child
+      outside of `resolve`, useful for example for table checkbox.
    - boolean `showValid` (default: false): Wherever you want to use valid
       interface on user input.
    - string `language` (default: en): One of the available languages
