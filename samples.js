@@ -1470,7 +1470,7 @@ export default {
           ui: "typeahead",
           title: "pets",
           description: "Choose your favorite pet...",
-          enum: ["dog", "cat", "horse"]
+          enum: ["", "dog", "cat", "horse"]
         }
       }
     },
@@ -1483,7 +1483,7 @@ export default {
           ui: "typeahead",
           title: "pets",
           description: "Choose your favorite pet...",
-          enum: ["dog", "cat", "horse"],
+          enum: ["", "dog", "cat", "horse"],
           default: "bird"
         }
       }
@@ -1497,7 +1497,7 @@ export default {
           ui: "typeahead",
           title: "pets",
           description: "Choose your favorite pet...",
-          enum: ["dog", "cat", "horse"],
+          enum: ["", "dog", "cat", "horse"],
           default: "cat"
         }
       }
@@ -1511,7 +1511,7 @@ export default {
           ui: "typeahead",
           title: "pets",
           description: "Choose your favorite pet...",
-          enum: ["dog", "cat", "horse"],
+          enum: ["", "dog", "cat", "horse"],
           labels: ["Dog", "Cat"],
           default: "bird"
         }
@@ -1526,7 +1526,7 @@ export default {
           ui: "typeahead",
           title: "pets",
           description: "Choose your favorite pet...",
-          enum: ["dog", "cat", "horse"],
+          enum: ["", "dog", "cat", "horse"],
           labels: ["Dog", "Cat"],
           default: "cat"
         }

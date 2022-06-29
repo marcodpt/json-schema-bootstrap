@@ -21,15 +21,16 @@ export default ({
 
   if (submit) {
     const Data = schema.default instanceof Array ? schema.default : []
-    const limitMin = n => minItems >= n || n == 0
+    const limitMin = n => (minItems != null && minItems >= n) || n == 0
     const limitMax = n => maxItems != null && maxItems <= n
     const setLimits = (e, n) => {
+      console.log('setLimits: '+n)
       const bp = e
         .querySelector('legend')
         .querySelector('i.fa-plus')
         .closest('button')
 
-      if (limitMax(n+1)) {
+      if (limitMax(n)) {
         bp.classList.add('disabled')
       } else {
         bp.classList.remove('disabled')
@@ -40,7 +41,7 @@ export default ({
         .querySelector('i.fa-minus')
         .closest('button')
 
-      if (limitMin(n-1)) {
+      if (limitMin(n)) {
         bm.classList.add('disabled')
       } else {
         bm.classList.remove('disabled')
@@ -50,7 +51,7 @@ export default ({
     }
 
     const add = e => {
-      const n = Data.length
+      var n = e.children.length - 1
       if (!limitMax(n)) {
         Data.push(items.default)
 
@@ -62,6 +63,7 @@ export default ({
             submit(Data)
           }
         }))))
+        n = n + 1
       }
       setLimits(e, n)
     }
@@ -80,10 +82,11 @@ export default ({
           type: 'button',
           click: ev => {
             const e = ev.target.closest('fieldset')
-            const n = Data.length
+            var n = e.children.length - 1
             if (!limitMin(n)) {
-              e.removeChild(e.children[n])
+              e.removeChild(e.lastChild)
               Data.pop()
+              n = n - 1
             }
             setLimits(e, n)
           }

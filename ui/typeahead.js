@@ -100,7 +100,12 @@ export default control((schema, submitter, options) =>
         f.value = setLabel(current)
       })
       new Autocomplete(f, {
-        data: Data,
+        data: Data.map(row => {
+          if (row.label == "") {
+            row.label = '\u200b'
+          }
+          return row
+        }),
         maximumItems: 0,
         threshold: 0,
         onSelectItem: ({value}) => {
@@ -123,5 +128,7 @@ export default control((schema, submitter, options) =>
     }
 
     return e
-  })
+  }), null, {
+    input: 'input'
+  }
 )

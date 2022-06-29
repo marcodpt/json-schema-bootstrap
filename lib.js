@@ -96,7 +96,7 @@ const control = (input, output, config) => (schema, submit, options) =>
           }
         }
 
-        if (config.input) {
+        if (e && config.input) {
           e = e.querySelector(config.input)
         }
 
