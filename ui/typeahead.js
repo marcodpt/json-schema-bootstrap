@@ -1,4 +1,4 @@
-import {html} from '../dependencies.js'
+import {html, Autocomplete} from '../dependencies.js'
 import {control, interpolate} from '../lib.js'
 
 export default control((schema, submitter, options) =>

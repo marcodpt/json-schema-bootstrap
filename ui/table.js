@@ -24,7 +24,6 @@ export default ({
     const limitMin = n => (minItems != null && minItems >= n) || n == 0
     const limitMax = n => maxItems != null && maxItems <= n
     const setLimits = (e, n) => {
-      console.log('setLimits: '+n)
       const bp = e
         .querySelector('legend')
         .querySelector('i.fa-plus')
