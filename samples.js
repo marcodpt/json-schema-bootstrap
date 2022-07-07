@@ -1461,6 +1461,21 @@ export default {
         }
       }
     },
+    typeaheadPrimesShortWrong: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "typeahead",
+          title: "primes",
+          enum: [2],
+          default: 0
+        }
+      }
+    },
     typeaheadPets: {
       attributes: {
         options: {

@@ -113,7 +113,9 @@ export default control((schema, submitter, options) =>
           submit(i == -1 ? value : Data[i].value)
         }
       })
-      f.disabled = Data.length <= 1
+      f.disabled = (Data.length +
+        (schema.default == null || indexValue(schema.default) == -1 ? 1 : 0)
+      ) <= 1
       if (schema.default != null) {
         submit(schema.default)
       }
