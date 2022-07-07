@@ -1592,7 +1592,8 @@ export default {
       attributes: {
         options: {
           resolve: resolve,
-          update: update(countries, 2000)
+          update: update(countries, 2000),
+          showValid: true
         },
         schema: {
           ui: "typeahead",

@@ -67,14 +67,14 @@ export default control((schema, submitter, options) =>
           enum: undefined,
           href: undefined
         }, options)
-        e.replaceWith(x)
-        e = x
+        e.innerHTML = ''
+        e.appendChild(x)
         return
       }
 
       const x = s.cloneNode(true)
-      e.replaceWith(x)
-      e = x
+      e.innerHTML = ''
+      x.childNodes.forEach(child => e.appendChild(child))
 
       Data.length = 0
       pending = Result == null
