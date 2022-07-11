@@ -234,11 +234,15 @@ const reader = file => new Promise((resolve, reject) => {
     }
   }
   var M = file.type.split('/')
-  if (([
-    'audio',
-    'video',
-    'image'
-  ]).indexOf(M[0]) != -1) {
+  if (
+    M[0] == 'audio' ||
+    M[0] == 'video' ||
+    M[0] == 'image' || (
+      M[0] == 'application' &&
+      file.type.indexOf('javascript') < 0 &&
+      file.type.indexOf('/x-') < 0
+    )
+  ) {
     type += '*'
     reader.readAsBinaryString(file)
   } else {
