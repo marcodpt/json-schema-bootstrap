@@ -133,6 +133,32 @@ export default {
         }
       }
     },
+    watch: {
+      attributes: {
+        schema: {
+          title: 'Watch sample',
+          properties: {
+            country: {
+              title: "Country",
+              default: "fr",
+              href: "countries",
+              ui: "typeahead"
+            }
+          }
+        },
+        options: {
+          language: 'pt',
+          loader: url => new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(DB[url])
+            }, 2000)
+          }),
+          watch: row => {
+            console.log(row)
+          }
+        }
+      }
+    },
     item: {
       attributes: {
         schema: item

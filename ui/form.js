@@ -41,7 +41,8 @@ export default ({
   loader,
   root,
   cache,
-  translations
+  translations,
+  watch
 }) => {
   const linker = link(it, translations)
   const P = properties || {}
@@ -87,7 +88,8 @@ export default ({
     }
   })
 
-  if (submit) {
+  const isSubmit = submit != null || watch != null
+  if (isSubmit) {
     Object.keys(P).forEach(key => {
       if (P[key].href) {
         Deps[key] = dependencies(P[key].href)
@@ -126,13 +128,17 @@ export default ({
         if (Watch[key]) {
           Watch[key].forEach(k => getter(k))
         }
-        if (!root) {
+        if (watch) {
+          watch(Data)
+        } else if (!root) {
           submit(Data)
         }
       }
     })
 
-    if (!root) {
+    if (watch) {
+      watch(Data)
+    } else if (!root) {
       submit(Data)
     }
   }
@@ -150,15 +156,15 @@ export default ({
 
     return fieldset([
       !title ? null : legend({
-        title: submit ? null : description
+        title: isSubmit ? null : description
       }, title),
       Object.keys(P).map(key => wrapper(it, {
         default: Data[key],
         title: key,
         ...P[key],
-        href: submit ? P[key].href : interpolate(P[key].href, Data)
+        href: isSubmit ? P[key].href : interpolate(P[key].href, Data)
       }, O[key])),
-      description && (!title || submit) ? it({
+      description && (!title || isSubmit) ? it({
         ui: 'info',
         description: description
       }) : null,
@@ -168,7 +174,7 @@ export default ({
     ])
   })
 
-  if (submit && root) {
+  if (isSubmit && root) {
     return html(({form, button, i, div}) => form({
       novalidate: true,
       submit: ev => {
@@ -177,7 +183,7 @@ export default ({
         return false
       }
     }, [
-      el(submitter({
+      el(watch ? null : submitter({
         label: translations.label,
         submit: () => Promise.resolve(submit(Data)).then(msg => {
           if (msg) {
