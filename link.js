@@ -72,7 +72,8 @@ export default (it, {close, label}) => {
                   }
                 }
               }, 500)
-            }
+            },
+            watch: null
           })
         }
       }
@@ -106,7 +107,8 @@ export default (it, {close, label}) => {
             },
             reject: () => {
               Data = undefined
-            }
+            },
+            watch: null
           }))
         },
         title: description
