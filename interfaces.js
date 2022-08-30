@@ -9,6 +9,8 @@ import range from './ui/range.js'
 import number from './ui/number.js'
 import checkbox from './ui/checkbox.js'
 import cnpjcpf from './ui/cnpjcpf.js'
+import rg from './ui/rg.js'
+import tel from './ui/tel.js'
 import cep from './ui/cep.js'
 import file from './ui/file.js'
 import date from './ui/date.js'
@@ -48,6 +50,8 @@ export default {
   checkbox: checkbox,
   switch: checkbox,
   cnpjcpf: cnpjcpf,
+  rg: rg,
+  tel: tel,
   cep: cep,
   file: file,
   date: date,

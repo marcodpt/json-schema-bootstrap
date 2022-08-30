@@ -1039,10 +1039,50 @@ export default {
         }
       }
     },
-    cnpjcpf0: {
+    cnpjcpf00: {
       attributes: {
         schema: {
           default: '171.395.530-09',
+          ui: 'cnpjcpf'
+        }
+      }
+    },
+    cnpjcpf01: {
+      attributes: {
+        schema: {
+          default: '02891141016',
+          ui: 'cnpjcpf'
+        }
+      }
+    },
+    cnpjcpf02: {
+      attributes: {
+        schema: {
+          default: 2891141016,
+          ui: 'cnpjcpf'
+        }
+      }
+    },
+    cnpjcpf03: {
+      attributes: {
+        schema: {
+          default: '09569041000178',
+          ui: 'cnpjcpf'
+        }
+      }
+    },
+    cnpjcpf04: {
+      attributes: {
+        schema: {
+          default: 9569041000178,
+          ui: 'cnpjcpf'
+        }
+      }
+    },
+    cnpjcpf05: {
+      attributes: {
+        schema: {
+          default: true,
           ui: 'cnpjcpf'
         }
       }
@@ -1086,10 +1126,195 @@ export default {
         }
       }
     },
-    cep0: {
+    rg00: {
+      attributes: {
+        schema: {
+          default: '27.750.976-2',
+          ui: 'rg'
+        }
+      }
+    },
+    rg01: {
+      attributes: {
+        schema: {
+          default: '277509762',
+          ui: 'rg'
+        }
+      }
+    },
+    rg02: {
+      attributes: {
+        schema: {
+          default: 277509762,
+          ui: 'rg'
+        }
+      }
+    },
+    rg03: {
+      attributes: {
+        schema: {
+          default: true,
+          ui: 'rg'
+        }
+      }
+    },
+    rg1: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "rg",
+          title: "rg",
+          description: 'Digite seu RG',
+          default: ''
+        }
+      }
+    },
+    rg2: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: 'rg',
+          default: ''
+        }
+      }
+    },
+    tel00: {
+      attributes: {
+        options: {
+          language: 'pt'
+        },
+        schema: {
+          default: '(47) 97251-7410',
+          ui: 'tel'
+        }
+      }
+    },
+    tel01: {
+      attributes: {
+        options: {
+          language: 'pt'
+        },
+        schema: {
+          default: '47972517410',
+          ui: 'tel'
+        }
+      }
+    },
+    tel02: {
+      attributes: {
+        options: {
+          language: 'pt'
+        },
+        schema: {
+          default: 47972517410,
+          ui: 'tel'
+        }
+      }
+    },
+    tel03: {
+      attributes: {
+        options: {
+          language: 'pt'
+        },
+        schema: {
+          default: '(21) 3563-5323',
+          ui: 'tel'
+        }
+      }
+    },
+    tel04: {
+      attributes: {
+        options: {
+          language: 'pt'
+        },
+        schema: {
+          default: '2135635323',
+          ui: 'tel'
+        }
+      }
+    },
+    tel05: {
+      attributes: {
+        options: {
+          language: 'pt'
+        },
+        schema: {
+          default: 2135635323,
+          ui: 'tel'
+        }
+      }
+    },
+    tel06: {
+      attributes: {
+        options: {
+          language: 'pt'
+        },
+        schema: {
+          default: true,
+          ui: 'tel'
+        }
+      }
+    },
+    tel1: {
+      attributes: {
+        options: {
+          resolve: resolve,
+          showValid: true,
+          language: 'pt'
+        },
+        schema: {
+          ui: "tel",
+          title: "tel",
+          description: 'Digite seu Telefone',
+          default: ''
+        }
+      }
+    },
+    tel2: {
+      attributes: {
+        options: {
+          resolve: resolve
+        },
+        schema: {
+          ui: 'tel',
+          default: ''
+        }
+      }
+    },
+    cep00: {
       attributes: {
         schema: {
           default: '01001-001',
+          ui: 'cep'
+        }
+      }
+    },
+    cep01: {
+      attributes: {
+        schema: {
+          default: '01001001',
+          ui: 'cep'
+        }
+      }
+    },
+    cep02: {
+      attributes: {
+        schema: {
+          default: 1001001,
+          ui: 'cep'
+        }
+      }
+    },
+    cep03: {
+      attributes: {
+        schema: {
+          default: true,
           ui: 'cep'
         }
       }

@@ -78,9 +78,10 @@ const control = (input, output, config) => (schema, submit, options) =>
 
     if (readOnly || !submit) {
       return output ? output(schema, options) : options.it({
+        format: schema.ui,
         ...schema,
         ui: 'data'
-      })
+      }, null, options)
     } else {
       const feedback = div({
         class: 'invalid-feedback'
@@ -218,6 +219,17 @@ const validateCPF = cpf => {
   return Resto == parseInt(cpf.substring(10, 11))
 }
 
+const validateRG = rg => {
+  const totais = []
+  const n = rg.length - 1
+
+  for (var i = 0; i < n; i++) {
+    totais.push(parseInt(rg[i]) * (2 + i));
+  }
+
+  return rg[n] == 11 - totais.reduce((sum, v) => sum + v, 0) % 11
+}
+
 const reader = file => new Promise((resolve, reject) => {
   var reader = new FileReader()
   var type = file.type
@@ -261,5 +273,6 @@ export {
   control,
   validateCNPJ,
   validateCPF,
+  validateRG,
   reader
 }
