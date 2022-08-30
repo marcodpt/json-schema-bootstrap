@@ -8,7 +8,7 @@ export default ({
   href,
   format,
   ...schema
-}, _, {language}) => html(({a, span, img, video, audio, source}) => {
+}, _, options) => html(({a, span, img, video, audio, source}) => {
   const el = children => (typeof href == 'string' ? a : span)({
     href: href,
     style: {
@@ -17,6 +17,7 @@ export default ({
     }
   }, children == '' && typeof href == 'string' ? '_' : children)
   const dflt = schema.default
+  const {language} = options || {} 
 
   if (format == 'cnpjcpf' && (
     typeof dflt == 'number' || typeof dflt == 'string'
