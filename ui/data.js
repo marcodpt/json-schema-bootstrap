@@ -18,11 +18,6 @@ export default ({
   }, children == '' && typeof href == 'string' ? '_' : children)
   const dflt = schema.default
 
-  console.log('HERE')
-  console.log('dflt: '+dflt)
-  console.log('format: '+format)
-  console.log('language: '+language)
-
   if (format == 'cnpjcpf' && (
     typeof dflt == 'number' || typeof dflt == 'string'
   )) {
